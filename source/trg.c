@@ -2598,6 +2598,8 @@ int trg_init (
     class_call(background_functions(
 				    pba,
 				    a_ini*exp(pnl->eta[index_eta]),
+				    0, // phi_scf, not implemented here yet
+				    0, // phi_prime_scf, not implemented here yet (MZ)				    
 				    pba->long_info,
 				    pvecback_nl
 				    ),

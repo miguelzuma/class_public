@@ -1722,7 +1722,7 @@ int output_open_background_file(
   if (pop->write_header == _TRUE_) {
     fprintf(*backfile,"# Table of selected background quantitites\n"); 
     fprintf(*backfile,"# All densities are mutiplied by (8piG/3) (below, shortcut notation (.) for this factor) \n"); 
-    fprintf(*backfile,"                        z");
+    fprintf(*backfile,"                      1+z");/*MZ: modified to 1+z for convenience in background plots*/
     fprintf(*backfile,"        proper time [Gyr]");
     fprintf(*backfile," conformal time * c [Mpc]");
     fprintf(*backfile,"            H / c [1/Mpc]");
@@ -1736,14 +1736,23 @@ int output_open_background_file(
       fprintf(*backfile,"     (.) rho_cdm [Mpc^-2]");
     if (pba->Omega0_ncdm_tot != 0.)
       for (n=0; n<pba->N_ncdm; n++)
-        fprintf(*backfile," (.) rho_ncdm[%d] [Mpc^-2]",n);
+	fprintf(*backfile," (.) rho_ncdm[%d] [Mpc^-2]",n);
     if (pba->Omega0_lambda != 0.)
       fprintf(*backfile,"  (.) rho_Lambda [Mpc^-2]");
     if (pba->Omega0_fld != 0.)
       fprintf(*backfile,"     (.) rho_fld [Mpc^-2]");
     if (pba->Omega0_ur != 0.)
       fprintf(*backfile,"      (.) rho_ur [Mpc^-2]");
+
+    /*adding the scalar field*/
+    if (pba->has_scf)
+      fprintf(*backfile,"      (.) rho_scf [Mpc^-2]");         
+    
     fprintf(*backfile,"    (.) rho_crit [Mpc^-2]");
+    
+    if (pba->has_scf)
+      fprintf(*backfile,"      phi_scf [???]");         
+    
     fprintf(*backfile,"\n");
   }
 
@@ -1767,7 +1776,7 @@ int output_one_line_of_background(
   
   int n;
 
-  fprintf(backfile,"%25.12e",pba->a_today/pvecback[pba->index_bg_a]-1.);
+fprintf(backfile,"%25.12e",pba->a_today/pvecback[pba->index_bg_a]);/*Modified to 1+z for convenience -1.*/
   fprintf(backfile,"%25.12e",pvecback[pba->index_bg_time]/_Gyr_over_Mpc_);
   fprintf(backfile,"%25.12e",pba->conformal_age-pvecback[pba->index_bg_conf_distance]);
   fprintf(backfile,"%25.12e",pvecback[pba->index_bg_H]);
@@ -1788,7 +1797,17 @@ int output_one_line_of_background(
     fprintf(backfile,"%25.12e",pvecback[pba->index_bg_rho_fld]);
   if (pba->Omega0_ur != 0.)
     fprintf(backfile,"%25.12e",pvecback[pba->index_bg_rho_ur]);
+  
+  /*adding the scalar field */
+  if (pba->has_scf)
+    fprintf(backfile,"%25.12e",pvecback[pba->index_bg_rho_scf]);
+    
   fprintf(backfile,"%25.12e",pvecback[pba->index_bg_rho_crit]);
+  
+  /*adding the scalar field */
+  if (pba->has_scf)
+    fprintf(backfile,"%25.12e",pvecback[pba->index_bg_phi_scf]);  
+  
   fprintf(backfile,"\n");
   
   return _SUCCESS_;

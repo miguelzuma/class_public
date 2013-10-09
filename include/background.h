@@ -62,6 +62,12 @@ struct background
   double Omega0_ur; /**< \f$ \Omega_{0 \nu r} \f$ : ultra-relativistic neutrinos */
 
   double Omega0_k; /**< \f$ \Omega_{0_k} \f$ : curvature contribution */
+  
+  double Omega0_scf; /**< \f$ \Omega_{0_\phi} \f$ : scalar field energy fraction */
+  double phi_ini_scf; /**< \f$ \phi(t_0) \f$ : scalar field initial value */
+  double phi_prime_ini_scf; /**< \f$ d\phi(t_0)/d\tau \f$ : scalar field initial derivative wrt conformal time */
+  double scf_V_param1; /**< \f$ V'/V \f$ : scalar field parameter1, currently exponential potential slope */
+  double scf_V_param2; /**< \f$ V_0 \f$ : scalar field parameter2, currently UNUSED */   
 
   int N_ncdm;                            /**< Number of distinguishabe ncdm species */
   double * M_ncdm;                       /**<vector of masses of non-cold relic: 
@@ -135,6 +141,14 @@ struct background
   int index_bg_rho_lambda;    /**< cosmological constant density */
   int index_bg_rho_fld;       /**< fluid with constant w density */
   int index_bg_rho_ur;        /**< relativistic neutrinos/relics density */
+  
+  int index_bg_phi_scf;       /**< scalar field value */
+  int index_bg_phi_prime_scf; /**< scalar field derivative wrt conformal time */
+  int index_bg_V_scf;         /**< scalar field potential V */
+  int index_bg_dV_scf;        /**< scalar field potential derivative V' */
+  int index_bg_ddV_scf;       /**< scalar field potential second derivative V'' */
+  int index_bg_rho_scf;       /**< scalar field energy density */
+  int index_bg_p_scf;         /**< scalar field pressure */  
 
   int index_bg_rho_ncdm1;     /**< density of first ncdm species (others contiguous) */
   int index_bg_p_ncdm1;       /**< pressure of first ncdm species (others contiguous) */
@@ -198,6 +212,10 @@ struct background
   int index_bi_rs;      /**< sound horizon */
   int index_bi_tau;     /**< conformal time in Mpc */
   int index_bi_growth;  /**< integral over [da/(aH)^3]=[dtau/(aH^2)], useful for growth factor */
+  
+  int index_bi_phi_scf;   /**< scalar field */  
+  int index_bi_phi_prime_scf;   /**< scalar field derivative wrt conformal time*/    
+  
   int bi_size;       
 
   //@}
@@ -218,6 +236,9 @@ struct background
   short has_fld;       /**< presence of fluid with constant w and cs2? */
   short has_ur;        /**< presence of ultra-relativistic neutrinos/relics? */
   short has_curvature; /**< presence of global spatial curvature? */
+  short has_scf;       /**< presence of scalar field? */  
+  
+  short scf_is_tuned; /**< is the scalar field tuned to give Omega0_scf? */  
 
   //@}
 
@@ -323,6 +344,8 @@ extern "C" {
   int background_functions(
 			   struct background *pba,
 			   double a,
+			   double phi, // _scf!!
+			   double phi_prime, //_scf prime
 			   short return_format,
 			   double * pvecback
 			   );
@@ -403,6 +426,22 @@ extern "C" {
 			 void * parameters_and_workspace,
 			 ErrorMsg error_message
 			 );
+  
+  /** Scalar field potential and its derivatives **/
+  double V_scf(
+		struct background *pba,
+		double phi
+		);
+
+  double dV_scf(
+		struct background *pba,
+		double phi
+		);
+
+  double ddV_scf(
+		struct background *pba,
+		double phi
+		);    
 
 #ifdef __cplusplus
 }

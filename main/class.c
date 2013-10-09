@@ -23,10 +23,24 @@ int main(int argc, char **argv) {
     return _FAILURE_;
   }
 
+  //Tune the scalar field parameters
+  if (tune_scalar_field_parameters(&pr,&ba) == _FAILURE_) {
+    printf("\n\nError running background_init \n=>%s\n",ba.error_message);
+    return _FAILURE_;
+  }
+
   if (background_init(&pr,&ba) == _FAILURE_) {
     printf("\n\nError running background_init \n=>%s\n",ba.error_message);
     return _FAILURE_;
   }
+
+  //added in order to extract the background functions
+  if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
+    printf("\n\nError in output_init \n=>%s\n",op.error_message);
+    return _FAILURE_;
+  }  
+  
+   return _SUCCESS_; // stop at the background_free
 
   if (thermodynamics_init(&pr,&ba,&th) == _FAILURE_) {
     printf("\n\nError in thermodynamics_init \n=>%s\n",th.error_message);
@@ -113,3 +127,68 @@ int main(int argc, char **argv) {
   return _SUCCESS_;
 
 }
+
+
+
+int tune_scalar_field_parameters(
+		                 struct precision * ppr,
+		                 struct background * pba
+		                 )  {
+  if (!pba->has_scf) {
+    printf(" no scalar field, skipping tune module \n");
+    return _SUCCESS_; 
+  }
+
+  int iter=0, maximum_iter = 100; //maximum number of iterations
+  double scf_lambda_min = -1;
+  double scf_lambda_max = 10*pba->scf_V_param1;
+  double Omega0_scf_try = 0.;//absurd value
+  double tolerance = 1e-4; //Need to pass a preccision argument
+
+  pba->scf_is_tuned = _FALSE_; /*scalar field not tuned. Useful to avoid unnecesary output NOTE: perhaps trade for a temporary background verbose value */
+  
+  while (fabs(pba->Omega0_scf-Omega0_scf_try) > tolerance){
+    
+    pba->scf_V_param1=0.5*(scf_lambda_max+scf_lambda_min);
+    
+ //   printf(" Tuning lambda = %e, Omega_0_try = %f \n",pba->scf_V_param1, Omega0_scf_try);
+    
+    if (background_init(ppr,pba) == _FAILURE_) {
+      printf("\n\nError running background_init with exp_quint, lambda = %e \n=>%s\n",pba->scf_V_param1,pba->error_message);
+      /*changed from pba.error_message to pba->error_message*/
+      return _FAILURE_;
+    }
+    
+    Omega0_scf_try = 
+    pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_scf]/
+    pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_crit];
+    /* this line returns the real value of Omega0_scf infered from the real evolution of the fields */
+    
+    if (Omega0_scf_try > pba->Omega0_scf)
+      scf_lambda_min = pba->scf_V_param1;
+    else
+      scf_lambda_max = pba->scf_V_param1;
+    /* note: the above four lines will find the correct value by bisection only if Omega0_scf_try is a monotonous function of sc_lambda. I hope that this is the case for the model we are after. It might not be the case in general. Then, one needs to think more. E.g. maybe one should pass values of scf_lambda_min and scf_lambda_max chosen not by chance, but knowning that they define the interval inside which the function Omega0_scf(scf_lambda) is monotonous. Moreover, depending on the fact that the function Omega0_scf(scf_lambda) is growing or decreasing, you may need to invert "min" and "max" inside the four lines above: I let you think about it. 
+    MZ: changed min/max
+     */
+    
+    if (background_free(pba) == _FAILURE_) {
+      printf("\n\nError in background_free \n=>%s\n",pba->error_message);
+      return _FAILURE_;
+    }
+    /* note: it is important to call background_free now, otherwise we could not call background_init again */
+    
+    if (iter > maximum_iter) {
+      printf("\n\nError in tune_scalar_field_parameters, too many iterations \n=>%s\n",pba->error_message);
+      return _FAILURE_;
+    }
+    iter ++;
+    
+  } /* end of bisection loop */
+  
+    pba->scf_is_tuned = _TRUE_;
+  
+  return _SUCCESS_;
+
+}
+

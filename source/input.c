@@ -476,30 +476,94 @@ int input_init(
   if (pba->K > 0.) pba->sgnK = 1;
   else if (pba->K < 0.) pba->sgnK = -1;
 
+//   //temporarily removed the previous assignement structure and deactivated _fld
+//   /* Omega_0_lambda (cosmological constant), Omega0_fld (dark energy fluid) */
+//   class_call(parser_read_double(pfc,"Omega_Lambda",&param1,&flag1,errmsg),
+//              errmsg,
+//              errmsg);
+//   class_call(parser_read_double(pfc,"Omega_fld",&param2,&flag2,errmsg),
+//              errmsg,
+//              errmsg);
+//   class_test((flag1 == _TRUE_) && (flag2 == _TRUE_),
+//              errmsg,
+//              "In input file, you can enter only two out of Omega_Lambda, Omega_de, Omega_k, the third one is inferred");
+// 
+//   if ((flag1 == _FALSE_) && (flag2 == _FALSE_)) {	
+//     pba->Omega0_lambda = 1.-pba->Omega0_k-pba->Omega0_g-pba->Omega0_ur-pba->Omega0_b-pba->Omega0_cdm-pba->Omega0_ncdm_tot;
+//   }
+//   else {
+//     if (flag1 == _TRUE_) {
+//       pba->Omega0_lambda= param1;
+//       pba->Omega0_fld = 1. - pba->Omega0_k - param1 - Omega_tot;
+//     }
+//     if (flag2 == _TRUE_) {
+//       pba->Omega0_lambda= 1. - pba->Omega0_k - param2 - Omega_tot;
+//       pba->Omega0_fld = param2;
+//     }
+//   }
+  
   /* Omega_0_lambda (cosmological constant), Omega0_fld (dark energy fluid) */
   class_call(parser_read_double(pfc,"Omega_Lambda",&param1,&flag1,errmsg),
              errmsg,
              errmsg);
-  class_call(parser_read_double(pfc,"Omega_fld",&param2,&flag2,errmsg),
+  class_call(parser_read_double(pfc,"Omega_scf",&param2,&flag2,errmsg),
              errmsg,
              errmsg);
+  
+  //MZ: changed fluid->scalar, added error message if fluid is casted
+  class_call(parser_read_double(pfc,"Omega_fld",&param3,&flag3,errmsg),
+             errmsg,
+             errmsg);
+  class_test(flag3 == _TRUE_,
+             errmsg,
+             "You introduced an effective fluid Omega_fld. This feature has been temporarily disabled to introduce a dynamical scalar field, sorry."); 
+  
   class_test((flag1 == _TRUE_) && (flag2 == _TRUE_),
              errmsg,
-             "In input file, you can enter only two out of Omega_Lambda, Omega_de, Omega_k, the third one is inferred");
+             "In input file, you can enter only two out of Omega_Lambda, Omega_scf (scalar field), Omega_k, the third one is inferred");
 
   if ((flag1 == _FALSE_) && (flag2 == _FALSE_)) {	
-    pba->Omega0_lambda = 1.-pba->Omega0_k-pba->Omega0_g-pba->Omega0_ur-pba->Omega0_b-pba->Omega0_cdm-pba->Omega0_ncdm_tot;
+    pba->Omega0_lambda = 1.+pba->Omega0_k-pba->Omega0_g-pba->Omega0_ur-pba->Omega0_b-pba->Omega0_cdm-pba->Omega0_ncdm_tot;
   }
   else {
     if (flag1 == _TRUE_) {
       pba->Omega0_lambda= param1;
-      pba->Omega0_fld = 1. - pba->Omega0_k - param1 - Omega_tot;
+      pba->Omega0_scf = 1. + pba->Omega0_k - param1 - Omega_tot;
     }
     if (flag2 == _TRUE_) {
-      pba->Omega0_lambda= 1. - pba->Omega0_k - param2 - Omega_tot;
-      pba->Omega0_fld = param2;
+      pba->Omega0_scf = param2; //probably       
+      pba->Omega0_lambda= 1. + pba->Omega0_k - param2 - Omega_tot;
     }
   }
+  
+  if (pba->Omega0_scf != 0.) {
+    
+    pba->has_scf = _TRUE_; //need here for tuning to work
+    
+    class_read_double("initial_phi_scf",pba->phi_ini_scf);
+    class_read_double("initial_phi_prime_scf",pba->phi_prime_ini_scf);
+    
+    class_call(parser_read_double(pfc,"parameter1_scf",&param1,&flag1,errmsg),
+             errmsg,
+             errmsg);
+    
+    if(flag1==_FALSE_) {
+      pba->scf_V_param1 = -sqrt(3./pba->Omega0_scf); //reproduces value today (if only matter!)
+      printf("lambda = %e determined from Omega0_scf (exp quint)\n", pba->scf_V_param1);    
+    }else{
+      pba->scf_V_param1 = param1;
+    }
+    
+    if (abs(pba->scf_V_param1) <3.) printf(" lambda = %e <3 won't be tracking (exp quint)\n",pba->scf_V_param1);
+      
+    
+    class_call(parser_read_double(pfc,"parameter2_scf",&param2,&flag2,errmsg),
+             errmsg,
+             errmsg);
+    class_test(flag2 == _TRUE_,
+             errmsg,
+             "So far we have only exponential quintessence. You can't introduce further potential parameters");
+  }  
 
   if (pba->Omega0_fld != 0.) {
     class_read_double("w0_fld",pba->w0_fld);
@@ -1799,6 +1863,13 @@ int input_default_params(
   pba->deg_ncdm = NULL;
   pba->ncdm_psd_parameters = NULL;
   pba->ncdm_psd_files = NULL;
+  
+  pba->Omega0_scf = 0.; /* Scalar field defaults */
+  pba->scf_V_param1 = -10.;
+  pba->scf_V_param2 = 1.;
+  //MZ: initial conditions are as multiplicative factors of the radiation attractor values  
+  pba->phi_ini_scf = 1;
+  pba->phi_prime_ini_scf = 1;    
 
   pba->Omega0_k = 0.;
   pba->K = 0.;
@@ -1809,6 +1880,8 @@ int input_default_params(
   pba->w0_fld=-1.;
   pba->wa_fld=0.;
   pba->cs2_fld=1.;
+  
+
 
   /** - thermodynamics structure */
 
