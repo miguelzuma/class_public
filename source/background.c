@@ -254,6 +254,24 @@ int background_functions(
   /** Summary: */
 
   /** - define local variables */
+  
+  /**Need to give the value of phi_scf, phi_prime_scf corresponding to a 
+   * if phi, phi_prime == _SCF_VOID_, pick up the interpolated value
+   * TODO: consider using background_at_tau all over thermodynamics.c (as in perturbations.c)
+   * TODO: error if only one argument is set to _SCF_VOID_
+  */
+  
+/*  
+  if(pba->has_scf && phi == _SCF_VOID_ && phi_prime == _SCF_VOID_) {
+    
+  }*/
+
+
+//     if ((phi == _SCF_VOID_ && phi_prime != _SCF_VOID_)||
+//       (phi_prime != _SCF_VOID_ && phi_prime == _SCF_VOID_)){
+//       printf("\n\nError in background_functions, need either  \n=>%s\n",pba->error_message);
+//       return _FAILURE_;
+//     }  
 
   /* total density */
   double rho_tot;
@@ -1572,8 +1590,13 @@ int background_solve(
     
     if (pba->has_scf == _TRUE_){    
       printf(" -> Omega_scf = %f, whished %f \n",pvecback[pba->index_bg_rho_scf]/pvecback[pba->index_bg_rho_crit], pba->Omega0_scf);     
-      printf(" parameters were lambda = %f,\n",pba->scf_V_param1,pba->phi_ini_scf,pba->phi_prime_ini_scf);
-      // phi_ini/phi_track = %f, phi'_ini/phi'_track = %f 
+      printf(" parameters: lambda = %f,",
+	     pba->scf_V_param1);
+      if (pba->phi_ini_scf !=1. || pba->phi_prime_ini_scf !=1.)
+	      printf(" phi_ini = %f, phi_prime_ini = %f (wrt attractor values)\n",
+		     pba->phi_ini_scf,pba->phi_prime_ini_scf);
+	      else
+		printf(" attractor initial conditions\n");
     }
   }
 

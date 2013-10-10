@@ -34,18 +34,19 @@ int main(int argc, char **argv) {
     return _FAILURE_;
   }
 
+  //now we do thermodynamics too
+  if (thermodynamics_init(&pr,&ba,&th) == _FAILURE_) {
+    printf("\n\nError in thermodynamics_init \n=>%s\n",th.error_message);
+    return _FAILURE_;
+  }
+  
   //added in order to extract the background functions
   if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
     printf("\n\nError in output_init \n=>%s\n",op.error_message);
     return _FAILURE_;
   }  
   
-   return _SUCCESS_; // stop at the background_free
-
-  if (thermodynamics_init(&pr,&ba,&th) == _FAILURE_) {
-    printf("\n\nError in thermodynamics_init \n=>%s\n",th.error_message);
-    return _FAILURE_;
-  }
+   return _SUCCESS_; // stop at the background_free  
 
   if (perturb_init(&pr,&ba,&th,&pt) == _FAILURE_) {
     printf("\n\nError in perturb_init \n=>%s\n",pt.error_message);
@@ -135,7 +136,7 @@ int tune_scalar_field_parameters(
 		                 struct background * pba
 		                 )  {
   if (!pba->has_scf) {
-    printf(" no scalar field, skipping tune module \n");
+    printf(" no scalar field, skipping tune algorithm \n");
     return _SUCCESS_; 
   }
 

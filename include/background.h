@@ -238,7 +238,7 @@ struct background
   short has_curvature; /**< presence of global spatial curvature? */
   short has_scf;       /**< presence of scalar field? */  
   
-  short scf_is_tuned; /**< is the scalar field tuned to give Omega0_scf? */  
+  short scf_is_tuned; /**< is the scalar field tuned to give Omega0_scf? */
 
   //@}
 
@@ -469,6 +469,8 @@ extern "C" {
 #define _h_P_ 6.62606896e-34
 /* remark: sigma_B = 2 pi^5 k_B^4 / (15h^3c^2) = 5.670400e-8 
                    = Stefan-Boltzmann constant in W/m^2/K^4 = Kg/K^4/s^3 */
+
+#define _SCF_VOID_ = 123456789 /**< if phi_scf, phi_prime_scf are given to background_functions() with this precise value, use the interpolated values at the given a */
 
 //@}
 
