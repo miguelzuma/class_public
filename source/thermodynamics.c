@@ -400,20 +400,43 @@ int thermodynamics_init(
   /** - store initial value of conformal time in the straucture */
 
   pth->tau_ini = tau_table[pth->tt_size-1];
+  
+  /** MZ: for phi_scf purposes, background_functions -> background_at_tau
+   * This avoids the possibility of giving a bad phi, phi_prime for z
+   * define last_index =0 and borrow double tau (used latter)
+   * and use pba->inter_normal (NOTE optimize latter if needed) */
+  
+  int last_index = 0;
+  
 
   /** - fill missing columns (quantities not computed previously but related) */
 
   /** -> baryon drag interaction rate time minus one, -[R * kappa'], stored temporarily in column ddkappa */
   for (index_tau=0; index_tau < pth->tt_size; index_tau++) {
 
-    class_call(background_functions(pba,
-				    1./(1.+pth->z_table[index_tau]),
-				    0, // phi_scf, not implemented here yet
-				    0, // phi_prime_scf, not implemented here yet (MZ)
-				    pba->short_info,
-				    pvecback),
+//     class_call(background_functions(pba,
+// 				    1./(1.+pth->z_table[index_tau]),
+// 				    0, // phi_scf, not implemented here yet
+// 				    0, // phi_prime_scf, not implemented here yet (MZ)
+// 				    pba->short_info,
+// 				    pvecback),
+// 	       pba->error_message,
+// 	       pth->error_message);
+    
+    //this gets tau to introduce in background at tau
+    class_call(background_tau_of_z(pba,pth->z_table[index_tau],&(tau)),
 	       pba->error_message,
-	       pth->error_message);
+	       pth->error_message);    
+    //MZ: for phi_scf purpouses, background_functions->background_at_tau
+    class_call(background_at_tau(pba,
+                               tau, 
+                               pba->short_info, 
+                               pba->inter_normal, 
+                               &(last_index), 
+                               pvecback),
+             pba->error_message,
+             pth->error_message);
+
     
     pth->thermodynamics_table[index_tau*pth->th_size+pth->index_th_ddkappa] =
       -4./3.*pvecback[pba->index_bg_rho_g]/pvecback[pba->index_bg_rho_b]
@@ -1765,6 +1788,9 @@ int thermodynamics_reionization_sample(
   double dkappadtau,dkappadtau_next;
   double energy_rate;
 
+  double tau; // MZ: added to remove phi_scf
+  int last_index = 0;
+  
   Yp = pth->YHe;
 
   /** (a) allocate vector of values related to reionization */
@@ -1799,10 +1825,24 @@ int thermodynamics_reionization_sample(
   reio_vector[preio->index_re_xe] = xe;
 
   /** - get \f$ d kappa / d z = (d kappa / d tau) * (d tau / d z) = - (d kappa / d tau) / H \f$ */
-  /*MZ: added zero values for phi_scf, phi_prime_scf (not implemented yet in thermodynamics */  
-  class_call(background_functions(pba,1./(1.+z),0,0,pba->short_info,pvecback),
+//   class_call(background_functions(pba,1./(1.+z),0,0,pba->short_info,pvecback),
+// 	     pba->error_message,
+// 	     pth->error_message);  
+
+  class_call(background_tau_of_z(pba,z,&(tau)),
 	     pba->error_message,
-	     pth->error_message);
+	     pth->error_message);    
+    //MZ: for phi_scf purpouses, background_functions->background_at_tau
+  class_call(background_at_tau(pba,
+                               tau, 
+                               pba->short_info, 
+                               pba->inter_normal, 
+                               &(last_index), 
+                               pvecback),
+             pba->error_message,
+             pth->error_message);  
+     
+
 
   reio_vector[preio->index_re_dkappadtau] = (1.+z) * (1.+z) * pth->n_e * xe * _sigma_ * _Mpc_over_m_;
 
@@ -1850,9 +1890,22 @@ int thermodynamics_reionization_sample(
 	       pth->error_message);
 
     /*MZ: added zero values for phi_scf, phi_prime_scf (not implemented yet in thermodynamics */
-    class_call(background_functions(pba,1./(1.+z_next),0,0,pba->short_info,pvecback),
-	       pba->error_message,
-	       pth->error_message);
+//     class_call(background_functions(pba,1./(1.+z_next),-1e3,0,pba->short_info,pvecback),
+// 	       pba->error_message,
+// 	       pth->error_message);
+    
+    class_call(background_tau_of_z(pba,z_next,&(tau)),
+  	       pba->error_message,
+	       pth->error_message);    
+    //MZ: for phi_scf purpouses, background_functions->background_at_tau
+    class_call(background_at_tau(pba,
+                                 tau, 
+                                 pba->short_info, 
+                                 pba->inter_normal, 
+                                 &(last_index), 
+                                 pvecback),
+               pba->error_message,
+               pth->error_message);  
 
     class_test(pvecback[pba->index_bg_H] == 0.,
 	       pth->error_message,
@@ -1884,9 +1937,22 @@ int thermodynamics_reionization_sample(
 		 pth->error_message);
 
     /*MZ: added zero values for phi_scf, phi_prime_scf (not implemented yet in thermodynamics */
-      class_call(background_functions(pba,1./(1.+z_next),0,0,pba->short_info,pvecback),
-		 pba->error_message,
-		 pth->error_message);
+//       class_call(background_functions(pba,1./(1.+z_next),0,0,pba->short_info,pvecback),
+// 		 pba->error_message,
+// 		 pth->error_message);
+      
+      class_call(background_tau_of_z(pba,z_next,&(tau)),
+  	         pba->error_message,
+	         pth->error_message);    
+      //MZ: for phi_scf purpouses, background_functions->background_at_tau
+      class_call(background_at_tau(pba,
+                                   tau, 
+                                   pba->short_info, 
+                                   pba->inter_normal, 
+                                   &(last_index), 
+                                   pvecback),
+                 pba->error_message,
+                 pth->error_message);  
 
       class_test(pvecback[pba->index_bg_H] == 0.,
 		 pth->error_message,
@@ -1951,9 +2017,22 @@ int thermodynamics_reionization_sample(
     z = preio->reionization_table[i*preio->re_size+preio->index_re_z];
 
     /*MZ: added zero values for phi_scf, phi_prime_scf (not implemented yet in thermodynamics */    
-    class_call(background_functions(pba,1./(1.+z),0,0,pba->normal_info,pvecback),
+//     class_call(background_functions(pba,1./(1.+z),0,0,pba->normal_info,pvecback),
+// 	       pba->error_message,
+// 	       pth->error_message);
+    
+    class_call(background_tau_of_z(pba,z,&(tau)),
 	       pba->error_message,
-	       pth->error_message);
+	       pth->error_message);    
+      //MZ: for phi_scf purpouses, background_functions->background_at_tau
+    class_call(background_at_tau(pba,
+                                 tau, 
+                                 pba->short_info, 
+                                 pba->inter_normal, 
+                                 &(last_index), 
+                                 pvecback),
+               pba->error_message,
+               pth->error_message);      
     
     dz = (preio->reionization_table[i*preio->re_size+preio->index_re_z]-preio->reionization_table[(i-1)*preio->re_size+preio->index_re_z]);
     
@@ -2268,9 +2347,28 @@ int thermodynamics_recombination_with_hyrec(
 	       pth->error_message);
     
     /*MZ: added zero values for phi_scf, phi_prime_scf (not implemented yet in thermodynamics */    
-    class_call(background_functions(pba,pba->a_today/(1.+z),0,0,pba->short_info,pvecback),
+//     class_call(background_functions(pba,pba->a_today/(1.+z),0,0,pba->short_info,pvecback),
+// 	       pba->error_message,
+// 	       pth->error_message);
+    
+    double tau; // MZ: added to remove phi_scf
+    int last_index = 0;
+  
+    //MZ: integration ends with z~-1e-14 otherwise 
+   //TODO: Find more elegant fix?
+    if(z<0) z=0;     
+    class_call(background_tau_of_z(pba,z,&(tau)),
 	       pba->error_message,
-	       pth->error_message);
+	       pth->error_message);    
+      //MZ: for phi_scf purpouses, background_functions->background_at_tau
+    class_call(background_at_tau(pba,
+                                 tau, 
+                                 pba->short_info, 
+                                 pba->inter_normal, 
+                                 &(last_index), 
+                                 pvecback),
+               pba->error_message,
+               pth->error_message);      
   
     /*   class_call(thermodynamics_energy_injection(ppr,pba,preco,z,&energy_rate,pth->error_message),
 	       pth->error_message,
@@ -2805,10 +2903,32 @@ int thermodynamics_derivs_with_recfast(
   n_He = preco->fHe * n;
   Trad = preco->Tnow * (1.+z);
 
-  /*MZ: added zero values for phi_scf, phi_prime_scf (not implemented yet in thermodynamics */  
-  class_call(background_functions(pba,1./(1.+z),0,0,pba->short_info,pvecback),
+//   /*MZ: added zero values for phi_scf, phi_prime_scf (not implemented yet in thermodynamics */  
+//   class_call(background_functions(pba,1./(1.+z),0,0,pba->short_info,pvecback),
+// 	     pba->error_message,
+// 	     error_message);
+//   printf("  H1 = %f \n", pvecback[pba->index_bg_H]);
+  
+  double tau; // MZ: added to remove phi_scf
+  int last_index = 0;
+  
+  //this gets tau to introduce in background at tau
+  //MZ: integration ends with z~-1e-14 otherwise 
+  //TODO: Find more elegant fix?
+  if(z<0) z=0; 
+  class_call(background_tau_of_z(pba,z,&(tau)),
 	     pba->error_message,
-	     error_message);
+	     error_message);    
+  //MZ: for phi_scf purpouses, background_functions->background_at_tau
+  class_call(background_at_tau(pba,
+                               tau, 
+                               pba->short_info, 
+                               pba->inter_normal, 
+                               &(last_index), 
+                               pvecback),
+             pba->error_message,
+             error_message);
+  //printf(" H2 = %f, z = %f, tau = %f \n", pvecback[pba->index_bg_H], z, tau);
   
   class_call(thermodynamics_energy_injection(ppr,pba,preco,z,&energy_rate,error_message),
 	     error_message,
