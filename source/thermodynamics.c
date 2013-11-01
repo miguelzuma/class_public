@@ -423,20 +423,29 @@ int thermodynamics_init(
 // 	       pba->error_message,
 // 	       pth->error_message);
     
+double before=  -4./3.*pvecback[pba->index_bg_rho_g]/pvecback[pba->index_bg_rho_b]
+      *pth->thermodynamics_table[index_tau*pth->th_size+pth->index_th_dkappa];
+//     
     //this gets tau to introduce in background at tau
     class_call(background_tau_of_z(pba,pth->z_table[index_tau],&(tau)),
 	       pba->error_message,
 	       pth->error_message);    
     //MZ: for phi_scf purpouses, background_functions->background_at_tau
+    
     class_call(background_at_tau(pba,
                                tau, 
-                               pba->short_info, 
+                               pba->normal_info, 
                                pba->inter_normal, 
                                &(last_index), 
                                pvecback),
              pba->error_message,
              pth->error_message);
-
+    
+    double after = -4./3.*pvecback[pba->index_bg_rho_g]/pvecback[pba->index_bg_rho_b]
+      *pth->thermodynamics_table[index_tau*pth->th_size+pth->index_th_dkappa];
+      
+      if (abs(after - before) !=0)
+	printf(" after - before %f \n ", after - before);
     
     pth->thermodynamics_table[index_tau*pth->th_size+pth->index_th_ddkappa] =
       -4./3.*pvecback[pba->index_bg_rho_g]/pvecback[pba->index_bg_rho_b]
@@ -1835,7 +1844,7 @@ int thermodynamics_reionization_sample(
     //MZ: for phi_scf purpouses, background_functions->background_at_tau
   class_call(background_at_tau(pba,
                                tau, 
-                               pba->short_info, 
+                               pba->normal_info, 
                                pba->inter_normal, 
                                &(last_index), 
                                pvecback),
@@ -1900,7 +1909,7 @@ int thermodynamics_reionization_sample(
     //MZ: for phi_scf purpouses, background_functions->background_at_tau
     class_call(background_at_tau(pba,
                                  tau, 
-                                 pba->short_info, 
+                                 pba->normal_info, 
                                  pba->inter_normal, 
                                  &(last_index), 
                                  pvecback),
@@ -1947,7 +1956,7 @@ int thermodynamics_reionization_sample(
       //MZ: for phi_scf purpouses, background_functions->background_at_tau
       class_call(background_at_tau(pba,
                                    tau, 
-                                   pba->short_info, 
+                                   pba->normal_info, 
                                    pba->inter_normal, 
                                    &(last_index), 
                                    pvecback),
@@ -2027,7 +2036,7 @@ int thermodynamics_reionization_sample(
       //MZ: for phi_scf purpouses, background_functions->background_at_tau
     class_call(background_at_tau(pba,
                                  tau, 
-                                 pba->short_info, 
+                                 pba->normal_info, 
                                  pba->inter_normal, 
                                  &(last_index), 
                                  pvecback),
@@ -2363,7 +2372,7 @@ int thermodynamics_recombination_with_hyrec(
       //MZ: for phi_scf purpouses, background_functions->background_at_tau
     class_call(background_at_tau(pba,
                                  tau, 
-                                 pba->short_info, 
+                                 pba->normal_info, 
                                  pba->inter_normal, 
                                  &(last_index), 
                                  pvecback),
@@ -2922,7 +2931,7 @@ int thermodynamics_derivs_with_recfast(
   //MZ: for phi_scf purpouses, background_functions->background_at_tau
   class_call(background_at_tau(pba,
                                tau, 
-                               pba->short_info, 
+                               pba->normal_info, 
                                pba->inter_normal, 
                                &(last_index), 
                                pvecback),
