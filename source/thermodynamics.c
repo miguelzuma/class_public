@@ -2363,7 +2363,7 @@ int thermodynamics_recombination_with_hyrec(
     double tau; // MZ: added to remove phi_scf
     int last_index = 0;
   
-    //MZ: integration ends with z~-1e-14 otherwise 
+   //MZ: integration ends with z~-1e-14 otherwise 
    //TODO: Find more elegant fix?
     if(z<0) z=0;     
     class_call(background_tau_of_z(pba,z,&(tau)),
