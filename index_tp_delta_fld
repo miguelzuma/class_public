@@ -1,0 +1,1676 @@
+Binary file build/input.o matches
+Binary file build/output.o matches
+Binary file build/perturbations.o matches
+Binary file build/primordial.o matches
+Binary file build/spectra.o matches
+Binary file build/transfer.o matches
+cpp/ClassEngine.cc:    printf("\n\nError in perturb_init \n=>%s\n",ppt->error_message);
+include/perturbations.h:#define _scalars_ ((ppt->has_scalars == _TRUE_) && (index_md == ppt->index_md_scalars))
+include/perturbations.h:#define _vectors_ ((ppt->has_vectors == _TRUE_) && (index_md == ppt->index_md_vectors))
+include/perturbations.h:#define _tensors_ ((ppt->has_tensors == _TRUE_) && (index_md == ppt->index_md_tensors))
+include/perturbations.h:#define _set_source_(index) ppt->sources[index_md][index_ic * ppt->tp_size[index_md] + index][index_tau * ppt->k_size + index_k]
+include/perturbations.h:  double * selection_function; /** selection function W(tau), normalized to \int W(tau) dtau=1, stored in selection_function[bin*ppt->tau_size+index_tau] */ 
+include/perturbations.h:                         [index_ic * ppt->tp_size[index_md] + index_type]
+include/perturbations.h:                         [index_tau * ppt->k_size + index_k] */
+include/perturbations.h~:#define _scalars_ ((ppt->has_scalars == _TRUE_) && (index_md == ppt->index_md_scalars))
+include/perturbations.h~:#define _vectors_ ((ppt->has_vectors == _TRUE_) && (index_md == ppt->index_md_vectors))
+include/perturbations.h~:#define _tensors_ ((ppt->has_tensors == _TRUE_) && (index_md == ppt->index_md_tensors))
+include/perturbations.h~:#define _set_source_(index) ppt->sources[index_md][index_ic * ppt->tp_size[index_md] + index][index_tau * ppt->k_size + index_k]
+include/perturbations.h~:  double * selection_function; /** selection function W(tau), normalized to \int W(tau) dtau=1, stored in selection_function[bin*ppt->tau_size+index_tau] */ 
+include/perturbations.h~:                         [index_ic * ppt->tp_size[index_md] + index_type]
+include/perturbations.h~:                         [index_tau * ppt->k_size + index_k] */
+source/input.c:  ppt->has_perturbations = _FALSE_;
+source/input.c:  ppt->has_cls = _FALSE_;
+source/input.c:      ppt->has_cl_cmb_temperature = _TRUE_;  
+source/input.c:      ppt->has_perturbations = _TRUE_;  
+source/input.c:      ppt->has_cls = _TRUE_;
+source/input.c:      ppt->has_cl_cmb_polarization = _TRUE_;  
+source/input.c:      ppt->has_perturbations = _TRUE_;  
+source/input.c:      ppt->has_cls = _TRUE_;
+source/input.c:      ppt->has_cl_cmb_lensing_potential = _TRUE_;
+source/input.c:      ppt->has_perturbations = _TRUE_; 
+source/input.c:      ppt->has_cls = _TRUE_;
+source/input.c:      ppt->has_cl_density=_TRUE_;
+source/input.c:      ppt->has_perturbations = _TRUE_;
+source/input.c:      ppt->has_cls = _TRUE_;
+source/input.c:      ppt->has_cl_lensing_potential=_TRUE_;
+source/input.c:      ppt->has_perturbations = _TRUE_;
+source/input.c:      ppt->has_cls = _TRUE_;
+source/input.c:      ppt->has_pk_matter=_TRUE_; 
+source/input.c:      ppt->has_perturbations = _TRUE_;  
+source/input.c:      ppt->has_density_transfers=_TRUE_; 
+source/input.c:      ppt->has_perturbations = _TRUE_;  
+source/input.c:      ppt->has_velocity_transfers=_TRUE_; 
+source/input.c:      ppt->has_perturbations = _TRUE_;  
+source/input.c:  if (ppt->has_perturbations == _TRUE_) { 
+source/input.c:      ppt->has_scalars=_FALSE_;
+source/input.c:        ppt->has_scalars=_TRUE_; 
+source/input.c:        ppt->has_vectors=_TRUE_;  
+source/input.c:        ppt->has_tensors=_TRUE_;
+source/input.c:      class_test(class_none_of_three(ppt->has_scalars,ppt->has_vectors,ppt->has_tensors),
+source/input.c:    if (ppt->has_scalars == _TRUE_) {
+source/input.c:        ppt->has_ad=_FALSE_;
+source/input.c:          ppt->has_ad=_TRUE_; 
+source/input.c:          ppt->has_bi=_TRUE_; 
+source/input.c:          ppt->has_cdi=_TRUE_; 
+source/input.c:          ppt->has_nid=_TRUE_; 
+source/input.c:          ppt->has_niv=_TRUE_; 
+source/input.c:        class_test(ppt->has_ad==_FALSE_ && ppt->has_bi ==_FALSE_ && ppt->has_cdi ==_FALSE_ && ppt->has_nid ==_FALSE_ && ppt->has_niv ==_FALSE_,
+source/input.c:      class_test(ppt->has_cl_cmb_lensing_potential == _TRUE_,
+source/input.c:      class_test(ppt->has_pk_matter == _TRUE_,
+source/input.c:        ppt->gauge = newtonian;
+source/input.c:        ppt->gauge = synchronous;
+source/input.c:    if (ppt->has_scalars == _TRUE_) {
+source/input.c:      if ((ppt->has_bi == _TRUE_) ||
+source/input.c:          (ppt->has_cdi == _TRUE_) ||
+source/input.c:          (ppt->has_nid == _TRUE_) ||
+source/input.c:          (ppt->has_niv == _TRUE_)) {
+source/input.c:      if (ppt->has_bi == _TRUE_) {
+source/input.c:      if (ppt->has_cdi == _TRUE_) {
+source/input.c:      if (ppt->has_nid == _TRUE_) {
+source/input.c:      if (ppt->has_niv == _TRUE_) {
+source/input.c:    if (ppt->has_scalars == _TRUE_) {
+source/input.c:      if (ppt->has_ad == _TRUE_) {
+source/input.c:      if (ppt->has_bi == _TRUE_) {
+source/input.c:      if (ppt->has_cdi == _TRUE_) {
+source/input.c:      if (ppt->has_nid == _TRUE_) {
+source/input.c:      if (ppt->has_niv == _TRUE_) {
+source/input.c:      if ((ppt->has_ad == _TRUE_) && (ppt->has_bi == _TRUE_)) {
+source/input.c:      if ((ppt->has_ad == _TRUE_) && (ppt->has_cdi == _TRUE_)) {
+source/input.c:      if ((ppt->has_ad == _TRUE_) && (ppt->has_nid == _TRUE_)) {
+source/input.c:      if ((ppt->has_ad == _TRUE_) && (ppt->has_niv == _TRUE_)) {
+source/input.c:      if ((ppt->has_bi == _TRUE_) && (ppt->has_cdi == _TRUE_)) {
+source/input.c:      if ((ppt->has_bi == _TRUE_) && (ppt->has_nid == _TRUE_)) {
+source/input.c:      if ((ppt->has_bi == _TRUE_) && (ppt->has_niv == _TRUE_)) {
+source/input.c:      if ((ppt->has_cdi == _TRUE_) && (ppt->has_nid == _TRUE_)) {
+source/input.c:      if ((ppt->has_cdi == _TRUE_) && (ppt->has_niv == _TRUE_)) {
+source/input.c:      if ((ppt->has_nid == _TRUE_) && (ppt->has_niv == _TRUE_)) {
+source/input.c:    if (ppt->has_tensors == _TRUE_) {
+source/input.c:  if (ppt->has_cls == _TRUE_) {
+source/input.c:    if (ppt->has_scalars == _TRUE_) {
+source/input.c:      if ((ppt->has_cl_cmb_temperature == _TRUE_) || 
+source/input.c:          (ppt->has_cl_cmb_polarization == _TRUE_) || 
+source/input.c:          (ppt->has_cl_cmb_lensing_potential == _TRUE_)) 
+source/input.c:        class_read_double("l_max_scalars",ppt->l_scalar_max);
+source/input.c:      if ((ppt->has_cl_lensing_potential == _TRUE_) || (ppt->has_cl_density == _TRUE_))
+source/input.c:        class_read_double("l_max_lss",ppt->l_lss_max);
+source/input.c:    if (ppt->has_tensors == _TRUE_) {   
+source/input.c:      class_read_double("l_max_tensors",ppt->l_tensor_max);
+source/input.c:  if ((ppt->has_scalars == _TRUE_) && 
+source/input.c:      ((ppt->has_cl_cmb_temperature == _TRUE_) || (ppt->has_cl_cmb_polarization == _TRUE_)) && 
+source/input.c:      (ppt->has_cl_cmb_lensing_potential == _TRUE_)) {
+source/input.c:  if ((ppt->has_pk_matter == _TRUE_) || (ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_)) {
+source/input.c:      ppt->k_max_for_pk=param1*pba->h;
+source/input.c:      ppt->k_max_for_pk=param2;
+source/input.c:  if ((ppt->has_cl_density == _TRUE_) || (ppt->has_cl_lensing_potential == _TRUE_)) {
+source/input.c:        ppt->selection=gaussian; 
+source/input.c:        ppt->selection=tophat; 
+source/input.c:        ppt->selection=dirac; 
+source/input.c:      ppt->selection_num = int1;
+source/input.c:        ppt->selection_mean[i] = pointer1[i];
+source/input.c:        class_test(ppt->selection_mean[i]<=ppt->selection_mean[i-1],
+source/input.c:                   "input of selection functions: the list of mean redshifts must be passed in growing order; you entered %e before %e",ppt->selection_mean[i-1],ppt->selection_mean[i]);
+source/input.c:        ppt->selection_width[i] = ppt->selection_width[0];
+source/input.c:          for (i=0; i<ppt->selection_num; i++) {
+source/input.c:            ppt->selection_width[i] = pointer1[0];
+source/input.c:        else if (int1==ppt->selection_num) {
+source/input.c:            ppt->selection_width[i] = pointer1[i];
+source/input.c:                     ppt->selection_num,int1,ppt->selection_num);
+source/input.c:    if (ppt->selection_num>1) {
+source/input.c:      if ((psp->non_diag<0) || (psp->non_diag>=ppt->selection_num))
+source/input.c:                   psp->non_diag,ppt->selection_num-1);
+source/input.c:    class_test((pnl->method>nl_none) && (ppt->has_pk_matter==_FALSE_),
+source/input.c:                 ppt->perturbations_verbose);
+source/input.c:    ppt->k_max_for_pk 
+source/input.c:            ppt->k_max_for_pk,
+source/input.c:    ppt->l_scalar_max+=ppr->delta_l_max;
+source/input.c:  ppt->has_cl_cmb_temperature = _FALSE_;
+source/input.c:  ppt->has_cl_cmb_polarization = _FALSE_;
+source/input.c:  ppt->has_cl_cmb_lensing_potential = _FALSE_;
+source/input.c:  ppt->has_cl_density = _FALSE_;
+source/input.c:  ppt->has_cl_lensing_potential = _FALSE_;
+source/input.c:  ppt->has_pk_matter = _FALSE_;
+source/input.c:  ppt->has_density_transfers = _FALSE_;
+source/input.c:  ppt->has_velocity_transfers = _FALSE_;
+source/input.c:  ppt->has_ad=_TRUE_;  
+source/input.c:  ppt->has_bi=_FALSE_;
+source/input.c:  ppt->has_cdi=_FALSE_;
+source/input.c:  ppt->has_nid=_FALSE_;
+source/input.c:  ppt->has_niv=_FALSE_;
+source/input.c:  ppt->has_scalars=_TRUE_;  
+source/input.c:  ppt->has_vectors=_FALSE_;
+source/input.c:  ppt->has_tensors=_FALSE_;  
+source/input.c:  ppt->l_scalar_max=2500;
+source/input.c:  ppt->l_tensor_max=500;
+source/input.c:  ppt->l_lss_max=300;
+source/input.c:  ppt->k_max_for_pk=0.1;
+source/input.c:  ppt->gauge=synchronous;
+source/input.c:  ppt->selection_num=1;
+source/input.c:  ppt->selection=gaussian;
+source/input.c:  ppt->selection_mean[0]=1.;
+source/input.c:  ppt->selection_width[0]=0.1;
+source/input.c:  ppt->perturbations_verbose = 0;
+source/output.c:  if ((ppt->has_cls == _FALSE_) && (ppt->has_pk_matter == _FALSE_) && (pnl->method == nl_none) && (ppt->has_density_transfers == _FALSE_) && (ppt->has_velocity_transfers == _FALSE_) && (pop->write_background == _FALSE_)) {
+source/output.c:  if (ppt->has_cls == _TRUE_) {
+source/output.c:  if (ppt->has_pk_matter == _TRUE_) {
+source/output.c:  if ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_)) {
+source/output.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:  if (ppt->md_size > 1) {
+source/output.c:    for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:    if (ppt->ic_size[index_md] > 1) {
+source/output.c:      for (index_ic1 = 0; index_ic1 < ppt->ic_size[index_md]; index_ic1++) {
+source/output.c:        for (index_ic2 = index_ic1; index_ic2 < ppt->ic_size[index_md]; index_ic2++) {
+source/output.c:              if ((ppt->has_ad == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_ad)) {
+source/output.c:              if ((ppt->has_bi == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_bi)) {
+source/output.c:              if ((ppt->has_cdi == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_cdi)) {
+source/output.c:              if ((ppt->has_nid == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_nid) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:              if ((ppt->has_niv == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_niv) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:              if ((ppt->has_ad == _TRUE_) && 
+source/output.c:                  (ppt->has_bi == _TRUE_) && (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_bi)) {
+source/output.c:              if ((ppt->has_ad == _TRUE_) && (ppt->has_cdi == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_cdi)) {
+source/output.c:              if ((ppt->has_ad == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:              if ((ppt->has_ad == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:              if ((ppt->has_bi == _TRUE_) && (ppt->has_cdi == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_cdi)) {
+source/output.c:              if ((ppt->has_bi == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:              if ((ppt->has_bi == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:              if ((ppt->has_cdi == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:              if ((ppt->has_cdi == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:              if ((ppt->has_nid == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:                  (index_ic1 == ppt->index_ic_nid) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:    if (ppt->md_size > 1) {
+source/output.c:      for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:    for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:      if ((ppt->ic_size[index_md] > 1) && (l <= psp->l_max[index_md])) {
+source/output.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:    if (ppt->ic_size[index_md] > 1) {
+source/output.c:  if (ppt->md_size > 1) {
+source/output.c:    for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/output.c:  index_md=ppt->index_md_scalars;
+source/output.c:      for (index_ic1 = 0; index_ic1 < ppt->ic_size[index_md]; index_ic1++) {
+source/output.c:        for (index_ic2 = index_ic1; index_ic2 < ppt->ic_size[index_md]; index_ic2++) {
+source/output.c:          if ((ppt->has_ad == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_ad)) {
+source/output.c:          if ((ppt->has_bi == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_bi)) {
+source/output.c:          if ((ppt->has_cdi == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_cdi)) {
+source/output.c:          if ((ppt->has_nid == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_nid) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:          if ((ppt->has_niv == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_niv) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:          if ((ppt->has_ad == _TRUE_) && 
+source/output.c:              (ppt->has_bi == _TRUE_) && (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_bi)) {
+source/output.c:          if ((ppt->has_ad == _TRUE_) && (ppt->has_cdi == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_cdi)) {
+source/output.c:          if ((ppt->has_ad == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:          if ((ppt->has_ad == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:          if ((ppt->has_bi == _TRUE_) && (ppt->has_cdi == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_cdi)) {
+source/output.c:          if ((ppt->has_bi == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:          if ((ppt->has_bi == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:          if ((ppt->has_cdi == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_nid)) {
+source/output.c:          if ((ppt->has_cdi == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:          if ((ppt->has_nid == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/output.c:              (index_ic1 == ppt->index_ic_nid) && (index_ic2 == ppt->index_ic_niv)) {
+source/output.c:  index_md=ppt->index_md_scalars;
+source/output.c:    class_test(ppt->has_velocity_transfers == _TRUE_,
+source/output.c:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/output.c:      if ((ppt->has_ad == _TRUE_) && (index_ic == ppt->index_ic_ad)) {
+source/output.c:        if (ppt->ic_size[index_md] == 1)
+source/output.c:      if ((ppt->has_bi == _TRUE_) && (index_ic == ppt->index_ic_bi)) {
+source/output.c:      if ((ppt->has_cdi == _TRUE_) && (index_ic == ppt->index_ic_cdi)) {
+source/output.c:      if ((ppt->has_nid == _TRUE_) && (index_ic == ppt->index_ic_nid)) {
+source/output.c:      if ((ppt->has_niv == _TRUE_) && (index_ic == ppt->index_ic_niv)) {
+source/output.c:      if (ppt->has_density_transfers == _TRUE_) {
+source/output.c:      if (ppt->has_velocity_transfers == _TRUE_) {
+source/output.c:      if (ppt->has_density_transfers == _TRUE_) {
+source/output.c:      if (ppt->has_velocity_transfers == _TRUE_) {
+source/output.c:        if ((pba->has_cdm == _TRUE_) && (ppt->gauge != synchronous))
+source/perturbations.c:  class_call(array_interpolate_two_bis(ppt->tau_sampling,
+source/perturbations.c:                                       ppt->sources[index_md][index_ic*ppt->tp_size[index_md]+index_type],
+source/perturbations.c:                                       ppt->k_size,
+source/perturbations.c:                                       ppt->tau_size,
+source/perturbations.c:                                       ppt->k_size,
+source/perturbations.c:                                       ppt->error_message),
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:  if (ppt->has_perturbations == _FALSE_) {
+source/perturbations.c:    if (ppt->perturbations_verbose > 0)
+source/perturbations.c:    if (ppt->perturbations_verbose > 0)
+source/perturbations.c:  class_test((ppt->gauge == synchronous) && (pba->has_cdm == _FALSE_),
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:              ppt->error_message,
+source/perturbations.c:              ppt->error_message,
+source/perturbations.c:                ppt->error_message,
+source/perturbations.c:                ppt->error_message,
+source/perturbations.c:  class_test(ppt->has_vectors == _TRUE_,
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:  if ((ppt->has_niv == _TRUE_) && (ppt->perturbations_verbose > 0)) {
+source/perturbations.c:  if ((ppt->has_tensors == _TRUE_) && (ppt->perturbations_verbose > 0))
+source/perturbations.c:  if ((ppt->has_cl_cmb_polarization == _TRUE_) &&
+source/perturbations.c:      (ppt->has_tensors == _TRUE_) && (ppt->perturbations_verbose > 0)) {
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:  class_alloc(pppw,number_of_threads * sizeof(struct perturb_workspace *),ppt->error_message);
+source/perturbations.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c:      class_alloc_parallel(pppw[thread],sz,ppt->error_message);
+source/perturbations.c:                          ppt->error_message,
+source/perturbations.c:                          ppt->error_message);
+source/perturbations.c:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/perturbations.c:        //for (index_k = 0; index_k < ppt->k_size; index_k++) {
+source/perturbations.c:        for (index_k = ppt->k_size-1; index_k >=0; index_k--) {  
+source/perturbations.c:          if ((ppt->perturbations_verbose > 2) && (abort == _FALSE_)) {
+source/perturbations.c:            printf("evolving mode k=%e /Mpc",ppt->k[index_k]);
+source/perturbations.c:              printf(" (for scalar modes, corresponds to nu=%e)",sqrt(ppt->k[index_k]*ppt->k[index_k]+pba->K)/sqrt(pba->sgnK*pba->K));
+source/perturbations.c:                              ppt->error_message,
+source/perturbations.c:                              ppt->error_message);
+source/perturbations.c:        if (ppt->perturbations_verbose>1)
+source/perturbations.c:                          ppt->error_message,
+source/perturbations.c:                          ppt->error_message);
+source/perturbations.c:  if (ppt->has_perturbations == _TRUE_) {
+source/perturbations.c:    for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c:      for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/perturbations.c:        for (index_type = 0; index_type < ppt->tp_size[index_md]; index_type++) {
+source/perturbations.c:          free(ppt->sources[index_md][index_ic*ppt->tp_size[index_md]+index_type]);
+source/perturbations.c:      free(ppt->sources[index_md]);
+source/perturbations.c:    free(ppt->tau_sampling);
+source/perturbations.c:    free(ppt->tp_size);
+source/perturbations.c:    free(ppt->ic_size);
+source/perturbations.c:    free(ppt->k);
+source/perturbations.c:    free(ppt->sources);
+source/perturbations.c:  class_define_index(ppt->index_md_scalars,ppt->has_scalars,index_md,1);
+source/perturbations.c:  class_define_index(ppt->index_md_vectors,ppt->has_vectors,index_md,1);
+source/perturbations.c:  class_define_index(ppt->index_md_tensors,ppt->has_tensors,index_md,1);
+source/perturbations.c:  ppt->md_size = index_md;
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:  /** - allocate array of number of types for each mode, ppt->tp_size[index_md] */
+source/perturbations.c:  class_alloc(ppt->tp_size,ppt->md_size*sizeof(int),ppt->error_message);
+source/perturbations.c:  /** - allocate array of number of initial conditions for each mode, ppt->ic_size[index_md] */
+source/perturbations.c:  class_alloc(ppt->ic_size,ppt->md_size*sizeof(int),ppt->error_message);
+source/perturbations.c:  /** - allocate array of arrays of source functions for each mode, ppt->source[index_md] */
+source/perturbations.c:  class_alloc(ppt->sources,ppt->md_size * sizeof(double *),ppt->error_message);
+source/perturbations.c:  ppt->has_cmb = _FALSE_;
+source/perturbations.c:  ppt->has_lss = _FALSE_;
+source/perturbations.c:  ppt->has_source_t = _FALSE_;
+source/perturbations.c:  ppt->has_source_p = _FALSE_;
+source/perturbations.c:  ppt->has_source_g = _FALSE_;
+source/perturbations.c:  ppt->has_source_delta_pk = _FALSE_;
+source/perturbations.c:  ppt->has_source_delta_g = _FALSE_;
+source/perturbations.c:  ppt->has_source_delta_b = _FALSE_;
+source/perturbations.c:  ppt->has_source_delta_cdm = _FALSE_;
+source/perturbations.c:  ppt->has_source_delta_fld = _FALSE_;
+source/perturbations.c:  ppt->has_source_delta_scf = _FALSE_;  //scalar field
+source/perturbations.c:  ppt->has_source_delta_ur = _FALSE_;
+source/perturbations.c:  ppt->has_source_delta_ncdm = _FALSE_;
+source/perturbations.c:  ppt->has_source_theta_g = _FALSE_;
+source/perturbations.c:  ppt->has_source_theta_b = _FALSE_;
+source/perturbations.c:  ppt->has_source_theta_cdm = _FALSE_;
+source/perturbations.c:  ppt->has_source_theta_fld = _FALSE_;
+source/perturbations.c:  ppt->has_source_theta_scf = _FALSE_;  //scalar field
+source/perturbations.c:  ppt->has_source_theta_ur = _FALSE_;
+source/perturbations.c:  ppt->has_source_theta_ncdm = _FALSE_;
+source/perturbations.c:  if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/perturbations.c:    ppt->has_source_t = _TRUE_;
+source/perturbations.c:    ppt->has_cmb = _TRUE_;
+source/perturbations.c:  if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/perturbations.c:    ppt->has_source_p = _TRUE_;
+source/perturbations.c:    ppt->has_cmb = _TRUE_;
+source/perturbations.c:  class_define_index(ppt->index_tp_t2,ppt->has_source_t,index_type,1);
+source/perturbations.c:  class_define_index(ppt->index_tp_p,ppt->has_source_p,index_type,1);
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c:        if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) ||
+source/perturbations.c:            ((ppt->has_pk_matter == _TRUE_) && (ppr->pk_definition == delta_tot_from_poisson_squared)) ||
+source/perturbations.c:            (ppt->has_cl_density == _TRUE_) ||
+source/perturbations.c:            (ppt->has_cl_lensing_potential)) { 
+source/perturbations.c:          ppt->has_lss = _TRUE_;
+source/perturbations.c:          ppt->has_source_g = _TRUE_;
+source/perturbations.c:        if ((ppt->has_pk_matter == _TRUE_) && (ppr->pk_definition != delta_tot_from_poisson_squared)) {
+source/perturbations.c:          ppt->has_lss = _TRUE_;
+source/perturbations.c:          ppt->has_source_delta_pk = _TRUE_;
+source/perturbations.c:        if (ppt->has_density_transfers == _TRUE_) {
+source/perturbations.c:          ppt->has_lss = _TRUE_;
+source/perturbations.c:          ppt->has_source_delta_g = _TRUE_;
+source/perturbations.c:          ppt->has_source_delta_b = _TRUE_;
+source/perturbations.c:            ppt->has_source_delta_cdm = _TRUE_;
+source/perturbations.c:            ppt->has_source_delta_fld = _TRUE_;
+source/perturbations.c:            ppt->has_source_delta_scf = _TRUE_;
+source/perturbations.c:            ppt->has_source_delta_ur = _TRUE_;
+source/perturbations.c:            ppt->has_source_delta_ncdm = _TRUE_;
+source/perturbations.c:        if (ppt->has_velocity_transfers == _TRUE_) {
+source/perturbations.c:          ppt->has_lss = _TRUE_;
+source/perturbations.c:          ppt->has_source_theta_g = _TRUE_;
+source/perturbations.c:          ppt->has_source_theta_b = _TRUE_;
+source/perturbations.c:          if ((pba->has_cdm == _TRUE_) && (ppt->gauge != synchronous))
+source/perturbations.c:            ppt->has_source_theta_cdm = _TRUE_;
+source/perturbations.c:            ppt->has_source_theta_fld = _TRUE_;
+source/perturbations.c:            ppt->has_source_theta_scf = _TRUE_;
+source/perturbations.c:            ppt->has_source_theta_ur = _TRUE_;
+source/perturbations.c:            ppt->has_source_theta_ncdm = _TRUE_;
+source/perturbations.c:        class_define_index(ppt->index_tp_t0,         ppt->has_source_t,         index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_t1,         ppt->has_source_t,         index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_g,          ppt->has_source_g,         index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_delta_pk,   ppt->has_source_delta_pk,  index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_delta_g,    ppt->has_source_delta_g,   index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_delta_b,    ppt->has_source_delta_b,   index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_delta_cdm,  ppt->has_source_delta_cdm, index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_delta_fld,  ppt->has_source_delta_fld, index_type,1);
+source/perturbations.c:	class_define_index(ppt->index_tp_delta_scf,  ppt->has_source_delta_scf, index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_delta_ur,   ppt->has_source_delta_ur,  index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_delta_ncdm1,ppt->has_source_delta_ncdm,index_type,pba->N_ncdm);
+source/perturbations.c:        class_define_index(ppt->index_tp_theta_g,    ppt->has_source_theta_g,   index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_theta_b,    ppt->has_source_theta_b,   index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_theta_cdm,  ppt->has_source_theta_cdm, index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_theta_fld,  ppt->has_source_theta_fld, index_type,1);
+source/perturbations.c:	class_define_index(ppt->index_tp_theta_scf,  ppt->has_source_theta_scf, index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_theta_ur,   ppt->has_source_theta_ur,  index_type,1);
+source/perturbations.c:        class_define_index(ppt->index_tp_theta_ncdm1,ppt->has_source_theta_ncdm,index_type,pba->N_ncdm);
+source/perturbations.c:        ppt->tp_size[index_md] = index_type;
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:        class_define_index(ppt->index_ic_ad, ppt->has_ad, index_ic,1);
+source/perturbations.c:        class_define_index(ppt->index_ic_bi, ppt->has_bi, index_ic,1);
+source/perturbations.c:        class_define_index(ppt->index_ic_cdi,ppt->has_cdi,index_ic,1);
+source/perturbations.c:        class_define_index(ppt->index_ic_nid,ppt->has_nid,index_ic,1);
+source/perturbations.c:        class_define_index(ppt->index_ic_niv,ppt->has_niv,index_ic,1);
+source/perturbations.c:        ppt->ic_size[index_md] = index_ic;
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:        class_define_index(ppt->index_tp_t1,ppt->has_source_t,index_type,1);
+source/perturbations.c:        ppt->tp_size[index_md] = index_type;
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:        ppt->ic_size[index_md] = index_ic;
+source/perturbations.c:        ppt->tp_size[index_md] = index_type;
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:        class_define_index(ppt->index_ic_ten,_TRUE_,index_ic,1);
+source/perturbations.c:        ppt->ic_size[index_md] = index_ic;
+source/perturbations.c:    /** (c) for each mode, allocate array of arrays of source functions for each initial conditions and wavenumber, (ppt->source[index_md])[index_ic][index_type] */
+source/perturbations.c:    class_alloc(ppt->sources[index_md],
+source/perturbations.c:                ppt->ic_size[index_md] * ppt->tp_size[index_md] * sizeof(double *),
+source/perturbations.c:                ppt->error_message);
+source/perturbations.c:  class_alloc(pvecback,pba->bg_size_short*sizeof(double),ppt->error_message);  
+source/perturbations.c:  class_alloc(pvecthermo,pth->th_size*sizeof(double),ppt->error_message);
+source/perturbations.c:  if (ppt->has_cmb == _TRUE_) {
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:    if (ppt->has_cmb == _TRUE_) {
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:  /** - infer total number of time steps, ppt->tau_size */
+source/perturbations.c:  ppt->tau_size = counter;
+source/perturbations.c:  /** - allocate array of time steps, ppt->tau_sampling[index_tau] */
+source/perturbations.c:  class_alloc(ppt->tau_sampling,ppt->tau_size * sizeof(double),ppt->error_message);
+source/perturbations.c:  ppt->tau_sampling[counter]=tau_ini;
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:    if (ppt->has_cmb == _TRUE_) {
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:    ppt->tau_sampling[counter]=tau;
+source/perturbations.c:  ppt->tau_sampling[counter] = pba->conformal_age;
+source/perturbations.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/perturbations.c:      for (index_type = 0; index_type < ppt->tp_size[index_md]; index_type++) {
+source/perturbations.c:        class_alloc(ppt->sources[index_md][index_ic*ppt->tp_size[index_md]+index_type],
+source/perturbations.c:                    ppt->k_size * ppt->tau_size * sizeof(double),
+source/perturbations.c:                    ppt->error_message);
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:    if (ppt->has_vectors == _TRUE_) {
+source/perturbations.c:    if (ppt->has_tensors == _TRUE_) {
+source/perturbations.c:  if (ppt->has_cls == _TRUE_) {
+source/perturbations.c:    k_max_cmb = ppr->k_max_tau0_over_l_max*ppt->l_scalar_max
+source/perturbations.c:    if ((ppt->has_cl_density == _TRUE_) || (ppt->has_cl_lensing_potential == _TRUE_)) {
+source/perturbations.c:                                     ppt->selection_mean[0],
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:      k_max_cl = MAX(k_max_cl,ppr->k_max_tau0_over_l_max*ppt->l_lss_max/(pba->conformal_age-tau1)); // to be very accurate we should use angular diameter distance to given redhsift instead of comoving radius: would implement corrections dependning on curvature
+source/perturbations.c:  if ((ppt->has_pk_matter == _TRUE_) || (ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_))
+source/perturbations.c:    k_max = MAX(k_max,ppt->k_max_for_pk);
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:  class_alloc(ppt->k,((int)((k_max_cmb-k_min)/k_rec/MIN(ppr->k_step_super,ppr->k_step_sub))+
+source/perturbations.c:              *sizeof(double),ppt->error_message);
+source/perturbations.c:  ppt->k[index_k] = k;
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:    class_test(k == ppt->k[index_k-1],
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:    ppt->k[index_k] = k;
+source/perturbations.c:  ppt->k_size_cmb = index_k;
+source/perturbations.c:    ppt->k[index_k] = k;
+source/perturbations.c:  ppt->k_size_cl = index_k;
+source/perturbations.c:    ppt->k[index_k] = k;      
+source/perturbations.c:  ppt->k_size = index_k;
+source/perturbations.c:  class_realloc(ppt->k,
+source/perturbations.c:                ppt->k,
+source/perturbations.c:                ppt->k_size*sizeof(double),
+source/perturbations.c:                ppt->error_message);
+source/perturbations.c:    ppt->k_size = (int)sqrt(k_max*k_max/pba->K+1.)-nu_min+1;
+source/perturbations.c:    ppt->k_size_cmb = (int)sqrt(k_max_cmb*k_max_cmb/pba->K+1.)-nu_min+1;
+source/perturbations.c:    ppt->k_size_cl = (int)sqrt(k_max_cl*k_max_cl/pba->K+1.)-nu_min+1;
+source/perturbations.c:    class_alloc(ppt->k,ppt->k_size*sizeof(double),ppt->error_message);
+source/perturbations.c:    for (index_k=0; index_k < ppt->k_size; index_k++) {
+source/perturbations.c:    ppt->k[index_k] = sqrt(pow(nu_min+index_k,2)-1)*sqrt(pba->K);
+source/perturbations.c:  class_alloc(ppw->s_l, sizeof(double)*(ppw->max_l_max+1),ppt->error_message);
+source/perturbations.c:      if (ppt->gauge == newtonian) {
+source/perturbations.c:      if (ppt->gauge == synchronous) {
+source/perturbations.c:  class_alloc(ppw->pvecback,pba->bg_size_normal*sizeof(double),ppt->error_message);
+source/perturbations.c:  class_alloc(ppw->pvecthermo,pth->th_size*sizeof(double),ppt->error_message);
+source/perturbations.c:  class_alloc(ppw->pvecmetric,ppw->mt_size*sizeof(double),ppt->error_message);
+source/perturbations.c:    class_alloc(ppw->approx,ppw->ap_size*sizeof(int),ppt->error_message);
+source/perturbations.c:      if ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c:        class_alloc(ppw->delta_ncdm,pba->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c:        class_alloc(ppw->theta_ncdm,pba->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c:        class_alloc(ppw->shear_ncdm,pba->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c:      if ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c:  k = ppt->k[index_k];
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:  tau_actual_size = ppt->tau_size;
+source/perturbations.c:  /*   if (ppt->has_lss == _FALSE_) { */
+source/perturbations.c:  /*     while (ppt->tau_sampling[tau_actual_size-1] > taumax) */
+source/perturbations.c:  /* 	       ppt->error_message, */
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:             ppr->start_small_k_at_tau_c_over_tau_h, ppt->error_message, "your choice of initial time for integrating wavenumbers is inappropriate: it corresponds to a time before that at which the background has been integrated. You should increase 'start_small_k_at_tau_c_over_tau_h' up to at least %g, or decrease 'a_ini_over_a_today_default'\n", 
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->k[ppt->k_size-1]/ppw->pvecback[pba->index_bg_a]/ ppw->pvecback[pba->index_bg_H]);
+source/perturbations.c:                 ppt->error_message,     
+source/perturbations.c:  tau_upper = ppt->tau_sampling[0];
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:  class_alloc(interval_number_of,ppw->ap_size*sizeof(int),ppt->error_message);
+source/perturbations.c:                                               ppt->tau_sampling[tau_actual_size-1],
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:  class_alloc(interval_limit,(interval_number+1)*sizeof(double),ppt->error_message);
+source/perturbations.c:  class_alloc(interval_approx,interval_number*sizeof(int*),ppt->error_message);
+source/perturbations.c:    class_alloc(interval_approx[index_interval],ppw->ap_size*sizeof(int),ppt->error_message);
+source/perturbations.c:                                                 ppt->tau_sampling[tau_actual_size-1],
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:                               ppt->tau_sampling,
+source/perturbations.c:                               ppt->error_message),
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:  for (index_tau = tau_actual_size; index_tau < ppt->tau_size; index_tau++) {
+source/perturbations.c:    for (index_type = 0; index_type < ppt->tp_size[index_md]; index_type++) {
+source/perturbations.c:      ppt->sources[index_md]
+source/perturbations.c:        [index_ic * ppt->tp_size[index_md] + index_type]
+source/perturbations.c:        [index_tau * ppt->k_size + index_k] = 0.;
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:    class_alloc(unsorted_tau_switch,(interval_number-1)*sizeof(double),ppt->error_message);
+source/perturbations.c:                       ppt->error_message,
+source/perturbations.c:                       ppt->error_message);
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:      if (ppt->perturbations_verbose>2) {
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:  class_alloc(ppv,sizeof(struct perturb_vector),ppt->error_message);
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:      class_define_index(ppv->index_pt_theta_cdm,pba->has_cdm && (ppt->gauge == newtonian),index_pt,1); /* cdm velocity */
+source/perturbations.c:        class_alloc(ppv->l_max_ncdm,ppv->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c:        class_alloc(ppv->q_size_ncdm,ppv->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c:                       ppt->error_message,
+source/perturbations.c:      class_define_index(ppv->index_pt_eta,ppt->gauge == synchronous,index_pt,1);
+source/perturbations.c:      class_define_index(ppv->index_pt_phi,ppt->gauge == newtonian,index_pt,1); 
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:  class_calloc(ppv->y,ppv->pt_size,sizeof(double),ppt->error_message);
+source/perturbations.c:  class_alloc(ppv->dy,ppv->pt_size*sizeof(double),ppt->error_message);
+source/perturbations.c:  class_alloc(ppv->used_in_sources,ppv->pt_size*sizeof(int),ppt->error_message);
+source/perturbations.c:    if (ppt->perturbations_verbose>2)
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:                     ppt->error_message,
+source/perturbations.c:                     ppt->error_message,
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:          if (ppt->gauge == newtonian) {
+source/perturbations.c:        if (ppt->gauge == synchronous)
+source/perturbations.c:        if (ppt->gauge == newtonian)
+source/perturbations.c:          if (ppt->perturbations_verbose>2)
+source/perturbations.c:          if (ppt->perturbations_verbose>2)
+source/perturbations.c:            if (ppt->perturbations_verbose>2)
+source/perturbations.c:            if (ppt->perturbations_verbose>2)
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:          if (ppt->perturbations_verbose>2)
+source/perturbations.c:          if (ppt->perturbations_verbose>2)
+source/perturbations.c:               ppt->error_message,
+source/perturbations.c:               ppt->error_message);
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:      if ((ppt->has_ad == _TRUE_) && (index_ic == ppt->index_ic_ad)) {
+source/perturbations.c:      if ((ppt->has_cdi == _TRUE_) && (index_ic == ppt->index_ic_cdi)) { 
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:      if ((ppt->has_bi == _TRUE_) && (index_ic == ppt->index_ic_bi)) {
+source/perturbations.c:      if ((ppt->has_nid == _TRUE_) && (index_ic == ppt->index_ic_nid)) {
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:      if ((ppt->has_niv == _TRUE_) && (index_ic == ppt->index_ic_niv)) {
+source/perturbations.c:                   ppt->error_message,
+source/perturbations.c:      if (ppt->gauge == synchronous) {
+source/perturbations.c:      if (ppt->gauge == newtonian) {
+source/perturbations.c:      if (index_ic == ppt->index_ic_ten) { 
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:             ppt->error_message);
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:             ppt->error_message,
+source/perturbations.c:  if ((ppt->has_scalars == _TRUE_) && (pppaw->index_md == ppt->index_md_scalars)) {
+source/perturbations.c:  if ((ppt->has_tensors == _TRUE_) && (pppaw->index_md == ppt->index_md_tensors)) {
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:                 ppt->error_message);
+source/perturbations.c:      if (ppt->gauge == newtonian) {
+source/perturbations.c:                     ppt->error_message,
+source/perturbations.c:                     ppt->error_message);
+source/perturbations.c:      if (ppt->gauge == synchronous) {
+source/perturbations.c:                     ppt->error_message,
+source/perturbations.c:                     ppt->error_message);
+source/perturbations.c:    if (ppt->gauge == newtonian) {
+source/perturbations.c:    if (ppt->gauge == newtonian)
+source/perturbations.c:        if ((ppt->has_source_delta_ncdm == _TRUE_) || (ppt->has_source_theta_ncdm == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c:        if ((ppt->has_source_delta_ncdm == _TRUE_) || (ppt->has_source_theta_ncdm == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c:  if (ppt->has_source_delta_pk == _TRUE_) {
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:      if (ppt->has_source_t == _TRUE_) {
+source/perturbations.c:          if (ppt->gauge == newtonian) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_exp_m_kappa] * pvecmetric[ppw->index_mt_phi_prime] + pvecthermo[pth->index_th_g] * delta_g / 4.;
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_exp_m_kappa] * k* pvecmetric[ppw->index_mt_psi] + pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b]/k;
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c:        if (ppt->gauge == newtonian) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_exp_m_kappa] * k* (pvecmetric[ppw->index_mt_psi]-y[ppw->pv->index_pt_phi]);
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c:          if (ppt->gauge == synchronous) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b] / k;
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = 
+source/perturbations.c:        if (ppt->gauge == synchronous) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = 
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = 
+source/perturbations.c:          if (ppt->gauge == newtonian) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_exp_m_kappa] * 2. * pvecmetric[ppw->index_mt_phi_prime] + pvecthermo[pth->index_th_g] * (- pvecmetric[ppw->index_mt_psi] + y[ppw->pv->index_pt_phi]);
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_exp_m_kappa] * k* (pvecmetric[ppw->index_mt_psi]-y[ppw->pv->index_pt_phi]);
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = 0.;
+source/perturbations.c:          if (ppt->gauge == synchronous) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = 
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = 0.;
+source/perturbations.c:             if (ppt->gauge == newtonian) {
+source/perturbations.c:             _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_g] * (delta_g / 4. + pvecmetric[ppw->index_mt_psi]);
+source/perturbations.c:             _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b] / k;
+source/perturbations.c:             _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c:          if (ppt->gauge == synchronous) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) =
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = 
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) =
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = 0.;
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = 0.;
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = 0.;
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = (pvecthermo[pth->index_th_dg] * y[ppw->pv->index_pt_theta_b] + pvecthermo[pth->index_th_g] * dy[ppw->pv->index_pt_theta_b])/k/k;
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b]/k;
+source/perturbations.c:          if (ppt->gauge == synchronous) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_g] * (delta_g / 4. + P/2. + pvecmetric[ppw->index_mt_alpha_prime]);
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b] / k;
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = 0.; pvecthermo[pth->index_th_g] * P;
+source/perturbations.c:          if (ppt->gauge == newtonian) {
+source/perturbations.c:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_g] * (delta_g / 4. + pvecmetric[ppw->index_mt_psi]);
+source/perturbations.c:          _set_source_(ppt->index_tp_t1) = 0.;
+source/perturbations.c:          _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c:      if (ppt->has_source_p == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_p) = sqrt(6.) * pvecthermo[pth->index_th_g] * P;  
+source/perturbations.c:      if (ppt->has_source_g == _TRUE_) {
+source/perturbations.c:        if (ppt->gauge == newtonian)
+source/perturbations.c:          _set_source_(ppt->index_tp_g) = pvecmetric[ppw->index_mt_psi];
+source/perturbations.c:        if (ppt->gauge == synchronous)
+source/perturbations.c:          _set_source_(ppt->index_tp_g) = (pvecback[pba->index_bg_H] * pvecback[pba->index_bg_a] * (pvecmetric[ppw->index_mt_h_prime] + 6. * pvecmetric[ppw->index_mt_eta_prime])/2./k/k + pvecmetric[ppw->index_mt_alpha_prime]);
+source/perturbations.c:      if (ppt->has_source_delta_pk == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_delta_pk) = ppw->delta_pk;
+source/perturbations.c:      if (ppt->has_source_delta_g == _TRUE_)  {
+source/perturbations.c:        _set_source_(ppt->index_tp_delta_g) = delta_g;
+source/perturbations.c:      if (ppt->has_source_delta_b == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_delta_b) = y[ppw->pv->index_pt_delta_b]; 
+source/perturbations.c:      if (ppt->has_source_delta_cdm == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_delta_cdm) = y[ppw->pv->index_pt_delta_cdm]; 
+source/perturbations.c:      if (ppt->has_source_delta_fld == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_delta_fld) = y[ppw->pv->index_pt_delta_fld]; 
+source/perturbations.c:      if (ppt->has_source_delta_scf == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_delta_scf) = y[ppw->pv->index_pt_delta_scf]; 
+source/perturbations.c:      if (ppt->has_source_delta_ur == _TRUE_) {
+source/perturbations.c:          _set_source_(ppt->index_tp_delta_ur) = y[ppw->pv->index_pt_delta_ur];
+source/perturbations.c:          _set_source_(ppt->index_tp_delta_ur) = ppw->rsa_delta_ur;
+source/perturbations.c:      if (ppt->has_source_delta_ncdm == _TRUE_) {
+source/perturbations.c:        for (index_type = ppt->index_tp_delta_ncdm1; index_type < ppt->index_tp_delta_ncdm1+pba->N_ncdm; index_type++) {
+source/perturbations.c:          _set_source_(index_type) = ppw->delta_ncdm[index_type - ppt->index_tp_delta_ncdm1];
+source/perturbations.c:      if (ppt->has_source_theta_g == _TRUE_) {
+source/perturbations.c:          _set_source_(ppt->index_tp_theta_g) = y[ppw->pv->index_pt_theta_g];
+source/perturbations.c:          _set_source_(ppt->index_tp_theta_g) = ppw->rsa_theta_g;
+source/perturbations.c:      if (ppt->has_source_theta_b == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_theta_b) = y[ppw->pv->index_pt_theta_b]; 
+source/perturbations.c:      if (ppt->has_source_theta_cdm == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_theta_cdm) = y[ppw->pv->index_pt_theta_cdm]; 
+source/perturbations.c:      if (ppt->has_source_theta_fld == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_theta_fld) = y[ppw->pv->index_pt_theta_fld]; 
+source/perturbations.c:      if (ppt->has_source_theta_scf == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_theta_scf) = y[ppw->pv->index_pt_theta_scf]; 
+source/perturbations.c:      if (ppt->has_source_theta_ur == _TRUE_) {
+source/perturbations.c:          _set_source_(ppt->index_tp_theta_ur) = y[ppw->pv->index_pt_theta_ur];
+source/perturbations.c:          _set_source_(ppt->index_tp_theta_ur) = ppw->rsa_theta_ur;
+source/perturbations.c:      if (ppt->has_source_theta_ncdm == _TRUE_) {
+source/perturbations.c:        for (index_type = ppt->index_tp_theta_ncdm1; index_type < ppt->index_tp_theta_ncdm1+pba->N_ncdm; index_type++) {
+source/perturbations.c:          _set_source_(index_type) = ppw->theta_ncdm[index_type - ppt->index_tp_theta_ncdm1];
+source/perturbations.c:      if (ppt->has_source_t == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_t2) = - y[ppw->pv->index_pt_gwdot] * pvecthermo[pth->index_th_exp_m_kappa] + pvecthermo[pth->index_th_g] * P; 
+source/perturbations.c:      if (ppt->has_source_p == _TRUE_) {
+source/perturbations.c:        _set_source_(ppt->index_tp_p) = sqrt(6.) * pvecthermo[pth->index_th_g] * P;
+source/perturbations.c:  //if (_tensors_ && (pppaw->index_k == ppt->k_size-1)) {
+source/perturbations.c:          if (ppt->gauge == synchronous) {
+source/perturbations.c:        if (ppt->gauge == synchronous) {
+source/perturbations.c:        if ((pba->has_ncdm == _TRUE_) && ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_))) {
+source/perturbations.c:        if (ppt->gauge == synchronous) {
+source/perturbations.c:        if (ppt->gauge == newtonian) {
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:      if (ppt->gauge == synchronous) {
+source/perturbations.c:      if (ppt->gauge == newtonian) {
+source/perturbations.c:        if (ppt->gauge == newtonian) {
+source/perturbations.c:        if (ppt->gauge == synchronous) {
+source/perturbations.c:      if (ppt->gauge == synchronous) {
+source/perturbations.c:      if (ppt->gauge == newtonian) {
+source/perturbations.c:  if (ppt->gauge == synchronous) {
+source/perturbations.c:  if (ppt->gauge == newtonian) {
+source/perturbations.c:    if (ppt->gauge == newtonian) {
+source/perturbations.c:    if (ppt->gauge == synchronous) {
+source/perturbations.c:                 ppt->error_message,
+source/perturbations.c:    if (ppt->gauge == newtonian) {
+source/perturbations.c:    if (ppt->gauge == synchronous) {
+source/perturbations.c:  if (ppt->gauge == newtonian) {
+source/perturbations.c:  if (ppt->gauge == synchronous) {
+source/perturbations.c~:  class_call(array_interpolate_two_bis(ppt->tau_sampling,
+source/perturbations.c~:                                       ppt->sources[index_md][index_ic*ppt->tp_size[index_md]+index_type],
+source/perturbations.c~:                                       ppt->k_size,
+source/perturbations.c~:                                       ppt->tau_size,
+source/perturbations.c~:                                       ppt->k_size,
+source/perturbations.c~:                                       ppt->error_message),
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:  if (ppt->has_perturbations == _FALSE_) {
+source/perturbations.c~:    if (ppt->perturbations_verbose > 0)
+source/perturbations.c~:    if (ppt->perturbations_verbose > 0)
+source/perturbations.c~:  class_test((ppt->gauge == synchronous) && (pba->has_cdm == _FALSE_),
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:              ppt->error_message,
+source/perturbations.c~:              ppt->error_message,
+source/perturbations.c~:                ppt->error_message,
+source/perturbations.c~:                ppt->error_message,
+source/perturbations.c~:  class_test(ppt->has_vectors == _TRUE_,
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:  if ((ppt->has_niv == _TRUE_) && (ppt->perturbations_verbose > 0)) {
+source/perturbations.c~:  if ((ppt->has_tensors == _TRUE_) && (ppt->perturbations_verbose > 0))
+source/perturbations.c~:  if ((ppt->has_cl_cmb_polarization == _TRUE_) &&
+source/perturbations.c~:      (ppt->has_tensors == _TRUE_) && (ppt->perturbations_verbose > 0)) {
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:  class_alloc(pppw,number_of_threads * sizeof(struct perturb_workspace *),ppt->error_message);
+source/perturbations.c~:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c~:      class_alloc_parallel(pppw[thread],sz,ppt->error_message);
+source/perturbations.c~:                          ppt->error_message,
+source/perturbations.c~:                          ppt->error_message);
+source/perturbations.c~:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/perturbations.c~:        //for (index_k = 0; index_k < ppt->k_size; index_k++) {
+source/perturbations.c~:        for (index_k = ppt->k_size-1; index_k >=0; index_k--) {  
+source/perturbations.c~:          if ((ppt->perturbations_verbose > 2) && (abort == _FALSE_)) {
+source/perturbations.c~:            printf("evolving mode k=%e /Mpc",ppt->k[index_k]);
+source/perturbations.c~:              printf(" (for scalar modes, corresponds to nu=%e)",sqrt(ppt->k[index_k]*ppt->k[index_k]+pba->K)/sqrt(pba->sgnK*pba->K));
+source/perturbations.c~:                              ppt->error_message,
+source/perturbations.c~:                              ppt->error_message);
+source/perturbations.c~:        if (ppt->perturbations_verbose>1)
+source/perturbations.c~:                          ppt->error_message,
+source/perturbations.c~:                          ppt->error_message);
+source/perturbations.c~:  if (ppt->has_perturbations == _TRUE_) {
+source/perturbations.c~:    for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c~:      for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/perturbations.c~:        for (index_type = 0; index_type < ppt->tp_size[index_md]; index_type++) {
+source/perturbations.c~:          free(ppt->sources[index_md][index_ic*ppt->tp_size[index_md]+index_type]);
+source/perturbations.c~:      free(ppt->sources[index_md]);
+source/perturbations.c~:    free(ppt->tau_sampling);
+source/perturbations.c~:    free(ppt->tp_size);
+source/perturbations.c~:    free(ppt->ic_size);
+source/perturbations.c~:    free(ppt->k);
+source/perturbations.c~:    free(ppt->sources);
+source/perturbations.c~:  class_define_index(ppt->index_md_scalars,ppt->has_scalars,index_md,1);
+source/perturbations.c~:  class_define_index(ppt->index_md_vectors,ppt->has_vectors,index_md,1);
+source/perturbations.c~:  class_define_index(ppt->index_md_tensors,ppt->has_tensors,index_md,1);
+source/perturbations.c~:  ppt->md_size = index_md;
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:  /** - allocate array of number of types for each mode, ppt->tp_size[index_md] */
+source/perturbations.c~:  class_alloc(ppt->tp_size,ppt->md_size*sizeof(int),ppt->error_message);
+source/perturbations.c~:  /** - allocate array of number of initial conditions for each mode, ppt->ic_size[index_md] */
+source/perturbations.c~:  class_alloc(ppt->ic_size,ppt->md_size*sizeof(int),ppt->error_message);
+source/perturbations.c~:  /** - allocate array of arrays of source functions for each mode, ppt->source[index_md] */
+source/perturbations.c~:  class_alloc(ppt->sources,ppt->md_size * sizeof(double *),ppt->error_message);
+source/perturbations.c~:  ppt->has_cmb = _FALSE_;
+source/perturbations.c~:  ppt->has_lss = _FALSE_;
+source/perturbations.c~:  ppt->has_source_t = _FALSE_;
+source/perturbations.c~:  ppt->has_source_p = _FALSE_;
+source/perturbations.c~:  ppt->has_source_g = _FALSE_;
+source/perturbations.c~:  ppt->has_source_delta_pk = _FALSE_;
+source/perturbations.c~:  ppt->has_source_delta_g = _FALSE_;
+source/perturbations.c~:  ppt->has_source_delta_b = _FALSE_;
+source/perturbations.c~:  ppt->has_source_delta_cdm = _FALSE_;
+source/perturbations.c~:  ppt->has_source_delta_fld = _FALSE_;
+source/perturbations.c~:  ppt->has_source_delta_scf = _FALSE_;  //scalar field
+source/perturbations.c~:  ppt->has_source_delta_ur = _FALSE_;
+source/perturbations.c~:  ppt->has_source_delta_ncdm = _FALSE_;
+source/perturbations.c~:  ppt->has_source_theta_g = _FALSE_;
+source/perturbations.c~:  ppt->has_source_theta_b = _FALSE_;
+source/perturbations.c~:  ppt->has_source_theta_cdm = _FALSE_;
+source/perturbations.c~:  ppt->has_source_theta_fld = _FALSE_;
+source/perturbations.c~:  ppt->has_source_theta_scf = _FALSE_;  //scalar field
+source/perturbations.c~:  ppt->has_source_theta_ur = _FALSE_;
+source/perturbations.c~:  ppt->has_source_theta_ncdm = _FALSE_;
+source/perturbations.c~:  if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/perturbations.c~:    ppt->has_source_t = _TRUE_;
+source/perturbations.c~:    ppt->has_cmb = _TRUE_;
+source/perturbations.c~:  if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/perturbations.c~:    ppt->has_source_p = _TRUE_;
+source/perturbations.c~:    ppt->has_cmb = _TRUE_;
+source/perturbations.c~:  class_define_index(ppt->index_tp_t2,ppt->has_source_t,index_type,1);
+source/perturbations.c~:  class_define_index(ppt->index_tp_p,ppt->has_source_p,index_type,1);
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c~:        if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) ||
+source/perturbations.c~:            ((ppt->has_pk_matter == _TRUE_) && (ppr->pk_definition == delta_tot_from_poisson_squared)) ||
+source/perturbations.c~:            (ppt->has_cl_density == _TRUE_) ||
+source/perturbations.c~:            (ppt->has_cl_lensing_potential)) { 
+source/perturbations.c~:          ppt->has_lss = _TRUE_;
+source/perturbations.c~:          ppt->has_source_g = _TRUE_;
+source/perturbations.c~:        if ((ppt->has_pk_matter == _TRUE_) && (ppr->pk_definition != delta_tot_from_poisson_squared)) {
+source/perturbations.c~:          ppt->has_lss = _TRUE_;
+source/perturbations.c~:          ppt->has_source_delta_pk = _TRUE_;
+source/perturbations.c~:        if (ppt->has_density_transfers == _TRUE_) {
+source/perturbations.c~:          ppt->has_lss = _TRUE_;
+source/perturbations.c~:          ppt->has_source_delta_g = _TRUE_;
+source/perturbations.c~:          ppt->has_source_delta_b = _TRUE_;
+source/perturbations.c~:            ppt->has_source_delta_cdm = _TRUE_;
+source/perturbations.c~:            ppt->has_source_delta_fld = _TRUE_;
+source/perturbations.c~:            ppt->has_source_delta_scf = _TRUE_;
+source/perturbations.c~:            ppt->has_source_delta_ur = _TRUE_;
+source/perturbations.c~:            ppt->has_source_delta_ncdm = _TRUE_;
+source/perturbations.c~:        if (ppt->has_velocity_transfers == _TRUE_) {
+source/perturbations.c~:          ppt->has_lss = _TRUE_;
+source/perturbations.c~:          ppt->has_source_theta_g = _TRUE_;
+source/perturbations.c~:          ppt->has_source_theta_b = _TRUE_;
+source/perturbations.c~:          if ((pba->has_cdm == _TRUE_) && (ppt->gauge != synchronous))
+source/perturbations.c~:            ppt->has_source_theta_cdm = _TRUE_;
+source/perturbations.c~:            ppt->has_source_theta_fld = _TRUE_;
+source/perturbations.c~:            ppt->has_source_theta_scf = _TRUE_;
+source/perturbations.c~:            ppt->has_source_theta_ur = _TRUE_;
+source/perturbations.c~:            ppt->has_source_theta_ncdm = _TRUE_;
+source/perturbations.c~:        class_define_index(ppt->index_tp_t0,         ppt->has_source_t,         index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_t1,         ppt->has_source_t,         index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_g,          ppt->has_source_g,         index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_delta_pk,   ppt->has_source_delta_pk,  index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_delta_g,    ppt->has_source_delta_g,   index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_delta_b,    ppt->has_source_delta_b,   index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_delta_cdm,  ppt->has_source_delta_cdm, index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_delta_fld,  ppt->has_source_delta_fld, index_type,1);
+source/perturbations.c~:	class_define_index(ppt->index_tp_delta_scf,  ppt->has_source_delta_scf, index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_delta_ur,   ppt->has_source_delta_ur,  index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_delta_ncdm1,ppt->has_source_delta_ncdm,index_type,pba->N_ncdm);
+source/perturbations.c~:        class_define_index(ppt->index_tp_theta_g,    ppt->has_source_theta_g,   index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_theta_b,    ppt->has_source_theta_b,   index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_theta_cdm,  ppt->has_source_theta_cdm, index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_theta_fld,  ppt->has_source_theta_fld, index_type,1);
+source/perturbations.c~:	class_define_index(ppt->index_tp_theta_scf,  ppt->has_source_theta_scf, index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_theta_ur,   ppt->has_source_theta_ur,  index_type,1);
+source/perturbations.c~:        class_define_index(ppt->index_tp_theta_ncdm1,ppt->has_source_theta_ncdm,index_type,pba->N_ncdm);
+source/perturbations.c~:        ppt->tp_size[index_md] = index_type;
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:        class_define_index(ppt->index_ic_ad, ppt->has_ad, index_ic,1);
+source/perturbations.c~:        class_define_index(ppt->index_ic_bi, ppt->has_bi, index_ic,1);
+source/perturbations.c~:        class_define_index(ppt->index_ic_cdi,ppt->has_cdi,index_ic,1);
+source/perturbations.c~:        class_define_index(ppt->index_ic_nid,ppt->has_nid,index_ic,1);
+source/perturbations.c~:        class_define_index(ppt->index_ic_niv,ppt->has_niv,index_ic,1);
+source/perturbations.c~:        ppt->ic_size[index_md] = index_ic;
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:        class_define_index(ppt->index_tp_t1,ppt->has_source_t,index_type,1);
+source/perturbations.c~:        ppt->tp_size[index_md] = index_type;
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:        ppt->ic_size[index_md] = index_ic;
+source/perturbations.c~:        ppt->tp_size[index_md] = index_type;
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:        class_define_index(ppt->index_ic_ten,_TRUE_,index_ic,1);
+source/perturbations.c~:        ppt->ic_size[index_md] = index_ic;
+source/perturbations.c~:    /** (c) for each mode, allocate array of arrays of source functions for each initial conditions and wavenumber, (ppt->source[index_md])[index_ic][index_type] */
+source/perturbations.c~:    class_alloc(ppt->sources[index_md],
+source/perturbations.c~:                ppt->ic_size[index_md] * ppt->tp_size[index_md] * sizeof(double *),
+source/perturbations.c~:                ppt->error_message);
+source/perturbations.c~:  class_alloc(pvecback,pba->bg_size_short*sizeof(double),ppt->error_message);  
+source/perturbations.c~:  class_alloc(pvecthermo,pth->th_size*sizeof(double),ppt->error_message);
+source/perturbations.c~:  if (ppt->has_cmb == _TRUE_) {
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:    if (ppt->has_cmb == _TRUE_) {
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:  /** - infer total number of time steps, ppt->tau_size */
+source/perturbations.c~:  ppt->tau_size = counter;
+source/perturbations.c~:  /** - allocate array of time steps, ppt->tau_sampling[index_tau] */
+source/perturbations.c~:  class_alloc(ppt->tau_sampling,ppt->tau_size * sizeof(double),ppt->error_message);
+source/perturbations.c~:  ppt->tau_sampling[counter]=tau_ini;
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:    if (ppt->has_cmb == _TRUE_) {
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:    ppt->tau_sampling[counter]=tau;
+source/perturbations.c~:  ppt->tau_sampling[counter] = pba->conformal_age;
+source/perturbations.c~:  for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/perturbations.c~:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/perturbations.c~:      for (index_type = 0; index_type < ppt->tp_size[index_md]; index_type++) {
+source/perturbations.c~:        class_alloc(ppt->sources[index_md][index_ic*ppt->tp_size[index_md]+index_type],
+source/perturbations.c~:                    ppt->k_size * ppt->tau_size * sizeof(double),
+source/perturbations.c~:                    ppt->error_message);
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:    if (ppt->has_vectors == _TRUE_) {
+source/perturbations.c~:    if (ppt->has_tensors == _TRUE_) {
+source/perturbations.c~:  if (ppt->has_cls == _TRUE_) {
+source/perturbations.c~:    k_max_cmb = ppr->k_max_tau0_over_l_max*ppt->l_scalar_max
+source/perturbations.c~:    if ((ppt->has_cl_density == _TRUE_) || (ppt->has_cl_lensing_potential == _TRUE_)) {
+source/perturbations.c~:                                     ppt->selection_mean[0],
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:      k_max_cl = MAX(k_max_cl,ppr->k_max_tau0_over_l_max*ppt->l_lss_max/(pba->conformal_age-tau1)); // to be very accurate we should use angular diameter distance to given redhsift instead of comoving radius: would implement corrections dependning on curvature
+source/perturbations.c~:  if ((ppt->has_pk_matter == _TRUE_) || (ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_))
+source/perturbations.c~:    k_max = MAX(k_max,ppt->k_max_for_pk);
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:  class_alloc(ppt->k,((int)((k_max_cmb-k_min)/k_rec/MIN(ppr->k_step_super,ppr->k_step_sub))+
+source/perturbations.c~:              *sizeof(double),ppt->error_message);
+source/perturbations.c~:  ppt->k[index_k] = k;
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:    class_test(k == ppt->k[index_k-1],
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:    ppt->k[index_k] = k;
+source/perturbations.c~:  ppt->k_size_cmb = index_k;
+source/perturbations.c~:    ppt->k[index_k] = k;
+source/perturbations.c~:  ppt->k_size_cl = index_k;
+source/perturbations.c~:    ppt->k[index_k] = k;      
+source/perturbations.c~:  ppt->k_size = index_k;
+source/perturbations.c~:  class_realloc(ppt->k,
+source/perturbations.c~:                ppt->k,
+source/perturbations.c~:                ppt->k_size*sizeof(double),
+source/perturbations.c~:                ppt->error_message);
+source/perturbations.c~:    ppt->k_size = (int)sqrt(k_max*k_max/pba->K+1.)-nu_min+1;
+source/perturbations.c~:    ppt->k_size_cmb = (int)sqrt(k_max_cmb*k_max_cmb/pba->K+1.)-nu_min+1;
+source/perturbations.c~:    ppt->k_size_cl = (int)sqrt(k_max_cl*k_max_cl/pba->K+1.)-nu_min+1;
+source/perturbations.c~:    class_alloc(ppt->k,ppt->k_size*sizeof(double),ppt->error_message);
+source/perturbations.c~:    for (index_k=0; index_k < ppt->k_size; index_k++) {
+source/perturbations.c~:    ppt->k[index_k] = sqrt(pow(nu_min+index_k,2)-1)*sqrt(pba->K);
+source/perturbations.c~:  class_alloc(ppw->s_l, sizeof(double)*(ppw->max_l_max+1),ppt->error_message);
+source/perturbations.c~:      if (ppt->gauge == newtonian) {
+source/perturbations.c~:      if (ppt->gauge == synchronous) {
+source/perturbations.c~:  class_alloc(ppw->pvecback,pba->bg_size_normal*sizeof(double),ppt->error_message);
+source/perturbations.c~:  class_alloc(ppw->pvecthermo,pth->th_size*sizeof(double),ppt->error_message);
+source/perturbations.c~:  class_alloc(ppw->pvecmetric,ppw->mt_size*sizeof(double),ppt->error_message);
+source/perturbations.c~:    class_alloc(ppw->approx,ppw->ap_size*sizeof(int),ppt->error_message);
+source/perturbations.c~:      if ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c~:        class_alloc(ppw->delta_ncdm,pba->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c~:        class_alloc(ppw->theta_ncdm,pba->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c~:        class_alloc(ppw->shear_ncdm,pba->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c~:      if ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c~:  k = ppt->k[index_k];
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:  tau_actual_size = ppt->tau_size;
+source/perturbations.c~:  /*   if (ppt->has_lss == _FALSE_) { */
+source/perturbations.c~:  /*     while (ppt->tau_sampling[tau_actual_size-1] > taumax) */
+source/perturbations.c~:  /* 	       ppt->error_message, */
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:             ppr->start_small_k_at_tau_c_over_tau_h, ppt->error_message, "your choice of initial time for integrating wavenumbers is inappropriate: it corresponds to a time before that at which the background has been integrated. You should increase 'start_small_k_at_tau_c_over_tau_h' up to at least %g, or decrease 'a_ini_over_a_today_default'\n", 
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->k[ppt->k_size-1]/ppw->pvecback[pba->index_bg_a]/ ppw->pvecback[pba->index_bg_H]);
+source/perturbations.c~:                 ppt->error_message,     
+source/perturbations.c~:  tau_upper = ppt->tau_sampling[0];
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:  class_alloc(interval_number_of,ppw->ap_size*sizeof(int),ppt->error_message);
+source/perturbations.c~:                                               ppt->tau_sampling[tau_actual_size-1],
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:  class_alloc(interval_limit,(interval_number+1)*sizeof(double),ppt->error_message);
+source/perturbations.c~:  class_alloc(interval_approx,interval_number*sizeof(int*),ppt->error_message);
+source/perturbations.c~:    class_alloc(interval_approx[index_interval],ppw->ap_size*sizeof(int),ppt->error_message);
+source/perturbations.c~:                                                 ppt->tau_sampling[tau_actual_size-1],
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:                               ppt->tau_sampling,
+source/perturbations.c~:                               ppt->error_message),
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:  for (index_tau = tau_actual_size; index_tau < ppt->tau_size; index_tau++) {
+source/perturbations.c~:    for (index_type = 0; index_type < ppt->tp_size[index_md]; index_type++) {
+source/perturbations.c~:      ppt->sources[index_md]
+source/perturbations.c~:        [index_ic * ppt->tp_size[index_md] + index_type]
+source/perturbations.c~:        [index_tau * ppt->k_size + index_k] = 0.;
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:    class_alloc(unsorted_tau_switch,(interval_number-1)*sizeof(double),ppt->error_message);
+source/perturbations.c~:                       ppt->error_message,
+source/perturbations.c~:                       ppt->error_message);
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:      if (ppt->perturbations_verbose>2) {
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:  class_alloc(ppv,sizeof(struct perturb_vector),ppt->error_message);
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:      class_define_index(ppv->index_pt_theta_cdm,pba->has_cdm && (ppt->gauge == newtonian),index_pt,1); /* cdm velocity */
+source/perturbations.c~:        class_alloc(ppv->l_max_ncdm,ppv->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c~:        class_alloc(ppv->q_size_ncdm,ppv->N_ncdm*sizeof(double),ppt->error_message);
+source/perturbations.c~:                       ppt->error_message,
+source/perturbations.c~:      class_define_index(ppv->index_pt_eta,ppt->gauge == synchronous,index_pt,1);
+source/perturbations.c~:      class_define_index(ppv->index_pt_phi,ppt->gauge == newtonian,index_pt,1); 
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:  class_calloc(ppv->y,ppv->pt_size,sizeof(double),ppt->error_message);
+source/perturbations.c~:  class_alloc(ppv->dy,ppv->pt_size*sizeof(double),ppt->error_message);
+source/perturbations.c~:  class_alloc(ppv->used_in_sources,ppv->pt_size*sizeof(int),ppt->error_message);
+source/perturbations.c~:    if (ppt->perturbations_verbose>2)
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:                     ppt->error_message,
+source/perturbations.c~:                     ppt->error_message,
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:          if (ppt->gauge == newtonian) {
+source/perturbations.c~:        if (ppt->gauge == synchronous)
+source/perturbations.c~:        if (ppt->gauge == newtonian)
+source/perturbations.c~:          if (ppt->perturbations_verbose>2)
+source/perturbations.c~:          if (ppt->perturbations_verbose>2)
+source/perturbations.c~:            if (ppt->perturbations_verbose>2)
+source/perturbations.c~:            if (ppt->perturbations_verbose>2)
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:          if (ppt->perturbations_verbose>2)
+source/perturbations.c~:          if (ppt->perturbations_verbose>2)
+source/perturbations.c~:               ppt->error_message,
+source/perturbations.c~:               ppt->error_message);
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:      if ((ppt->has_ad == _TRUE_) && (index_ic == ppt->index_ic_ad)) {
+source/perturbations.c~:      if ((ppt->has_cdi == _TRUE_) && (index_ic == ppt->index_ic_cdi)) { 
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:      if ((ppt->has_bi == _TRUE_) && (index_ic == ppt->index_ic_bi)) {
+source/perturbations.c~:      if ((ppt->has_nid == _TRUE_) && (index_ic == ppt->index_ic_nid)) {
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:      if ((ppt->has_niv == _TRUE_) && (index_ic == ppt->index_ic_niv)) {
+source/perturbations.c~:                   ppt->error_message,
+source/perturbations.c~:      if (ppt->gauge == synchronous) {
+source/perturbations.c~:      if (ppt->gauge == newtonian) {
+source/perturbations.c~:      if (index_ic == ppt->index_ic_ten) { 
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:             ppt->error_message);
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:             ppt->error_message,
+source/perturbations.c~:  if ((ppt->has_scalars == _TRUE_) && (pppaw->index_md == ppt->index_md_scalars)) {
+source/perturbations.c~:  if ((ppt->has_tensors == _TRUE_) && (pppaw->index_md == ppt->index_md_tensors)) {
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:                 ppt->error_message);
+source/perturbations.c~:      if (ppt->gauge == newtonian) {
+source/perturbations.c~:                     ppt->error_message,
+source/perturbations.c~:                     ppt->error_message);
+source/perturbations.c~:      if (ppt->gauge == synchronous) {
+source/perturbations.c~:                     ppt->error_message,
+source/perturbations.c~:                     ppt->error_message);
+source/perturbations.c~:    if (ppt->gauge == newtonian) {
+source/perturbations.c~:    if (ppt->gauge == newtonian)
+source/perturbations.c~:        if ((ppt->has_source_delta_ncdm == _TRUE_) || (ppt->has_source_theta_ncdm == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c~:        if ((ppt->has_source_delta_ncdm == _TRUE_) || (ppt->has_source_theta_ncdm == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_)) {
+source/perturbations.c~:  if (ppt->has_source_delta_pk == _TRUE_) {
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:      if (ppt->has_source_t == _TRUE_) {
+source/perturbations.c~:          if (ppt->gauge == newtonian) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_exp_m_kappa] * pvecmetric[ppw->index_mt_phi_prime] + pvecthermo[pth->index_th_g] * delta_g / 4.;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_exp_m_kappa] * k* pvecmetric[ppw->index_mt_psi] + pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b]/k;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c~:        if (ppt->gauge == newtonian) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_exp_m_kappa] * k* (pvecmetric[ppw->index_mt_psi]-y[ppw->pv->index_pt_phi]);
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c~:          if (ppt->gauge == synchronous) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b] / k;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = 
+source/perturbations.c~:        if (ppt->gauge == synchronous) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = 
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = 
+source/perturbations.c~:          if (ppt->gauge == newtonian) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_exp_m_kappa] * 2. * pvecmetric[ppw->index_mt_phi_prime] + pvecthermo[pth->index_th_g] * (- pvecmetric[ppw->index_mt_psi] + y[ppw->pv->index_pt_phi]);
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_exp_m_kappa] * k* (pvecmetric[ppw->index_mt_psi]-y[ppw->pv->index_pt_phi]);
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = 0.;
+source/perturbations.c~:          if (ppt->gauge == synchronous) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = 
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = 
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = 0.;
+source/perturbations.c~:             if (ppt->gauge == newtonian) {
+source/perturbations.c~:             _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_g] * (delta_g / 4. + pvecmetric[ppw->index_mt_psi]);
+source/perturbations.c~:             _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b] / k;
+source/perturbations.c~:             _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c~:          if (ppt->gauge == synchronous) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) =
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = 
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) =
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = 0.;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = 0.;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = 0.;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = (pvecthermo[pth->index_th_dg] * y[ppw->pv->index_pt_theta_b] + pvecthermo[pth->index_th_g] * dy[ppw->pv->index_pt_theta_b])/k/k;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b]/k;
+source/perturbations.c~:          if (ppt->gauge == synchronous) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_g] * (delta_g / 4. + P/2. + pvecmetric[ppw->index_mt_alpha_prime]);
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = pvecthermo[pth->index_th_g] * y[ppw->pv->index_pt_theta_b] / k;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = 0.; pvecthermo[pth->index_th_g] * P;
+source/perturbations.c~:          if (ppt->gauge == newtonian) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_t0) = pvecthermo[pth->index_th_g] * (delta_g / 4. + pvecmetric[ppw->index_mt_psi]);
+source/perturbations.c~:          _set_source_(ppt->index_tp_t1) = 0.;
+source/perturbations.c~:          _set_source_(ppt->index_tp_t2) = pvecthermo[pth->index_th_g] * P;
+source/perturbations.c~:      if (ppt->has_source_p == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_p) = sqrt(6.) * pvecthermo[pth->index_th_g] * P;  
+source/perturbations.c~:      if (ppt->has_source_g == _TRUE_) {
+source/perturbations.c~:        if (ppt->gauge == newtonian)
+source/perturbations.c~:          _set_source_(ppt->index_tp_g) = pvecmetric[ppw->index_mt_psi];
+source/perturbations.c~:        if (ppt->gauge == synchronous)
+source/perturbations.c~:          _set_source_(ppt->index_tp_g) = (pvecback[pba->index_bg_H] * pvecback[pba->index_bg_a] * (pvecmetric[ppw->index_mt_h_prime] + 6. * pvecmetric[ppw->index_mt_eta_prime])/2./k/k + pvecmetric[ppw->index_mt_alpha_prime]);
+source/perturbations.c~:      if (ppt->has_source_delta_pk == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_delta_pk) = ppw->delta_pk;
+source/perturbations.c~:      if (ppt->has_source_delta_g == _TRUE_)  {
+source/perturbations.c~:        _set_source_(ppt->index_tp_delta_g) = delta_g;
+source/perturbations.c~:      if (ppt->has_source_delta_b == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_delta_b) = y[ppw->pv->index_pt_delta_b]; 
+source/perturbations.c~:      if (ppt->has_source_delta_cdm == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_delta_cdm) = y[ppw->pv->index_pt_delta_cdm]; 
+source/perturbations.c~:      if (ppt->has_source_delta_fld == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_delta_fld) = y[ppw->pv->index_pt_delta_fld]; 
+source/perturbations.c~:      if (ppt->has_source_delta_scf == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_delta_scf) = y[ppw->pv->index_pt_delta_scf]; 
+source/perturbations.c~:      if (ppt->has_source_delta_ur == _TRUE_) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_delta_ur) = y[ppw->pv->index_pt_delta_ur];
+source/perturbations.c~:          _set_source_(ppt->index_tp_delta_ur) = ppw->rsa_delta_ur;
+source/perturbations.c~:      if (ppt->has_source_delta_ncdm == _TRUE_) {
+source/perturbations.c~:        for (index_type = ppt->index_tp_delta_ncdm1; index_type < ppt->index_tp_delta_ncdm1+pba->N_ncdm; index_type++) {
+source/perturbations.c~:          _set_source_(index_type) = ppw->delta_ncdm[index_type - ppt->index_tp_delta_ncdm1];
+source/perturbations.c~:      if (ppt->has_source_theta_g == _TRUE_) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_theta_g) = y[ppw->pv->index_pt_theta_g];
+source/perturbations.c~:          _set_source_(ppt->index_tp_theta_g) = ppw->rsa_theta_g;
+source/perturbations.c~:      if (ppt->has_source_theta_b == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_theta_b) = y[ppw->pv->index_pt_theta_b]; 
+source/perturbations.c~:      if (ppt->has_source_theta_cdm == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_theta_cdm) = y[ppw->pv->index_pt_theta_cdm]; 
+source/perturbations.c~:      if (ppt->has_source_theta_fld == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_theta_fld) = y[ppw->pv->index_pt_theta_fld]; 
+source/perturbations.c~:      if (ppt->has_source_theta_scf == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_theta_scf) = y[ppw->pv->index_pt_theta_scf]; 
+source/perturbations.c~:      if (ppt->has_source_theta_ur == _TRUE_) {
+source/perturbations.c~:          _set_source_(ppt->index_tp_theta_ur) = y[ppw->pv->index_pt_theta_ur];
+source/perturbations.c~:          _set_source_(ppt->index_tp_theta_ur) = ppw->rsa_theta_ur;
+source/perturbations.c~:      if (ppt->has_source_theta_ncdm == _TRUE_) {
+source/perturbations.c~:        for (index_type = ppt->index_tp_theta_ncdm1; index_type < ppt->index_tp_theta_ncdm1+pba->N_ncdm; index_type++) {
+source/perturbations.c~:          _set_source_(index_type) = ppw->theta_ncdm[index_type - ppt->index_tp_theta_ncdm1];
+source/perturbations.c~:      if (ppt->has_source_t == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_t2) = - y[ppw->pv->index_pt_gwdot] * pvecthermo[pth->index_th_exp_m_kappa] + pvecthermo[pth->index_th_g] * P; 
+source/perturbations.c~:      if (ppt->has_source_p == _TRUE_) {
+source/perturbations.c~:        _set_source_(ppt->index_tp_p) = sqrt(6.) * pvecthermo[pth->index_th_g] * P;
+source/perturbations.c~:  //if (_tensors_ && (pppaw->index_k == ppt->k_size-1)) {
+source/perturbations.c~:          if (ppt->gauge == synchronous) {
+source/perturbations.c~:        if (ppt->gauge == synchronous) {
+source/perturbations.c~:        if ((pba->has_ncdm == _TRUE_) && ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_) || (ppt->has_source_delta_pk == _TRUE_))) {
+source/perturbations.c~:        if (ppt->gauge == synchronous) {
+source/perturbations.c~:        if (ppt->gauge == newtonian) {
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:      if (ppt->gauge == synchronous) {
+source/perturbations.c~:      if (ppt->gauge == newtonian) {
+source/perturbations.c~:        if (ppt->gauge == newtonian) {
+source/perturbations.c~:        if (ppt->gauge == synchronous) {
+source/perturbations.c~:      if (ppt->gauge == synchronous) {
+source/perturbations.c~:      if (ppt->gauge == newtonian) {
+source/perturbations.c~:  if (ppt->gauge == synchronous) {
+source/perturbations.c~:  if (ppt->gauge == newtonian) {
+source/perturbations.c~:    if (ppt->gauge == newtonian) {
+source/perturbations.c~:    if (ppt->gauge == synchronous) {
+source/perturbations.c~:                 ppt->error_message,
+source/perturbations.c~:    if (ppt->gauge == newtonian) {
+source/perturbations.c~:    if (ppt->gauge == synchronous) {
+source/perturbations.c~:  if (ppt->gauge == newtonian) {
+source/perturbations.c~:  if (ppt->gauge == synchronous) {
+source/primordial.c:  if (ppt->has_perturbations == _FALSE_) {
+source/primordial.c:  k_min = ppt->k[0]; /* first value, inferred from perturbations structure */
+source/primordial.c:  k_max = ppt->k[ppt->k_size-1]; /* last value, inferred from perturbations structure */
+source/primordial.c:      for (index_md = 0; index_md < ppt->md_size; index_md++) {
+source/primordial.c:    class_test(ppt->has_scalars == _FALSE_,
+source/primordial.c:    class_test(ppt->has_vectors == _TRUE_,
+source/primordial.c:    class_test(ppt->has_tensors == _FALSE_,
+source/primordial.c:    class_test(ppt->has_bi == _TRUE_ || ppt->has_cdi == _TRUE_ || ppt->has_nid == _TRUE_ || ppt->has_niv == _TRUE_,
+source/primordial.c:    if (ppt->has_scalars == _TRUE_) {
+source/primordial.c:                                          ppt->index_md_scalars,
+source/primordial.c:                                          ppt->index_md_scalars,
+source/primordial.c:                                          ppt->index_md_scalars,
+source/primordial.c:                                          ppt->index_md_scalars,
+source/primordial.c:                                          ppt->index_md_scalars,
+source/primordial.c:    if (ppt->has_tensors == _TRUE_) {
+source/primordial.c:                                          ppt->index_md_tensors,
+source/primordial.c:                                          ppt->index_md_tensors,
+source/primordial.c:                                          ppt->index_md_tensors,
+source/primordial.c:  ppm->md_size = ppt->md_size;
+source/primordial.c:  class_alloc(ppm->lnpk,ppt->md_size*sizeof(double*),ppm->error_message);
+source/primordial.c:  class_alloc(ppm->ddlnpk,ppt->md_size*sizeof(double*),ppm->error_message);
+source/primordial.c:  class_alloc(ppm->ic_size,ppt->md_size*sizeof(int*),ppm->error_message);
+source/primordial.c:  class_alloc(ppm->ic_ic_size,ppt->md_size*sizeof(int*),ppm->error_message);
+source/primordial.c:  for (index_md = 0; index_md < ppt->md_size; index_md++) {		     
+source/primordial.c:    ppm->ic_size[index_md] = ppt->ic_size[index_md];
+source/primordial.c:          if ((ppt->has_ad == _TRUE_) && (index_ic1 == ppt->index_ic_ad)) {
+source/primordial.c:          if ((ppt->has_bi == _TRUE_) && (index_ic1 == ppt->index_ic_bi)) {
+source/primordial.c:          if ((ppt->has_cdi == _TRUE_) && (index_ic1 == ppt->index_ic_cdi)) {
+source/primordial.c:          if ((ppt->has_nid == _TRUE_) && (index_ic1 == ppt->index_ic_nid)) {
+source/primordial.c:          if ((ppt->has_niv == _TRUE_) && (index_ic1 == ppt->index_ic_niv)) {
+source/primordial.c:          if (index_ic1 == ppt->index_ic_ten) {
+source/primordial.c:            if ((ppt->has_ad == _TRUE_) && (ppt->has_bi == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_bi)) ||
+source/primordial.c:                 ((index_ic1 == ppt->index_ic_ad) && (index_ic1 == ppt->index_ic_bi)))) {
+source/primordial.c:            if ((ppt->has_ad == _TRUE_) && (ppt->has_cdi == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_cdi)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_ad) && (index_ic1 == ppt->index_ic_cdi)))) {
+source/primordial.c:            if ((ppt->has_ad == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_nid)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_ad) && (index_ic1 == ppt->index_ic_nid)))) {
+source/primordial.c:            if ((ppt->has_ad == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_ad) && (index_ic2 == ppt->index_ic_niv)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_ad) && (index_ic1 == ppt->index_ic_niv)))) {
+source/primordial.c:            if ((ppt->has_bi == _TRUE_) && (ppt->has_cdi == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_cdi)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_bi) && (index_ic1 == ppt->index_ic_cdi)))) {
+source/primordial.c:            if ((ppt->has_bi == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_nid)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_bi) && (index_ic1 == ppt->index_ic_nid)))) {
+source/primordial.c:            if ((ppt->has_bi == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_bi) && (index_ic2 == ppt->index_ic_niv)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_bi) && (index_ic1 == ppt->index_ic_niv)))) {
+source/primordial.c:            if ((ppt->has_cdi == _TRUE_) && (ppt->has_nid == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_nid)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_cdi) && (index_ic1 == ppt->index_ic_nid)))) {
+source/primordial.c:            if ((ppt->has_cdi == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_cdi) && (index_ic2 == ppt->index_ic_niv)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_cdi) && (index_ic1 == ppt->index_ic_niv)))) {
+source/primordial.c:            if ((ppt->has_nid == _TRUE_) && (ppt->has_niv == _TRUE_) && 
+source/primordial.c:                (((index_ic1 == ppt->index_ic_nid) && (index_ic2 == ppt->index_ic_niv)) ||
+source/primordial.c:                 ((index_ic2 == ppt->index_ic_nid) && (index_ic1 == ppt->index_ic_niv)))) {
+source/primordial.c:    ppm->lnpk[ppt->index_md_scalars][index_k] = log(curvature);
+source/primordial.c:    ppm->lnpk[ppt->index_md_tensors][index_k] = log(tensors);
+source/primordial.c:    ppm->is_non_zero[ppt->index_md_scalars][0] = _TRUE_;
+source/primordial.c:    ppm->is_non_zero[ppt->index_md_tensors][0] = _TRUE_;
+source/primordial.c:    /* 	    ppm->lnpk[ppt->index_md_scalars][index_k], */
+source/primordial.c:    /* 	    ppm->lnpk[ppt->index_md_tensors][index_k]); */
+source/spectra.c:  if ((ppt->has_cls == _FALSE_) && 
+source/spectra.c:      (ppt->has_pk_matter == _FALSE_) &&
+source/spectra.c:      (ppt->has_density_transfers == _FALSE_) &&
+source/spectra.c:      (ppt->has_velocity_transfers == _FALSE_)) {
+source/spectra.c:  if (ppt->has_cls == _TRUE_) {
+source/spectra.c:  if ((ppt->has_pk_matter == _TRUE_) || (ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_)) {
+source/spectra.c:    if (ppt->has_pk_matter == _TRUE_) {
+source/spectra.c:    if ((ppt->has_density_transfers == _TRUE_) || (ppt->has_velocity_transfers == _TRUE_)) {
+source/spectra.c:  if ((ppt->has_cls == _TRUE_) && (ppt->ic_size[ppt->index_md_scalars]>1)) {
+source/spectra.c:    if (ppt->has_cdi==_TRUE_) {
+source/spectra.c:    if (ppt->has_nid==_TRUE_) {
+source/spectra.c:    if (ppt->has_niv==_TRUE_) {
+source/spectra.c:  if (ppt->has_cls == _TRUE_) {
+source/spectra.c:    if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/spectra.c:    if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/spectra.c:    if ((ppt->has_cl_cmb_temperature == _TRUE_) && 
+source/spectra.c:        (ppt->has_cl_cmb_polarization == _TRUE_)) {
+source/spectra.c:    if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/spectra.c:    if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:    if ((ppt->has_cl_cmb_temperature == _TRUE_) && (ppt->has_cl_cmb_lensing_potential == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:    if ((ppt->has_cl_cmb_polarization == _TRUE_) && (ppt->has_cl_cmb_lensing_potential == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:    if ((ppt->has_scalars == _TRUE_) &&
+source/spectra.c:        ((ppt->has_cl_density == _TRUE_) || (ppt->has_cl_lensing_potential == _TRUE_)))
+source/spectra.c:      psp->d_size=ppt->selection_num;
+source/spectra.c:    if ((ppt->has_cl_density == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:       if ((ppt->has_cl_cmb_temperature == _TRUE_) && (ppt->has_cl_density == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:    if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (ppt->has_cl_density == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:    if ((ppt->has_cl_lensing_potential == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:       if ((ppt->has_cl_cmb_temperature == _TRUE_) && (ppt->has_cl_lensing_potential == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:    if ((ppt->has_cl_density == _TRUE_) && (ppt->has_cl_lensing_potential == _TRUE_) && (ppt->has_scalars == _TRUE_)) {
+source/spectra.c:    if (ppt->has_scalars == _TRUE_) {
+source/spectra.c:      if (psp->has_tt == _TRUE_) psp->l_max_ct[ppt->index_md_scalars][psp->index_ct_tt] = ppt->l_scalar_max;
+source/spectra.c:      if (psp->has_ee == _TRUE_) psp->l_max_ct[ppt->index_md_scalars][psp->index_ct_ee] = ppt->l_scalar_max;
+source/spectra.c:      if (psp->has_te == _TRUE_) psp->l_max_ct[ppt->index_md_scalars][psp->index_ct_te] = ppt->l_scalar_max;
+source/spectra.c:      if (psp->has_pp == _TRUE_) psp->l_max_ct[ppt->index_md_scalars][psp->index_ct_pp] = ppt->l_scalar_max;
+source/spectra.c:      if (psp->has_tp == _TRUE_) psp->l_max_ct[ppt->index_md_scalars][psp->index_ct_tp] = ppt->l_scalar_max;
+source/spectra.c:      if (psp->has_ep == _TRUE_) psp->l_max_ct[ppt->index_md_scalars][psp->index_ct_ep] = ppt->l_scalar_max;
+source/spectra.c:          psp->l_max_ct[ppt->index_md_scalars][index_ct] = ppt->l_lss_max;
+source/spectra.c:          psp->l_max_ct[ppt->index_md_scalars][index_ct] = MIN(ppt->l_scalar_max,ppt->l_lss_max);
+source/spectra.c:          psp->l_max_ct[ppt->index_md_scalars][index_ct] = MIN(ppt->l_scalar_max,ppt->l_lss_max);
+source/spectra.c:          psp->l_max_ct[ppt->index_md_scalars][index_ct] = ppt->l_lss_max;
+source/spectra.c:          psp->l_max_ct[ppt->index_md_scalars][index_ct] = MIN(ppt->l_scalar_max,ppt->l_lss_max);
+source/spectra.c:          psp->l_max_ct[ppt->index_md_scalars][index_ct] = ppt->l_lss_max;
+source/spectra.c:    if (ppt->has_tensors == _TRUE_) {
+source/spectra.c:      if (psp->has_tt == _TRUE_) psp->l_max_ct[ppt->index_md_tensors][psp->index_ct_tt] = ppt->l_tensor_max;
+source/spectra.c:      if (psp->has_ee == _TRUE_) psp->l_max_ct[ppt->index_md_tensors][psp->index_ct_ee] = ppt->l_tensor_max;
+source/spectra.c:      if (psp->has_te == _TRUE_) psp->l_max_ct[ppt->index_md_tensors][psp->index_ct_te] = ppt->l_tensor_max;
+source/spectra.c:      if (psp->has_bb == _TRUE_) psp->l_max_ct[ppt->index_md_tensors][psp->index_ct_bb] = ppt->l_tensor_max;
+source/spectra.c:  if (ppt->has_source_delta_g == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_delta_b == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_delta_cdm == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_delta_fld == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_delta_ur == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_delta_ncdm == _TRUE_) {
+source/spectra.c:  if (ppt->has_density_transfers == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_theta_g == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_theta_b == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_theta_cdm == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_theta_fld == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_theta_ur == _TRUE_) {
+source/spectra.c:  if (ppt->has_source_theta_ncdm == _TRUE_) {
+source/spectra.c:  if (ppt->has_velocity_transfers == _TRUE_) {
+source/spectra.c:    if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/spectra.c:  class_test((ppt->has_scalars == _FALSE_),
+source/spectra.c:  psp->index_md_scalars = ppt->index_md_scalars;
+source/spectra.c:    class_test((tau_min < ppt->tau_sampling[index_tau]),
+source/spectra.c:               "you asked for zmax=%e, i.e. taumin=%e, smaller than first possible value =%e",psp->z_max_pk,tau_min,ppt->tau_sampling[0]);
+source/spectra.c:    while (ppt->tau_sampling[index_tau] < tau_min){
+source/spectra.c:    psp->ln_tau_size=ppt->tau_size-index_tau;
+source/spectra.c:    psp->ln_tau[index_tau]=log(ppt->tau_sampling[index_tau-psp->ln_tau_size+ppt->tau_size]);
+source/spectra.c:  psp->ln_k_size = ppt->k_size;
+source/spectra.c:    class_test(ppt->k[index_k] <= 0.,
+source/spectra.c:    psp->ln_k[index_k]=log(ppt->k[index_k]);
+source/spectra.c:  class_test((ppt->has_scalars == _FALSE_),
+source/spectra.c:  psp->index_md_scalars = ppt->index_md_scalars;
+source/spectra.c:                                 ppt->tau_sampling[index_tau-psp->ln_tau_size+ppt->tau_size], 
+source/spectra.c:        if (ppt->has_source_delta_pk == _TRUE_) {
+source/spectra.c:          source_ic1 = ppt->sources[index_md]
+source/spectra.c:            [index_ic1 * ppt->tp_size[index_md] + ppt->index_tp_delta_pk]
+source/spectra.c:            [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:          source_ic1 = ppt->sources[index_md]
+source/spectra.c:            [index_ic1 * ppt->tp_size[index_md] + ppt->index_tp_g]
+source/spectra.c:            [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:            if (ppt->has_source_delta_pk == _TRUE_) {
+source/spectra.c:              source_ic1 = ppt->sources[index_md]
+source/spectra.c:                [index_ic1 * ppt->tp_size[index_md] + ppt->index_tp_delta_pk]
+source/spectra.c:                [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:              source_ic2 = ppt->sources[index_md]
+source/spectra.c:                [index_ic2 * ppt->tp_size[index_md] + ppt->index_tp_delta_pk]
+source/spectra.c:                [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:              source_ic1 = ppt->sources[index_md]
+source/spectra.c:                [index_ic1 * ppt->tp_size[index_md] + ppt->index_tp_g]
+source/spectra.c:                [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:              source_ic2 = ppt->sources[index_md]
+source/spectra.c:                [index_ic2 * ppt->tp_size[index_md] + ppt->index_tp_g]
+source/spectra.c:                [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k]; 
+source/spectra.c:  class_test((ppt->has_scalars == _FALSE_),
+source/spectra.c:  psp->index_md_scalars = ppt->index_md_scalars;
+source/spectra.c:                                 ppt->tau_sampling[index_tau-psp->ln_tau_size+ppt->tau_size], 
+source/spectra.c:        if (ppt->has_source_delta_g == _TRUE_) {
+source/spectra.c:          delta_i = ppt->sources[index_md]
+source/spectra.c:            [index_ic * ppt->tp_size[index_md] + ppt->index_tp_delta_g]
+source/spectra.c:            [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:        if (ppt->has_source_theta_g == _TRUE_) {
+source/spectra.c:          theta_i = ppt->sources[index_md]
+source/spectra.c:            [index_ic * ppt->tp_size[index_md] + ppt->index_tp_theta_g]
+source/spectra.c:            [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:        if (ppt->has_source_delta_b == _TRUE_) {
+source/spectra.c:          delta_i = ppt->sources[index_md]
+source/spectra.c:            [index_ic * ppt->tp_size[index_md] + ppt->index_tp_delta_b]
+source/spectra.c:            [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:        if (ppt->has_source_theta_b == _TRUE_) {
+source/spectra.c:          theta_i = ppt->sources[index_md]
+source/spectra.c:            [index_ic * ppt->tp_size[index_md] + ppt->index_tp_theta_b]
+source/spectra.c:            [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:          if (ppt->has_source_delta_cdm == _TRUE_) {
+source/spectra.c:            delta_i = ppt->sources[index_md]
+source/spectra.c:              [index_ic * ppt->tp_size[index_md] + ppt->index_tp_delta_cdm]
+source/spectra.c:              [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:          if (ppt->has_source_theta_cdm == _TRUE_) {
+source/spectra.c:            theta_i = ppt->sources[index_md]
+source/spectra.c:              [index_ic * ppt->tp_size[index_md] + ppt->index_tp_theta_cdm]
+source/spectra.c:              [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:          if (ppt->has_source_delta_fld == _TRUE_) {
+source/spectra.c:            delta_i = ppt->sources[index_md]
+source/spectra.c:              [index_ic * ppt->tp_size[index_md] + ppt->index_tp_delta_fld]
+source/spectra.c:              [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:          if (ppt->has_source_theta_fld == _TRUE_) {
+source/spectra.c:            theta_i = ppt->sources[index_md]
+source/spectra.c:              [index_ic * ppt->tp_size[index_md] + ppt->index_tp_theta_fld]
+source/spectra.c:              [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:          if (ppt->has_source_delta_ur == _TRUE_) {
+source/spectra.c:            delta_i = ppt->sources[index_md]
+source/spectra.c:              [index_ic * ppt->tp_size[index_md] + ppt->index_tp_delta_ur]
+source/spectra.c:              [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:          if (ppt->has_source_theta_ur == _TRUE_) {
+source/spectra.c:            theta_i = ppt->sources[index_md]
+source/spectra.c:              [index_ic * ppt->tp_size[index_md] + ppt->index_tp_theta_ur]
+source/spectra.c:              [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:            if (ppt->has_source_delta_ncdm == _TRUE_) {
+source/spectra.c:              delta_i = ppt->sources[index_md]
+source/spectra.c:                [index_ic * ppt->tp_size[index_md] + ppt->index_tp_delta_ncdm1+n_ncdm]
+source/spectra.c:                [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:            if (ppt->has_source_theta_ncdm == _TRUE_) {
+source/spectra.c:              theta_i = ppt->sources[index_md]
+source/spectra.c:                [index_ic * ppt->tp_size[index_md] + ppt->index_tp_theta_ncdm1+n_ncdm]
+source/spectra.c:                [(index_tau-psp->ln_tau_size+ppt->tau_size) * ppt->k_size + index_k];
+source/spectra.c:        if (ppt->has_density_transfers == _TRUE_) {
+source/spectra.c:        if (ppt->has_velocity_transfers == _TRUE_) {
+source/transfer.c:     sources_spline[index_md][index_ic * ppt->tp_size[index_md] + index_tp][index_tau * ppt->k_size + index_k]
+source/transfer.c:  if (ppt->has_cls == _FALSE_) {
+source/transfer.c:  ptr->md_size = ppt->md_size;
+source/transfer.c:          ppt->tau_size,
+source/transfer.c:                                                ppt->tau_size,
+source/transfer.c:  if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:  if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:  if (ppt->has_scalars == _TRUE_) {
+source/transfer.c:    if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:    if (ppt->has_cl_cmb_lensing_potential == _TRUE_) {
+source/transfer.c:    if (ppt->has_cl_density == _TRUE_) {
+source/transfer.c:      index_tt+=ppt->selection_num;
+source/transfer.c:    if (ppt->has_cl_lensing_potential == _TRUE_) {
+source/transfer.c:      index_tt+=ppt->selection_num;
+source/transfer.c:    ptr->tt_size[ppt->index_md_scalars]=index_tt;
+source/transfer.c:  if (ppt->has_vectors == _TRUE_) {
+source/transfer.c:    if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:    if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:    ptr->tt_size[ppt->index_md_vectors]=index_tt;
+source/transfer.c:  if (ppt->has_tensors == _TRUE_) {
+source/transfer.c:    if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:    ptr->tt_size[ppt->index_md_tensors]=index_tt;
+source/transfer.c:                ppt->ic_size[index_md] * ptr->tt_size[index_md] * ptr->l_size[index_md] * ptr->q_size * sizeof(double),
+source/transfer.c:                ppt->ic_size[index_md]*ppt->tp_size[index_md]*sizeof(double*),
+source/transfer.c:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/transfer.c:      for (index_tp = 0; index_tp < ppt->tp_size[index_md]; index_tp++) {
+source/transfer.c:        class_alloc(sources_spline[index_md][index_ic * ppt->tp_size[index_md] + index_tp],
+source/transfer.c:                    ppt->k_size*ppt->tau_size*sizeof(double),
+source/transfer.c:        class_call(array_spline_table_columns2(ppt->k,
+source/transfer.c:                                               ppt->k_size,
+source/transfer.c:                                               ppt->sources[index_md][index_ic * ppt->tp_size[index_md] + index_tp],
+source/transfer.c:                                               ppt->tau_size,
+source/transfer.c:                                               sources_spline[index_md][index_ic * ppt->tp_size[index_md] + index_tp],
+source/transfer.c:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/transfer.c:      for (index_tp = 0; index_tp < ppt->tp_size[index_md]; index_tp++) {
+source/transfer.c:        free(sources_spline[index_md][index_ic * ppt->tp_size[index_md] + index_tp]);
+source/transfer.c:  if (ppt->has_cls == _TRUE_) {
+source/transfer.c:    if (ppt->has_scalars == _TRUE_) {
+source/transfer.c:      if ((ppt->has_cl_cmb_temperature == _TRUE_) || 
+source/transfer.c:          (ppt->has_cl_cmb_polarization == _TRUE_) || 
+source/transfer.c:          (ppt->has_cl_cmb_lensing_potential == _TRUE_))
+source/transfer.c:        l_max=MAX(ppt->l_scalar_max,l_max);
+source/transfer.c:      if ((ppt->has_cl_lensing_potential == _TRUE_) || 
+source/transfer.c:          (ppt->has_cl_density == _TRUE_))
+source/transfer.c:        l_max=MAX(ppt->l_lss_max,l_max);
+source/transfer.c:    if (ppt->has_tensors == _TRUE_)
+source/transfer.c:      l_max=MAX(ppt->l_tensor_max,l_max);
+source/transfer.c:  for (index_md=0; index_md < ppt->md_size; index_md++) {
+source/transfer.c:        if ((ppt->has_cl_cmb_temperature == _TRUE_) && 
+source/transfer.c:          l_max=ppt->l_scalar_max;
+source/transfer.c:        if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e))
+source/transfer.c:          l_max=ppt->l_scalar_max;
+source/transfer.c:        if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (index_tt == ptr->index_tt_lcmb))
+source/transfer.c:          l_max=ppt->l_scalar_max;
+source/transfer.c:        if ((ppt->has_cl_density == _TRUE_) && (index_tt >= ptr->index_tt_density) && (index_tt < ptr->index_tt_density+ppt->selection_num))
+source/transfer.c:          l_max=ppt->l_lss_max;
+source/transfer.c:        if ((ppt->has_cl_lensing_potential == _TRUE_) && (index_tt >= ptr->index_tt_lensing) && (index_tt < ptr->index_tt_lensing+ppt->selection_num))
+source/transfer.c:          l_max=ppt->l_lss_max;
+source/transfer.c:        l_max = ppt->l_tensor_max;
+source/transfer.c:      q_min = ppt->k[0];
+source/transfer.c:      q_max = ppt->k[ppt->k_size_cl-1]; 
+source/transfer.c:      q_min = sqrt(ppt->k[0]*ppt->k[0]+K);
+source/transfer.c:      k_max = ppt->k[ppt->k_size_cl-1];
+source/transfer.c:      if (ppt->has_vectors == _TRUE_) 
+source/transfer.c:      if (ppt->has_tensors == _TRUE_) 
+source/transfer.c:    q_size_max = 2+ppt->k_size_cl+(int)((q_max-q_min)/q_step_max);
+source/transfer.c:    while ((index_q < ppt->k_size_cl) && ((sqrt(ppt->k[index_q]*ppt->k[index_q]+K) - ptr->q[index_q-1]) < q_step_max)) {
+source/transfer.c:      ptr->q[index_q] = sqrt(ppt->k[index_q]*ppt->k[index_q]+K);
+source/transfer.c:    q_max = ppt->k[ppt->k_size_cl-1]; 
+source/transfer.c:    while (index_k < ppt->k_size_cl-2) {
+source/transfer.c:      nu_proposed = (int)(sqrt(pow(ppt->k[index_k],2)+K)/sqrt(K));
+source/transfer.c:      q_min = ppt->k[0];
+source/transfer.c:      q_max = ppt->k[ppt->k_size_cl-1]; 
+source/transfer.c:      q_min = sqrt(ppt->k[0]*ppt->k[0]+K);
+source/transfer.c:      k_max = ppt->k[ppt->k_size_cl-1];
+source/transfer.c:      if (ppt->has_vectors == _TRUE_) 
+source/transfer.c:      if (ppt->has_tensors == _TRUE_) 
+source/transfer.c:    q_max = ppt->k[ppt->k_size_cl-1]; 
+source/transfer.c:    class_test(ptr->k[index_md][0] < ppt->k[0],
+source/transfer.c:               ppt->k[0],
+source/transfer.c:    class_test(ptr->k[index_md][ptr->q_size-1] > ppt->k[ppt->k_size_cl-1],
+source/transfer.c:               ppt->k[ppt->k_size_cl],
+source/transfer.c:          if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t0)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_t0;
+source/transfer.c:          if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t1)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_t1;
+source/transfer.c:          if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t2)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_t2;
+source/transfer.c:          if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_p;
+source/transfer.c:          if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (index_tt == ptr->index_tt_lcmb)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_g;
+source/transfer.c:          if ((ppt->has_cl_density == _TRUE_) && (index_tt >= ptr->index_tt_density) && (index_tt < ptr->index_tt_density+ppt->selection_num))
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_g;
+source/transfer.c:          if ((ppt->has_cl_lensing_potential == _TRUE_) && (index_tt >= ptr->index_tt_lensing) && (index_tt < ptr->index_tt_lensing+ppt->selection_num))
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_g;
+source/transfer.c:          if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t1)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_t1;
+source/transfer.c:          if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t2)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_t2;
+source/transfer.c:          if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_p;
+source/transfer.c:          if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_b))
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_p;
+source/transfer.c:          if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t2)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_t2;
+source/transfer.c:          if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e)) 
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_p;
+source/transfer.c:          if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_b))
+source/transfer.c:            tp_of_tt[index_md][index_tt]=ppt->index_tp_p;
+source/transfer.c:      if ((ppt->has_cl_cmb_temperature == _TRUE_) && 
+source/transfer.c:        *tau_size = ppt->tau_size;
+source/transfer.c:      if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e))
+source/transfer.c:        *tau_size = ppt->tau_size;
+source/transfer.c:      if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (index_tt == ptr->index_tt_lcmb)) {
+source/transfer.c:        while (ppt->tau_sampling[index_tau_min]<=tau_rec) index_tau_min++;
+source/transfer.c:        *tau_size = ppt->tau_size-index_tau_min;
+source/transfer.c:      if ((ppt->has_cl_density == _TRUE_) && (index_tt >= ptr->index_tt_density) && (index_tt < ptr->index_tt_density+ppt->selection_num)) {
+source/transfer.c:          l_limber=ppr->l_switch_limber_for_cl_density_over_z*ppt->selection_mean[index_tt-ptr->index_tt_density];
+source/transfer.c:      if ((ppt->has_cl_lensing_potential == _TRUE_) && (index_tt >= ptr->index_tt_lensing) && (index_tt < ptr->index_tt_lensing+ppt->selection_num)) {
+source/transfer.c:        l_limber=ppr->l_switch_limber_for_cl_density_over_z*ppt->selection_mean[index_tt-ptr->index_tt_lensing];
+source/transfer.c:      *tau_size = ppt->tau_size;
+source/transfer.c:    for (index_ic = 0; index_ic < ppt->ic_size[index_md]; index_ic++) {
+source/transfer.c:            new index ppt->index_type. If yes, interpolate it at the
+source/transfer.c:                                                  sources_spline[index_md][index_ic * ppt->tp_size[index_md] + tp_of_tt[index_md][index_tt]],
+source/transfer.c:                                 double * source_spline, /* array with argument source_spline[index_tau*ppt->k_size[index_md]+index_k] (must be allocated) */
+source/transfer.c:                                 double * interpolated_sources /* array with argument interpolated_sources[index_q*ppt->tau_size+index_tau] (must be allocated) */
+source/transfer.c:    class_call(array_spline_table_columns(ppt->k,
+source/transfer.c:    ppt->k_size,
+source/transfer.c:    ppt->sources[index_md][index_ic * ppt->tp_size[index_md] + index_type],
+source/transfer.c:    ppt->tau_size,
+source/transfer.c:  h = ppt->k[index_k+1] - ppt->k[index_k];
+source/transfer.c:  while (((index_k+1) < ppt->k_size) &&
+source/transfer.c:         (ppt->k[index_k+1] < 
+source/transfer.c:    h = ppt->k[index_k+1] - ppt->k[index_k];
+source/transfer.c:  b = (ptr->k[index_md][index_q] - ppt->k[index_k])/h;
+source/transfer.c:  for (index_tau = 0; index_tau < ppt->tau_size; index_tau++) {
+source/transfer.c:      a * ppt->sources[index_md]
+source/transfer.c:      [index_ic * ppt->tp_size[index_md] + index_type]
+source/transfer.c:      [index_tau*ppt->k_size+index_k]
+source/transfer.c:      + b * ppt->sources[index_md]
+source/transfer.c:      [index_ic * ppt->tp_size[index_md] + index_type]
+source/transfer.c:      [index_tau*ppt->k_size+index_k+1]
+source/transfer.c:      + ((a*a*a-a) * source_spline[index_tau*ppt->k_size+index_k]
+source/transfer.c:         +(b*b*b-b) * source_spline[index_tau*ppt->k_size+index_k+1])*h*h/6.0;
+source/transfer.c:      if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (index_tt == ptr->index_tt_lcmb))
+source/transfer.c:      if ((ppt->has_cl_density == _TRUE_) && (index_tt >= ptr->index_tt_density) && (index_tt < ptr->index_tt_density+ppt->selection_num))
+source/transfer.c:      if ((ppt->has_cl_lensing_potential == _TRUE_) && (index_tt >= ptr->index_tt_lensing) && (index_tt < ptr->index_tt_lensing+ppt->selection_num))
+source/transfer.c:        if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (index_tt == ptr->index_tt_lcmb)) {
+source/transfer.c:          index_tau_min =  ppt->tau_size - tau_size;
+source/transfer.c:          for (index_tau = index_tau_min; index_tau < ppt->tau_size; index_tau++) {
+source/transfer.c:            tau = ppt->tau_sampling[index_tau];
+source/transfer.c:            if (index_tau == ppt->tau_size-1) {
+source/transfer.c:        if ((ppt->has_cl_density == _TRUE_) && (index_tt >= ptr->index_tt_density) && (index_tt < ptr->index_tt_density+ppt->selection_num)) {
+source/transfer.c:        if ((ppt->has_cl_lensing_potential == _TRUE_) && (index_tt >= ptr->index_tt_lensing) && (index_tt < ptr->index_tt_lensing+ppt->selection_num)) {
+source/transfer.c:          if (ppt->selection == dirac) {
+source/transfer.c:    tau_size = ppt->tau_size;
+source/transfer.c:           ppt->tau_size*sizeof(double));
+source/transfer.c:    for (index_tau=0; index_tau < ppt->tau_size; index_tau++) {
+source/transfer.c:      tau0_minus_tau[index_tau] = tau0 - ppt->tau_sampling[index_tau];
+source/transfer.c:  if (ppt->selection==dirac) {
+source/transfer.c:  x=fabs(z-ppt->selection_mean[bin]);
+source/transfer.c:  if (ppt->selection==gaussian) {
+source/transfer.c:    *selection = exp(-0.5*pow(x/ppt->selection_width[bin],2))
+source/transfer.c:      /ppt->selection_width[bin]/sqrt(2.*_PI_);
+source/transfer.c:  if (ppt->selection==tophat) {
+source/transfer.c:    *selection=(1.-tanh((x-ppt->selection_width[bin])/(ppr->selection_tophat_edge*ppt->selection_width[bin])))/2.;
+source/transfer.c:    class_call(array_interpolate_two(ppt->tau_sampling,
+source/transfer.c:                                     ppt->tau_size,
+source/transfer.c:  if (ppt->selection==gaussian) {
+source/transfer.c:    z = ppt->selection_mean[bin]+ppt->selection_width[bin]*ppr->selection_cut_at_sigma;
+source/transfer.c:  if (ppt->selection==tophat) {
+source/transfer.c:    z = ppt->selection_mean[bin]+(1.+ppr->selection_cut_at_sigma*ppr->selection_tophat_edge)*ppt->selection_width[bin];
+source/transfer.c:  if (ppt->selection==dirac) {
+source/transfer.c:    z = ppt->selection_mean[bin];
+source/transfer.c:             ppt->error_message);
+source/transfer.c:  if (ppt->selection==gaussian) {
+source/transfer.c:    z = MAX(ppt->selection_mean[bin]-ppt->selection_width[bin]*ppr->selection_cut_at_sigma,0.);
+source/transfer.c:  if (ppt->selection==tophat) {
+source/transfer.c:    z = MAX(ppt->selection_mean[bin]-(1.+ppr->selection_cut_at_sigma*ppr->selection_tophat_edge)*ppt->selection_width[bin],0.);
+source/transfer.c:  if (ppt->selection==dirac) {
+source/transfer.c:    z = ppt->selection_mean[bin];
+source/transfer.c:             ppt->error_message);
+source/transfer.c:  z = MAX(ppt->selection_mean[bin],0.);
+source/transfer.c:             ppt->error_message);
+source/transfer.c:        if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (index_tt == ptr->index_tt_lcmb) && (l>ppr->l_switch_limber)) {
+source/transfer.c:        else if ((ppt->has_cl_density == _TRUE_) && (index_tt >= ptr->index_tt_density) && (index_tt < ptr->index_tt_density+ppt->selection_num) && (l>=ppr->l_switch_limber_for_cl_density_over_z*ppt->selection_mean[index_tt-ptr->index_tt_density])) {
+source/transfer.c:          if (ppt->selection != dirac) *use_limber = _TRUE_;
+source/transfer.c:        else if ((ppt->has_cl_lensing_potential == _TRUE_) && (index_tt >= ptr->index_tt_lensing) && (index_tt < ptr->index_tt_lensing+ppt->selection_num) && (l>=ppr->l_switch_limber_for_cl_density_over_z*ppt->selection_mean[index_tt-ptr->index_tt_lensing])) {
+source/transfer.c:                    double * sources, /* array with argument interpolated_sources[index_q*ppt->tau_size+index_tau] */
+source/transfer.c:      if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t0) && (l < (k-ppr->transfer_neglect_delta_k_S_t0)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t1) && (l < (k-ppr->transfer_neglect_delta_k_S_t1)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t2) && (l < (k-ppr->transfer_neglect_delta_k_S_t2)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e) && (l < (k-ppr->transfer_neglect_delta_k_S_e)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_lensing_potential == _TRUE_) && (index_tt == ptr->index_tt_lcmb) && (l < (k-ppr->transfer_neglect_delta_k_S_lcmb)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t1) && (l < (k-ppr->transfer_neglect_delta_k_V_t1)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t2) && (l < (k-ppr->transfer_neglect_delta_k_V_t2)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e) && (l < (k-ppr->transfer_neglect_delta_k_V_e)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_b) && (l < (k-ppr->transfer_neglect_delta_k_V_b)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      if ((ppt->has_cl_cmb_temperature == _TRUE_) && (index_tt == ptr->index_tt_t2) && (l < (k-ppr->transfer_neglect_delta_k_T_t2)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_e) && (l < (k-ppr->transfer_neglect_delta_k_T_e)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      else if ((ppt->has_cl_cmb_polarization == _TRUE_) && (index_tt == ptr->index_tt_b) && (l < (k-ppr->transfer_neglect_delta_k_T_b)*pba->conformal_age*ptr->angular_rescaling)) *neglect = _TRUE_;
+source/transfer.c:      if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_polarization == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_temperature == _TRUE_) {
+source/transfer.c:      if (ppt->has_cl_cmb_polarization == _TRUE_) {
+test/test_degeneracy.c:    printf("\n\nError in perturb_init \n=>%s\n",ppt->error_message);
+test/test_degeneracy.c:    printf("\n\nError in perturb_free \n=>%s\n",ppt->error_message);
+test/test_loops.c:    printf("\n\nError in perturb_init \n=>%s\n",ppt->error_message);
+test/test_loops.c:    printf("\n\nError in perturb_free \n=>%s\n",ppt->error_message);
+test/test_optimize_1D.c:    printf("\n\nError in perturb_init \n=>%s\n",ppt->error_message);
+test/test_optimize_1D.c:    printf("\n\nError in perturb_free \n=>%s\n",ppt->error_message);
+test/test_optimize_1D.c:    printf("\n\nError in perturb_init \n=>%s\n",ppt->error_message);
+test/test_optimize_1D.c:    printf("\n\nError in perturb_free \n=>%s\n",ppt->error_message);
+test/test_optimize.c:    printf("\n\nError in perturb_init \n=>%s\n",ppt->error_message);
+test/test_optimize.c:    printf("\n\nError in perturb_free \n=>%s\n",ppt->error_message);
+test/test_optimize.c:    printf("\n\nError in perturb_init \n=>%s\n",ppt->error_message);
+test/test_optimize.c:    printf("\n\nError in perturb_free \n=>%s\n",ppt->error_message);
+tools/evolver_ndf15.c:	If ppt->perturbations_verbose > 2, this statistic is printed at the end of

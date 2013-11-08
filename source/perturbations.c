@@ -467,12 +467,14 @@ int perturb_indices_of_perturbs(
   ppt->has_source_delta_b = _FALSE_;
   ppt->has_source_delta_cdm = _FALSE_;
   ppt->has_source_delta_fld = _FALSE_;
+  ppt->has_source_delta_scf = _FALSE_;  //scalar field
   ppt->has_source_delta_ur = _FALSE_;
   ppt->has_source_delta_ncdm = _FALSE_;
   ppt->has_source_theta_g = _FALSE_;
   ppt->has_source_theta_b = _FALSE_;
   ppt->has_source_theta_cdm = _FALSE_;
   ppt->has_source_theta_fld = _FALSE_;
+  ppt->has_source_theta_scf = _FALSE_;  //scalar field
   ppt->has_source_theta_ur = _FALSE_;
   ppt->has_source_theta_ncdm = _FALSE_;
 
@@ -537,6 +539,8 @@ int perturb_indices_of_perturbs(
             ppt->has_source_delta_cdm = _TRUE_;
           if (pba->has_fld == _TRUE_)
             ppt->has_source_delta_fld = _TRUE_;
+	  if (pba->has_scf == _TRUE_)
+            ppt->has_source_delta_scf = _TRUE_;
           if (pba->has_ur == _TRUE_)
             ppt->has_source_delta_ur = _TRUE_;
           if (pba->has_ncdm == _TRUE_)
@@ -551,6 +555,8 @@ int perturb_indices_of_perturbs(
             ppt->has_source_theta_cdm = _TRUE_;
           if (pba->has_fld == _TRUE_)
             ppt->has_source_theta_fld = _TRUE_;
+	  if (pba->has_scf == _TRUE_)
+            ppt->has_source_theta_scf = _TRUE_;
           if (pba->has_ur == _TRUE_)
             ppt->has_source_theta_ur = _TRUE_;
           if (pba->has_ncdm == _TRUE_)
@@ -566,12 +572,14 @@ int perturb_indices_of_perturbs(
         class_define_index(ppt->index_tp_delta_b,    ppt->has_source_delta_b,   index_type,1);
         class_define_index(ppt->index_tp_delta_cdm,  ppt->has_source_delta_cdm, index_type,1);
         class_define_index(ppt->index_tp_delta_fld,  ppt->has_source_delta_fld, index_type,1);
+	class_define_index(ppt->index_tp_delta_scf,  ppt->has_source_delta_scf, index_type,1);
         class_define_index(ppt->index_tp_delta_ur,   ppt->has_source_delta_ur,  index_type,1);
         class_define_index(ppt->index_tp_delta_ncdm1,ppt->has_source_delta_ncdm,index_type,pba->N_ncdm);
         class_define_index(ppt->index_tp_theta_g,    ppt->has_source_theta_g,   index_type,1);
         class_define_index(ppt->index_tp_theta_b,    ppt->has_source_theta_b,   index_type,1);
         class_define_index(ppt->index_tp_theta_cdm,  ppt->has_source_theta_cdm, index_type,1);
         class_define_index(ppt->index_tp_theta_fld,  ppt->has_source_theta_fld, index_type,1);
+	class_define_index(ppt->index_tp_theta_scf,  ppt->has_source_theta_scf, index_type,1);
         class_define_index(ppt->index_tp_theta_ur,   ppt->has_source_theta_ur,  index_type,1);
         class_define_index(ppt->index_tp_theta_ncdm1,ppt->has_source_theta_ncdm,index_type,pba->N_ncdm);
         ppt->tp_size[index_md] = index_type;
@@ -2352,6 +2360,11 @@ int perturb_vector_init(
 
       class_define_index(ppv->index_pt_delta_fld,pba->has_fld,index_pt,1); /* fluid density */
       class_define_index(ppv->index_pt_theta_fld,pba->has_fld,index_pt,1); /* fluid velocity */
+      
+      /* scalar field */    
+
+      class_define_index(ppv->index_pt_delta_scf,pba->has_scf,index_pt,1); /* scalar field density */
+      class_define_index(ppv->index_pt_theta_scf,pba->has_scf,index_pt,1); /* scalar field velocity */      
 
       /* ultra relativistic neutrinos */
 
@@ -2668,6 +2681,15 @@ int perturb_vector_init(
 	
           ppv->y[ppv->index_pt_theta_fld] =
             ppw->pv->y[ppw->pv->index_pt_theta_fld];
+        }
+
+        if (pba->has_scf == _TRUE_) {
+	
+          ppv->y[ppv->index_pt_delta_scf] =
+            ppw->pv->y[ppw->pv->index_pt_delta_scf];
+	
+          ppv->y[ppv->index_pt_theta_scf] =
+            ppw->pv->y[ppw->pv->index_pt_theta_scf];
         }
       
         if (ppt->gauge == synchronous)
@@ -3153,6 +3175,10 @@ int perturb_initial_conditions(struct precision * ppr,
                    "So far, the fluid is meant to be negligible at early time, and not to be important for defining the initial conditions of other species. You are using parameters for which this assumption may break down, so maybe it's the case to fully implement the fluid in the initial condition routine");
       
       }
+      
+      if (pba->has_scf == _TRUE_) {
+	// TODO think of some suitable tests for the scalar field
+      }
     
       class_test(rho_r == 0.,
                  ppt->error_message,
@@ -3240,6 +3266,16 @@ int perturb_initial_conditions(struct precision * ppr,
 	
           ppw->pv->y[ppw->pv->index_pt_theta_fld] = - k*ktau_three/4.*pba->cs2_fld/(4.-6.*(pba->w0_fld+pba->wa_fld)+3.*pba->cs2_fld) * ppr->curvature_ini * s2_squared; /* from 1004.5509 */ //TBC:curvature
 	
+        }
+        
+        /* scalar field TODO: Implement the right initial conditions
+	   so far everything set to zero */
+        if (pba->has_scf == _TRUE_) {
+	
+          ppw->pv->y[ppw->pv->index_pt_delta_scf] = 0;
+	
+          ppw->pv->y[ppw->pv->index_pt_theta_scf] = 0;
+	  
         } 
       
         /* all relativistic relics: ur and early ncdm */
@@ -3412,7 +3448,7 @@ int perturb_initial_conditions(struct precision * ppr,
 
            velocity_tot = ((rho+p)theta/rho_c) 
            = [(4/3) rho_r theta_r + rho_m theta_m] / (rho_r + rho_m)
-           = [(4/3) theta_r + (rho_m/rho_r) theta_m] / (1 + rho_m/rho_r)
+           = [(4/3) theta_r + (rho_m/rho_r) theta_m] / 1311.1769v1(1 + rho_m/rho_r)
            = [(4/3) (f_g theta_g + f_nu theta_nu) + (rho_m/rho_r) (f_b delta_b + f_cdm 0)] / (1 + rho_m/rho_r)
         */
 
@@ -3449,6 +3485,12 @@ int perturb_initial_conditions(struct precision * ppr,
           ppw->pv->y[ppw->pv->index_pt_delta_fld] += 3*(1.+pba->w0_fld+pba->wa_fld)*a_prime_over_a*alpha;
           ppw->pv->y[ppw->pv->index_pt_theta_fld] += k*k*alpha;
         } 
+        
+        /* scalar field */
+        if (pba->has_scf == _TRUE_) {
+          ppw->pv->y[ppw->pv->index_pt_delta_scf] += 0; // write the gauge transformation here
+          ppw->pv->y[ppw->pv->index_pt_theta_scf] += 0; // write the gauge transformation here
+        }         
 	
         if ((pba->has_ur == _TRUE_) || (pba->has_ncdm == _TRUE_)) {
 	  
@@ -4279,6 +4321,14 @@ int perturb_total_stress_energy(
     ppw->rho_plus_p_theta += (1.+w)*ppw->pvecback[pba->index_bg_rho_fld]*y[ppw->pv->index_pt_theta_fld];
     ppw->delta_p = ppw->delta_p + pba->cs2_fld * ppw->pvecback[pba->index_bg_rho_fld]*y[ppw->pv->index_pt_delta_fld]; 
   } 
+  
+  /* scalar field contribution */
+  if (pba->has_scf == _TRUE_) {
+ 
+    ppw->delta_rho += 0; 
+    ppw->rho_plus_p_theta += 0;
+    ppw->delta_p += 0; 
+  }   
 
   /* ultra-relativistic neutrino/relics contribution */
 
@@ -4738,6 +4788,12 @@ int perturb_sources(
       if (ppt->has_source_delta_fld == _TRUE_) {
         _set_source_(ppt->index_tp_delta_fld) = y[ppw->pv->index_pt_delta_fld]; 
       }
+      
+      /* delta_scf NOTE: consider writing as 
+         del_phi_scf & del_phi_prime_scf instead. */
+      if (ppt->has_source_delta_scf == _TRUE_) {
+        _set_source_(ppt->index_tp_delta_scf) = y[ppw->pv->index_pt_delta_scf]; 
+      }      
 
       /* delta_ur */
       if (ppt->has_source_delta_ur == _TRUE_) {
@@ -4776,6 +4832,11 @@ int perturb_sources(
       if (ppt->has_source_theta_fld == _TRUE_) {
         _set_source_(ppt->index_tp_theta_fld) = y[ppw->pv->index_pt_theta_fld]; 
       }
+      
+      /* theta_scf */
+      if (ppt->has_source_theta_scf == _TRUE_) {
+        _set_source_(ppt->index_tp_theta_scf) = y[ppw->pv->index_pt_theta_scf]; 
+      }      
 
       /* theta_ur */
       if (ppt->has_source_theta_ur == _TRUE_) {
@@ -5491,7 +5552,25 @@ int perturb_derivs(double tau,
           +cs2*k2/(1.+w)*y[pv->index_pt_delta_fld]
           +metric_euler;
       
-      }  
+      }
+      
+      /** TODO -> scalar field (scf) */      
+      
+      if (pba->has_scf == _TRUE_) {  
+        
+        /** ---> background factors */
+	
+	// fill in if necessary
+
+        /** ---> fluid density */
+
+        dy[pv->index_pt_delta_scf] = 0; //TODO: write scalar field equation
+	
+        /** ---> fluid velocity */
+
+        dy[pv->index_pt_theta_scf] = 0; //TODO: write scalar field equation
+      
+      }      
     
       /** -> ultra-relativistic neutrino/relics (ur) */
     

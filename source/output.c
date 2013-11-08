@@ -139,7 +139,7 @@ int output_init(
     class_call(output_pk(pba,ppt,psp,pop),
                pop->error_message,
                pop->error_message);
-  }
+  } 
 
   if (pnl->method > nl_none) {
 
@@ -171,7 +171,7 @@ int output_init(
 
 }
 
-/** 
+/**     printf("good so far \n");
  * This routines writes the output in files for anisotropy power spectra C_l's.
  *
  * @param pba Input: pointer to background structure (needed for T_cmb)
@@ -623,7 +623,7 @@ int output_pk(
                                    ),
                pop->error_message,
                pop->error_message);
-   
+
     class_alloc(pk_tot,
                 psp->ln_k_size*sizeof(double),
                 pop->error_message);
@@ -1615,6 +1615,8 @@ int output_open_tk_file(
           fprintf(*tkfile,"d_cdm              ");
         if (pba->has_fld == _TRUE_)
           fprintf(*tkfile,"d_de               ");
+        if (pba->has_scf == _TRUE_)
+          fprintf(*tkfile,"d_scf               ");	
         if (pba->has_ur == _TRUE_)
           fprintf(*tkfile,"d_ur               ");
         if (pba->has_ncdm == _TRUE_) {
@@ -1631,6 +1633,8 @@ int output_open_tk_file(
           fprintf(*tkfile,"t_cdm              ");
         if (pba->has_fld == _TRUE_)
           fprintf(*tkfile,"t_de               ");
+        if (pba->has_scf == _TRUE_)
+          fprintf(*tkfile,"t_scf               ");	
         if (pba->has_ur == _TRUE_)
           fprintf(*tkfile,"t_ur               ");
         if (pba->has_ncdm == _TRUE_) {

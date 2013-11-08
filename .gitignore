@@ -8,3 +8,4 @@ libclass.a
 *out
 python/classy.c
 python/build/
+*.kate-swp

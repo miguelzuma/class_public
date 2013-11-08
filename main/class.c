@@ -40,19 +40,20 @@ int main(int argc, char **argv) {
     return _FAILURE_;
   }
   
-  //added in order to extract the background functions
-  if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
-    printf("\n\nError in output_init \n=>%s\n",op.error_message);
-    return _FAILURE_;
-  }  
-  
-   return _SUCCESS_; // stop at the background_free  
 
   if (perturb_init(&pr,&ba,&th,&pt) == _FAILURE_) {
     printf("\n\nError in perturb_init \n=>%s\n",pt.error_message);
     return _FAILURE_;
   }
+  
+  //added in order to extract the background functions
+  if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
+    printf("\n\nError in output_init \n=>%s\n",op.error_message);
+    return _FAILURE_;
+  }    
 
+  return _SUCCESS_; // stop at the background_free  
+  
   if (primordial_init(&pr,&pt,&pm) == _FAILURE_) {
     printf("\n\nError in primordial_init \n=>%s\n",pm.error_message);
     return _FAILURE_;
