@@ -3283,7 +3283,7 @@ int perturb_initial_conditions(struct precision * ppr,
 //           *k*ktau_three/4.*1./(4.-6.*(1./3.)+3.*1.) * (ppw->pvecback[pba->index_bg_rho_scf] + ppw->pvecback[pba->index_bg_p_scf])
 // 	  * ppr->curvature_ini * s2_squared;
 	
-          ppw->pv->y[ppw->pv->index_pt_phi_prime_scf] = 0. ;
+          ppw->pv->y[ppw->pv->index_pt_phi_prime_scf] = 0. ; // assume it reaches attractor soon enough
 // 	  a*a/ppw->pvecback[pba->index_bg_phi_prime_scf] 
 //           *( - ktau_two/4.*(1.+1./3.)*(4.-3.*1.)/(4.-6.*(1/3.)+3.*1.)*ppw->pvecback[pba->index_bg_rho_scf] //delta_fld expression * rho_scf with the w = 1/3, c_s = 1
 // 	  - ppw->pvecback[pba->index_bg_dV_scf]*ppw->pv->y[ppw->pv->index_pt_phi_scf] //part proportional to delta_phi
@@ -5289,7 +5289,7 @@ int perturb_derivs(double tau,
   pvecthermo = ppw->pvecthermo;
   pvecmetric = ppw->pvecmetric;
   pv = ppw->pv;
-
+  
   /** - get background/thermo quantities in this point */
 
   class_call(background_at_tau(pba,
@@ -5358,7 +5358,7 @@ int perturb_derivs(double tau,
                                   ppw),
                  ppt->error_message,
                  error_message);
-
+     
       /** (d) compute metric-related quantities (depending on gauge; additional gauges can be coded below)
 
           Each continuity equation contains a term in (theta+metric_continuity) with
@@ -5581,29 +5581,28 @@ int perturb_derivs(double tau,
       
       /** TODO -> scalar field (scf) */      
       
-      if (pba->has_scf == _TRUE_) {  
+      if (pba->has_scf == _TRUE_) { 
         
         /** ---> background factors */
 	
 	// fill in if necessary
 	
-	class_test(ppt->gauge == newtonian,
-               pba->error_message,
+	class_test(ppt->gauge == newtonian, //TODO: PROBLEM: The error is not being properly passed!
+               ppt->error_message,
                "asked for scalar field AND Newtonian gauge. Not yet implemented");
-	  
+	     
+
 
         /** ---> field value */
 
-        dy[pv->index_pt_phi_scf] = 0 ;
-	//*y[pv->index_pt_phi_prime_scf]; //TODO: write scalar field equation
+        dy[pv->index_pt_phi_scf] = y[pv->index_pt_phi_prime_scf]; //TODO: write scalar field equation
 	
         /** ---> KG equation */
 
-        dy[pv->index_pt_phi_prime_scf] = 0 ;
-//         -( 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
-//         - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity) = -h'/2
-//         + (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf] ); //TODO: write scalar field equation
-     printf(" ok \n ");
+        dy[pv->index_pt_phi_prime_scf] =  -( 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
+        - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity) = -h'/2
+        + (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf] ); //TODO: write scalar field equation
+
       }      
     
       /** -> ultra-relativistic neutrino/relics (ur) */
