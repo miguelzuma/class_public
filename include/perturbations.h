@@ -180,14 +180,14 @@ struct perturbs
   short has_source_delta_b;   /**< do we need source for delta of baryons? */
   short has_source_delta_cdm; /**< do we need source for delta of cold dark matter? */
   short has_source_delta_fld;  /**< do we need source for delta of dark energy? */
-  short has_source_delta_scf;  /**< do we need source for delta of scalar field? */  
+  short has_source_phi_scf;  /**< do we need source for delta of scalar field? */  
   short has_source_delta_ur; /**< do we need source for delta of ultra-relativistic neutrinos/relics? */
   short has_source_delta_ncdm; /**< do we need source for delta of all non-cold dark matter species (e.g. massive neutrinos)? */
   short has_source_theta_g;   /**< do we need source for theta of gammas? */
   short has_source_theta_b;   /**< do we need source for theta of baryons? */
   short has_source_theta_cdm; /**< do we need source for theta of cold dark matter? */
   short has_source_theta_fld;  /**< do we need source for theta of dark energy? */
-  short has_source_theta_scf;  /**< do we need source for theta of scalar field? */
+  short has_source_phi_prime_scf;  /**< do we need source for theta of scalar field? */
   short has_source_theta_ur; /**< do we need source for theta of ultra-relativistic neutrinos/relics? */
   short has_source_theta_ncdm; /**< do we need source for theta of all non-cold dark matter species (e.g. massive neutrinos)? */
 
@@ -205,14 +205,14 @@ struct perturbs
   int index_tp_delta_b;   /**< index value for delta of baryons */
   int index_tp_delta_cdm; /**< index value for delta of cold dark matter */
   int index_tp_delta_fld;  /**< index value for delta of dark energy */
-  int index_tp_delta_scf;  /**< index value for delta of scalar field */  
+  int index_tp_phi_scf;  /**< index value for delta of scalar field */  
   int index_tp_delta_ur; /**< index value for delta of ultra-relativistic neutrinos/relics */
   int index_tp_delta_ncdm1; /**< index value for delta of first non-cold dark matter species (e.g. massive neutrinos) */
   int index_tp_theta_g;   /**< index value for theta of gammas */
   int index_tp_theta_b;   /**< index value for theta of baryons */
   int index_tp_theta_cdm; /**< index value for theta of cold dark matter */
   int index_tp_theta_fld;  /**< index value for theta of dark energy */
-  int index_tp_theta_scf;  /**< index value for theta of scalar field */  
+  int index_tp_phi_prime_scf;  /**< index value for theta of scalar field */  
   int index_tp_theta_ur; /**< index value for theta of ultra-relativistic neutrinos/relics */
   int index_tp_theta_ncdm1; /**< index value for theta of first non-cold dark matter species (e.g. massive neutrinos) */
   int * tp_size; /**< number of types tp_size[index_md] included in computation for each mode */
@@ -309,8 +309,8 @@ struct perturb_vector
   int index_pt_theta_cdm; /**< cdm velocity */
   int index_pt_delta_fld;  /**< dark energy density */
   int index_pt_theta_fld;  /**< dark energy velocity */
-  int index_pt_delta_scf;  /**< scalar field density */
-  int index_pt_theta_scf;  /**< scalar field velocity */  
+  int index_pt_phi_scf;  /**< scalar field density */
+  int index_pt_phi_prime_scf;  /**< scalar field velocity */  
   int index_pt_delta_ur; /**< density of ultra-relativistic neutrinos/relics */
   int index_pt_theta_ur; /**< velocity of ultra-relativistic neutrinos/relics */
   int index_pt_shear_ur; /**< shear of ultra-relativistic neutrinos/relics */

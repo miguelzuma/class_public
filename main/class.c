@@ -34,7 +34,6 @@ int main(int argc, char **argv) {
     return _FAILURE_;
   }
 
-  //now we do thermodynamics too
   if (thermodynamics_init(&pr,&ba,&th) == _FAILURE_) {
     printf("\n\nError in thermodynamics_init \n=>%s\n",th.error_message);
     return _FAILURE_;
@@ -46,13 +45,13 @@ int main(int argc, char **argv) {
     return _FAILURE_;
   }
   
-  //added in order to extract the background functions
-  if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
-    printf("\n\nError in output_init \n=>%s\n",op.error_message);
-    return _FAILURE_;
-  }    
-
-  return _SUCCESS_; // stop at the background_free  
+//   //added in order to extract the background functions
+//   if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
+//     printf("\n\nError in output_init \n=>%s\n",op.error_message);
+//     return _FAILURE_;
+//   }    
+// 
+//   return _SUCCESS_; // stop at the background_free  
   
   if (primordial_init(&pr,&pt,&pm) == _FAILURE_) {
     printf("\n\nError in primordial_init \n=>%s\n",pm.error_message);

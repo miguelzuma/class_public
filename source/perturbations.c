@@ -467,14 +467,14 @@ int perturb_indices_of_perturbs(
   ppt->has_source_delta_b = _FALSE_;
   ppt->has_source_delta_cdm = _FALSE_;
   ppt->has_source_delta_fld = _FALSE_;
-  ppt->has_source_delta_scf = _FALSE_;  //scalar field
+  ppt->has_source_phi_scf = _FALSE_;  //scalar field
   ppt->has_source_delta_ur = _FALSE_;
   ppt->has_source_delta_ncdm = _FALSE_;
   ppt->has_source_theta_g = _FALSE_;
   ppt->has_source_theta_b = _FALSE_;
   ppt->has_source_theta_cdm = _FALSE_;
   ppt->has_source_theta_fld = _FALSE_;
-  ppt->has_source_theta_scf = _FALSE_;  //scalar field
+  ppt->has_source_phi_prime_scf = _FALSE_;  //scalar field
   ppt->has_source_theta_ur = _FALSE_;
   ppt->has_source_theta_ncdm = _FALSE_;
 
@@ -540,7 +540,7 @@ int perturb_indices_of_perturbs(
           if (pba->has_fld == _TRUE_)
             ppt->has_source_delta_fld = _TRUE_;
 	  if (pba->has_scf == _TRUE_)
-            ppt->has_source_delta_scf = _TRUE_;
+            ppt->has_source_phi_scf = _TRUE_;
           if (pba->has_ur == _TRUE_)
             ppt->has_source_delta_ur = _TRUE_;
           if (pba->has_ncdm == _TRUE_)
@@ -556,7 +556,7 @@ int perturb_indices_of_perturbs(
           if (pba->has_fld == _TRUE_)
             ppt->has_source_theta_fld = _TRUE_;
 	  if (pba->has_scf == _TRUE_)
-            ppt->has_source_theta_scf = _TRUE_;
+            ppt->has_source_phi_prime_scf = _TRUE_;
           if (pba->has_ur == _TRUE_)
             ppt->has_source_theta_ur = _TRUE_;
           if (pba->has_ncdm == _TRUE_)
@@ -572,14 +572,14 @@ int perturb_indices_of_perturbs(
         class_define_index(ppt->index_tp_delta_b,    ppt->has_source_delta_b,   index_type,1);
         class_define_index(ppt->index_tp_delta_cdm,  ppt->has_source_delta_cdm, index_type,1);
         class_define_index(ppt->index_tp_delta_fld,  ppt->has_source_delta_fld, index_type,1);
-	class_define_index(ppt->index_tp_delta_scf,  ppt->has_source_delta_scf, index_type,1);
+	class_define_index(ppt->index_tp_phi_scf,    ppt->has_source_phi_scf,   index_type,1);
         class_define_index(ppt->index_tp_delta_ur,   ppt->has_source_delta_ur,  index_type,1);
         class_define_index(ppt->index_tp_delta_ncdm1,ppt->has_source_delta_ncdm,index_type,pba->N_ncdm);
         class_define_index(ppt->index_tp_theta_g,    ppt->has_source_theta_g,   index_type,1);
         class_define_index(ppt->index_tp_theta_b,    ppt->has_source_theta_b,   index_type,1);
         class_define_index(ppt->index_tp_theta_cdm,  ppt->has_source_theta_cdm, index_type,1);
         class_define_index(ppt->index_tp_theta_fld,  ppt->has_source_theta_fld, index_type,1);
-	class_define_index(ppt->index_tp_theta_scf,  ppt->has_source_theta_scf, index_type,1);
+	class_define_index(ppt->index_tp_phi_prime_scf,  ppt->has_source_phi_prime_scf, index_type,1);
         class_define_index(ppt->index_tp_theta_ur,   ppt->has_source_theta_ur,  index_type,1);
         class_define_index(ppt->index_tp_theta_ncdm1,ppt->has_source_theta_ncdm,index_type,pba->N_ncdm);
         ppt->tp_size[index_md] = index_type;
@@ -2363,8 +2363,8 @@ int perturb_vector_init(
       
       /* scalar field */    
 
-      class_define_index(ppv->index_pt_delta_scf,pba->has_scf,index_pt,1); /* scalar field density */
-      class_define_index(ppv->index_pt_theta_scf,pba->has_scf,index_pt,1); /* scalar field velocity */      
+      class_define_index(ppv->index_pt_phi_scf,pba->has_scf,index_pt,1); /* scalar field density */
+      class_define_index(ppv->index_pt_phi_prime_scf,pba->has_scf,index_pt,1); /* scalar field velocity */      
 
       /* ultra relativistic neutrinos */
 
@@ -2685,11 +2685,11 @@ int perturb_vector_init(
 
         if (pba->has_scf == _TRUE_) {
 	
-          ppv->y[ppv->index_pt_delta_scf] =
-            ppw->pv->y[ppw->pv->index_pt_delta_scf];
+          ppv->y[ppv->index_pt_phi_scf] =
+            ppw->pv->y[ppw->pv->index_pt_phi_scf];
 	
-          ppv->y[ppv->index_pt_theta_scf] =
-            ppw->pv->y[ppw->pv->index_pt_theta_scf];
+          ppv->y[ppv->index_pt_phi_prime_scf] =
+            ppw->pv->y[ppw->pv->index_pt_phi_prime_scf];
         }
       
         if (ppt->gauge == synchronous)
@@ -3268,13 +3268,26 @@ int perturb_initial_conditions(struct precision * ppr,
 	
         }
         
-        /* scalar field TODO: Implement the right initial conditions
-	   so far everything set to zero */
+        /* Canonical field (solving for the perturbations):
+	 * perturbations set to zero, they should reach the attractor soon enough.
+	 * TODO: Incorporate the attractor IC from 1004.5509
+	   delta_phi = -(a/k)^2/phi'(rho + p)theta 
+	   delta_phi_prime = a^2/phi' (delta_rho_phi + V'delta_phi)
+	   and assume theta, delta_rho as for perfect fluid 
+	   with c_s^2 = 1 and w = 1/3 (ASSUMES radiation TRACKING)
+	*/
         if (pba->has_scf == _TRUE_) {
 	
-          ppw->pv->y[ppw->pv->index_pt_delta_scf] = 0;
+          ppw->pv->y[ppw->pv->index_pt_phi_scf] = 0. ; // assume that it will reach attractor soon enough
+//           a*a/k/k/ppw->pvecback[pba->index_bg_phi_prime_scf] // (rho + p) factor missing?
+//           *k*ktau_three/4.*1./(4.-6.*(1./3.)+3.*1.) * (ppw->pvecback[pba->index_bg_rho_scf] + ppw->pvecback[pba->index_bg_p_scf])
+// 	  * ppr->curvature_ini * s2_squared;
 	
-          ppw->pv->y[ppw->pv->index_pt_theta_scf] = 0;
+          ppw->pv->y[ppw->pv->index_pt_phi_prime_scf] = 0. ;
+// 	  a*a/ppw->pvecback[pba->index_bg_phi_prime_scf] 
+//           *( - ktau_two/4.*(1.+1./3.)*(4.-3.*1.)/(4.-6.*(1/3.)+3.*1.)*ppw->pvecback[pba->index_bg_rho_scf] //delta_fld expression * rho_scf with the w = 1/3, c_s = 1
+// 	  - ppw->pvecback[pba->index_bg_dV_scf]*ppw->pv->y[ppw->pv->index_pt_phi_scf] //part proportional to delta_phi
+// 	  )* ppr->curvature_ini * s2_squared;
 	  
         } 
       
@@ -3486,10 +3499,10 @@ int perturb_initial_conditions(struct precision * ppr,
           ppw->pv->y[ppw->pv->index_pt_theta_fld] += k*k*alpha;
         } 
         
-        /* scalar field */
+        /* scalar field: check */
         if (pba->has_scf == _TRUE_) {
-          ppw->pv->y[ppw->pv->index_pt_delta_scf] += 0; // write the gauge transformation here
-          ppw->pv->y[ppw->pv->index_pt_theta_scf] += 0; // write the gauge transformation here
+          ppw->pv->y[ppw->pv->index_pt_phi_scf] += 0.; // The derivative is invariant! CHECK 
+          ppw->pv->y[ppw->pv->index_pt_phi_prime_scf] += 0.; // write the gauge transformation here?
         }         
 	
         if ((pba->has_ur == _TRUE_) || (pba->has_ncdm == _TRUE_)) {
@@ -4322,12 +4335,24 @@ int perturb_total_stress_energy(
     ppw->delta_p = ppw->delta_p + pba->cs2_fld * ppw->pvecback[pba->index_bg_rho_fld]*y[ppw->pv->index_pt_delta_fld]; 
   } 
   
-  /* scalar field contribution */
+  /* scalar field contribution TODO: check the energy contributions */
   if (pba->has_scf == _TRUE_) {
  
-    ppw->delta_rho += 0; 
-    ppw->rho_plus_p_theta += 0;
-    ppw->delta_p += 0; 
+//     printf(" drho % f ",ppw->delta_rho);
+    ppw->delta_rho += 0. ;
+//     ppw->pvecback[pba->index_bg_phi_prime_scf]/a2*y[ppw->pv->index_pt_phi_prime_scf] 
+//     + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
+//         printf(" drho % f \n",ppw->delta_rho);
+   
+    ppw->rho_plus_p_theta += 0.; 
+//     - k*k/a2*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf];
+    // factor (0*ppw->pvecback[pba->index_bg_rho_scf] + 0*ppw->pvecback[pba->index_bg_p_scf])?
+    
+    ppw->delta_p += 0. ;
+//     ppw->pvecback[pba->index_bg_phi_prime_scf]/a2*y[ppw->pv->index_pt_phi_prime_scf] 
+//     - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]
+    // + 3h //TODO: needs metric perturbation!
+    ; 
   }   
 
   /* ultra-relativistic neutrino/relics contribution */
@@ -4789,10 +4814,10 @@ int perturb_sources(
         _set_source_(ppt->index_tp_delta_fld) = y[ppw->pv->index_pt_delta_fld]; 
       }
       
-      /* delta_scf NOTE: consider writing as 
+      /* phi_scf NOTE: consider writing as 
          del_phi_scf & del_phi_prime_scf instead. */
-      if (ppt->has_source_delta_scf == _TRUE_) {
-        _set_source_(ppt->index_tp_delta_scf) = y[ppw->pv->index_pt_delta_scf]; 
+      if (ppt->has_source_phi_scf == _TRUE_) {
+        _set_source_(ppt->index_tp_phi_scf) = y[ppw->pv->index_pt_phi_scf]; 
       }      
 
       /* delta_ur */
@@ -4833,9 +4858,9 @@ int perturb_sources(
         _set_source_(ppt->index_tp_theta_fld) = y[ppw->pv->index_pt_theta_fld]; 
       }
       
-      /* theta_scf */
-      if (ppt->has_source_theta_scf == _TRUE_) {
-        _set_source_(ppt->index_tp_theta_scf) = y[ppw->pv->index_pt_theta_scf]; 
+      /* phi_prime_scf */
+      if (ppt->has_source_phi_prime_scf == _TRUE_) {
+        _set_source_(ppt->index_tp_phi_prime_scf) = y[ppw->pv->index_pt_phi_prime_scf]; 
       }      
 
       /* theta_ur */
@@ -5561,15 +5586,24 @@ int perturb_derivs(double tau,
         /** ---> background factors */
 	
 	// fill in if necessary
-
-        /** ---> fluid density */
-
-        dy[pv->index_pt_delta_scf] = 0; //TODO: write scalar field equation
 	
-        /** ---> fluid velocity */
+	class_test(ppt->gauge == newtonian,
+               pba->error_message,
+               "asked for scalar field AND Newtonian gauge. Not yet implemented");
+	  
 
-        dy[pv->index_pt_theta_scf] = 0; //TODO: write scalar field equation
-      
+        /** ---> field value */
+
+        dy[pv->index_pt_phi_scf] = 0 ;
+	//*y[pv->index_pt_phi_prime_scf]; //TODO: write scalar field equation
+	
+        /** ---> KG equation */
+
+        dy[pv->index_pt_phi_prime_scf] = 0 ;
+//         -( 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
+//         - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity) = -h'/2
+//         + (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf] ); //TODO: write scalar field equation
+     printf(" ok \n ");
       }      
     
       /** -> ultra-relativistic neutrino/relics (ur) */
