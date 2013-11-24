@@ -3269,7 +3269,7 @@ int perturb_initial_conditions(struct precision * ppr,
         }
         
         /* Canonical field (solving for the perturbations):
-	 * perturbations set to zero, they should reach the attractor soon enough.
+	 * initial perturbations set to zero, they should reach the attractor soon enough.
 	 * TODO: Incorporate the attractor IC from 1004.5509
 	   delta_phi = -(a/k)^2/phi'(rho + p)theta 
 	   delta_phi_prime = a^2/phi' (delta_rho_phi + V'delta_phi)
@@ -4339,20 +4339,19 @@ int perturb_total_stress_energy(
   if (pba->has_scf == _TRUE_) {
  
 //     printf(" drho % f ",ppw->delta_rho);
-    ppw->delta_rho += 0. ;
-//     ppw->pvecback[pba->index_bg_phi_prime_scf]/a2*y[ppw->pv->index_pt_phi_prime_scf] 
-//     + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
+    ppw->delta_rho +=  ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
+    + a2*ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
+    // old coefficient: /a2
 //         printf(" drho % f \n",ppw->delta_rho);
    
-    ppw->rho_plus_p_theta += 0.; 
-//     - k*k/a2*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf];
-    // factor (0*ppw->pvecback[pba->index_bg_rho_scf] + 0*ppw->pvecback[pba->index_bg_p_scf])?
+    ppw->rho_plus_p_theta +=  - k*k*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf];
+    // factor (ppw->pvecback[pba->index_bg_rho_scf] + ppw->pvecback[pba->index_bg_p_scf])?
+    // old coefficient /a2
     
-    ppw->delta_p += 0. ;
-//     ppw->pvecback[pba->index_bg_phi_prime_scf]/a2*y[ppw->pv->index_pt_phi_prime_scf] 
-//     - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]
-    // + 3h //TODO: needs metric perturbation!
-    ; 
+    ppw->delta_p +=  ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
+    - a2*ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf];
+    // + delta g^i_i(phi_dot^2/2 - a^2V) //TODO: needs metric perturbation!
+    // old coefficient /a2
   }   
 
   /* ultra-relativistic neutrino/relics contribution */
@@ -5597,7 +5596,7 @@ int perturb_derivs(double tau,
 
         dy[pv->index_pt_phi_scf] = y[pv->index_pt_phi_prime_scf]; //TODO: write scalar field equation
 	
-        /** ---> KG equation */
+        /** ---> Klein Gordon equation */
 
         dy[pv->index_pt_phi_prime_scf] =  -( 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
         - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity) = -h'/2
@@ -5818,6 +5817,8 @@ int perturb_derivs(double tau,
       if (ppt->gauge == synchronous) {
         
         dy[pv->index_pt_eta] = pvecmetric[ppw->index_mt_eta_prime];
+	
+	//MZ: consider evolving h, seems necessary for the pressure contribution of the scf in th synchronous gauge
 
       }
       
