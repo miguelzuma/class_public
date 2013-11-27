@@ -4335,23 +4335,17 @@ int perturb_total_stress_energy(
     ppw->delta_p = ppw->delta_p + pba->cs2_fld * ppw->pvecback[pba->index_bg_rho_fld]*y[ppw->pv->index_pt_delta_fld]; 
   } 
   
-  /* scalar field contribution TODO: check the energy contributions */
+  /* scalar field contribution TODO: check the velocity contribution */
   if (pba->has_scf == _TRUE_) {
  
-//     printf(" drho % f ",ppw->delta_rho);
-    ppw->delta_rho +=  ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
-    + a2*ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
-    // old coefficient: /a2
-//         printf(" drho % f \n",ppw->delta_rho);
+    ppw->delta_rho +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
+    + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
    
-    ppw->rho_plus_p_theta +=  - k*k*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf];
-    // factor (ppw->pvecback[pba->index_bg_rho_scf] + ppw->pvecback[pba->index_bg_p_scf])?
-    // old coefficient /a2
+    ppw->rho_plus_p_theta +=  - k*k/a2*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf];
     
-    ppw->delta_p +=  ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
-    - a2*ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf];
-    // + delta g^i_i(phi_dot^2/2 - a^2V) //TODO: needs metric perturbation!
-    // old coefficient /a2
+    ppw->delta_p +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
+    - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf];
+    
   }   
 
   /* ultra-relativistic neutrino/relics contribution */
@@ -5599,7 +5593,7 @@ int perturb_derivs(double tau,
         /** ---> Klein Gordon equation */
 
         dy[pv->index_pt_phi_prime_scf] =  -( 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
-        - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity) = -h'/2
+        - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity = -h'/2
         + (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf] ); //TODO: write scalar field equation
 
       }      
