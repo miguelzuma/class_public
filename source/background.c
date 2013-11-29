@@ -1590,8 +1590,8 @@ int background_solve(
     
     if (pba->has_scf == _TRUE_){    
       printf(" -> Omega_scf = %f, whished %f \n",pvecback[pba->index_bg_rho_scf]/pvecback[pba->index_bg_rho_crit], pba->Omega0_scf);     
-      printf(" parameters: lambda = %f,",
-	     pba->scf_V_param1);
+      printf(" parameters: lambda = %f, Omega_Lambda = %f ", 
+	     pba->scf_V_param1, pvecback[pba->index_bg_rho_lambda]/pvecback[pba->index_bg_rho_crit]);
       if (pba->phi_ini_scf !=1. || pba->phi_prime_ini_scf !=1.)
 	      printf(" phi_ini = %f, phi_prime_ini = %f (wrt attractor values)\n",
 		     pba->phi_ini_scf,pba->phi_prime_ini_scf);

@@ -549,7 +549,8 @@ int input_init(
     
     if(flag1==_FALSE_) {
       pba->scf_V_param1 = -sqrt(3./pba->Omega0_scf); //reproduces value today (if only matter!)
-      printf("lambda = %e determined from Omega0_scf (exp quint)\n", pba->scf_V_param1);    
+   //   printf("lambda = %e determined from Omega0_scf (exp quint)\n", pba->scf_V_param1);  
+   // NOTE: confusing, the tuning algorithm acts afterwards
     }else{
       pba->scf_V_param1 = param1;
     }

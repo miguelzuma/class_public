@@ -4341,7 +4341,8 @@ int perturb_total_stress_energy(
     ppw->delta_rho +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
     + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
    
-    ppw->rho_plus_p_theta +=  - k*k/a2*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf];
+    ppw->rho_plus_p_theta +=  k*k/a2*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf]; 
+    //TODO: positive in CMBeasy (
     
     ppw->delta_p +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
     - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf];
