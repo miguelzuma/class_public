@@ -4342,7 +4342,7 @@ int perturb_total_stress_energy(
     + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
    
     ppw->rho_plus_p_theta +=  k*k/a2*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf]; 
-    //TODO: positive in CMBeasy (
+    //TODO: positive in CMBeasy ( units are weird, for _fld ~ E^4*[theta], for _scf ~ E^5
     
     ppw->delta_p +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
     - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf];
@@ -5593,9 +5593,9 @@ int perturb_derivs(double tau,
 	
         /** ---> Klein Gordon equation */
 
-        dy[pv->index_pt_phi_prime_scf] =  -( 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
-        - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity = -h'/2
-        + (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf] ); //TODO: write scalar field equation
+        dy[pv->index_pt_phi_prime_scf] =  - 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
+        + metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity = -h'/2
+        - (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf] ); //TODO: write scalar field equation
 
       }      
     
