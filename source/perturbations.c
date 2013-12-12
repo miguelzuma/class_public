@@ -4335,14 +4335,14 @@ int perturb_total_stress_energy(
     ppw->delta_p = ppw->delta_p + pba->cs2_fld * ppw->pvecback[pba->index_bg_rho_fld]*y[ppw->pv->index_pt_delta_fld]; 
   } 
   
-  /* scalar field contribution TODO: check the velocity contribution */
+  /* scalar field contribution */
   if (pba->has_scf == _TRUE_) {
  
     ppw->delta_rho +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
     + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
    
-    ppw->rho_plus_p_theta +=  k*k/a2*y[ppw->pv->index_pt_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf]; 
-    //TODO: positive in CMBeasy ( units are weird, for _fld ~ E^4*[theta], for _scf ~ E^5
+    ppw->rho_plus_p_theta +=  k*k/a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf]; 
+    //checked
     
     ppw->delta_p +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
     - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf];
@@ -4356,6 +4356,8 @@ int perturb_total_stress_energy(
     ppw->rho_plus_p_theta = ppw->rho_plus_p_theta + 4./3.*ppw->pvecback[pba->index_bg_rho_ur]*theta_ur;
     ppw->rho_plus_p_shear = ppw->rho_plus_p_shear + 4./3.*ppw->pvecback[pba->index_bg_rho_ur]*shear_ur;
     ppw->delta_p += 1./3.*ppw->pvecback[pba->index_bg_rho_ur]*delta_ur;
+    
+   // printf(" has ur ");
   }
 
   /* non-cold dark matter contribution */
@@ -4808,8 +4810,7 @@ int perturb_sources(
         _set_source_(ppt->index_tp_delta_fld) = y[ppw->pv->index_pt_delta_fld]; 
       }
       
-      /* phi_scf NOTE: consider writing as 
-         del_phi_scf & del_phi_prime_scf instead. */
+      /* NOTE: what is this for??? */
       if (ppt->has_source_phi_scf == _TRUE_) {
         _set_source_(ppt->index_tp_phi_scf) = y[ppw->pv->index_pt_phi_scf]; 
       }      
@@ -5589,13 +5590,13 @@ int perturb_derivs(double tau,
 
         /** ---> field value */
 
-        dy[pv->index_pt_phi_scf] = y[pv->index_pt_phi_prime_scf]; //TODO: write scalar field equation
+        dy[pv->index_pt_phi_scf] = y[pv->index_pt_phi_prime_scf]; 
 	
         /** ---> Klein Gordon equation */
 
         dy[pv->index_pt_phi_prime_scf] =  - 2.*a_prime_over_a*y[pv->index_pt_phi_prime_scf] 
-        + metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity = -h'/2
-        - (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf] ); //TODO: write scalar field equation
+        - metric_continuity*pvecback[pba->index_bg_phi_prime_scf] //  metric_continuity = h'/2
+        - (k2 + a2*pvecback[pba->index_bg_ddV_scf])*y[pv->index_pt_phi_scf]; //checked
 
       }      
     
