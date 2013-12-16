@@ -476,31 +476,6 @@ int input_init(
   if (pba->K > 0.) pba->sgnK = 1;
   else if (pba->K < 0.) pba->sgnK = -1;
 
-//   //temporarily removed the previous assignement structure and deactivated _fld
-//   /* Omega_0_lambda (cosmological constant), Omega0_fld (dark energy fluid) */
-//   class_call(parser_read_double(pfc,"Omega_Lambda",&param1,&flag1,errmsg),
-//              errmsg,
-//              errmsg);
-//   class_call(parser_read_double(pfc,"Omega_fld",&param2,&flag2,errmsg),
-//              errmsg,
-//              errmsg);
-//   class_test((flag1 == _TRUE_) && (flag2 == _TRUE_),
-//              errmsg,
-//              "In input file, you can enter only two out of Omega_Lambda, Omega_de, Omega_k, the third one is inferred");
-// 
-//   if ((flag1 == _FALSE_) && (flag2 == _FALSE_)) {	
-//     pba->Omega0_lambda = 1.-pba->Omega0_k-pba->Omega0_g-pba->Omega0_ur-pba->Omega0_b-pba->Omega0_cdm-pba->Omega0_ncdm_tot;
-//   }
-//   else {
-//     if (flag1 == _TRUE_) {
-//       pba->Omega0_lambda= param1;
-//       pba->Omega0_fld = 1. - pba->Omega0_k - param1 - Omega_tot;
-//     }
-//     if (flag2 == _TRUE_) {
-//       pba->Omega0_lambda= 1. - pba->Omega0_k - param2 - Omega_tot;
-//       pba->Omega0_fld = param2;
-//     }
-//   }
   
   /* Omega_0_lambda (cosmological constant), Omega0_fld (dark energy fluid) */
   class_call(parser_read_double(pfc,"Omega_Lambda",&param1,&flag1,errmsg),
@@ -510,31 +485,50 @@ int input_init(
              errmsg,
              errmsg);
   
-  //MZ: changed fluid->scalar, added error message if fluid is casted
   class_call(parser_read_double(pfc,"Omega_fld",&param3,&flag3,errmsg),
              errmsg,
-             errmsg);
-  class_test(flag3 == _TRUE_,
-             errmsg,
-             "You introduced an effective fluid Omega_fld. This feature has been temporarily disabled to introduce a dynamical scalar field, sorry."); 
+             errmsg); 
   
-  class_test((flag1 == _TRUE_) && (flag2 == _TRUE_),
+  // one DE component has to be left unspecified
+  class_test((flag1 == _TRUE_) && (flag2 == _TRUE_) && (flag3 == _TRUE_),
              errmsg,
-             "In input file, you can enter only two out of Omega_Lambda, Omega_scf (scalar field), Omega_k, the third one is inferred");
+             "In input file, you can enter only two out of Omega_Lambda, Omega_scf (scalar field), Omega_fld (parameterized fluid), the third one is inferred");
 
-  if ((flag1 == _FALSE_) && (flag2 == _FALSE_)) {	
-    pba->Omega0_lambda = 1.+pba->Omega0_k-pba->Omega0_g-pba->Omega0_ur-pba->Omega0_b-pba->Omega0_cdm-pba->Omega0_ncdm_tot;
-  }
-  else {
-    if (flag1 == _TRUE_) {
-      pba->Omega0_lambda= param1;
-      pba->Omega0_scf = 1. + pba->Omega0_k - param1 - Omega_tot;
+  
+    // If a cosmological constant is specified
+    if (flag1 == _TRUE_){
+      pba->Omega0_lambda = param1;
+      printf(" Lambda given \n ");
+      if (flag2 == _TRUE_){
+	pba->Omega0_scf = param2;
+	pba->Omega0_fld = 1. - pba->Omega0_k - param1 - param2 - Omega_tot;
+	printf(" scf given \n ");
+      }
+      else if (flag3 == _TRUE_){
+	pba->Omega0_fld = param3;
+	pba->Omega0_scf = 1. - pba->Omega0_k - param1 - param3 - Omega_tot;
+	printf(" fld given \n ");
+      }
+      else 
+	class_test((flag2 == _FALSE_) && (flag3 == _FALSE_),
+             errmsg,
+             "Omega0_lambda = %f, but not Omega_scf (scalar field), Omega_fld (parameterized fluid) to fill up the universe. You can either unspecify Omega0_lambda to get its value automatically or set one of the other components to zero",pba->Omega0_lambda);
     }
-    if (flag2 == _TRUE_) {
-      pba->Omega0_scf = param2; //probably       
-      pba->Omega0_lambda= 1. + pba->Omega0_k - param2 - Omega_tot;
+    else {
+      // NO cosmological constant specified, fill up with Lambda
+	if (flag1 == _FALSE_) {
+	  if (flag2 == _TRUE_)
+	    pba->Omega0_scf = param2;
+	  if (flag3 == _TRUE_)
+	    pba->Omega0_fld = param3;
+	
+	  pba->Omega0_lambda = 1. - pba->Omega0_k - param2 - param3 - Omega_tot;
+      
+      printf(" no Lambda given \n ");
     }
   }
+  // print the results of the dark sector
+  printf("Omega0_lambda = %f Omega0_fld = %f, Omega0_scf = %f \n",pba->Omega0_lambda, pba->Omega0_fld, pba->Omega0_scf);
   
   if (pba->Omega0_scf != 0.) {
     
@@ -548,9 +542,7 @@ int input_init(
              errmsg);
     
     if(flag1==_FALSE_) {
-      pba->scf_V_param1 = -sqrt(3./pba->Omega0_scf); //reproduces value today (if only matter!)
-   //   printf("lambda = %e determined from Omega0_scf (exp quint)\n", pba->scf_V_param1);  
-   // NOTE: confusing, the tuning algorithm acts afterwards
+      pba->scf_V_param1 = -sqrt(3./pba->Omega0_scf); //reproduces value today if only matter. Will be erased if tuning algorithm is called
     }else{
       pba->scf_V_param1 = param1;
     }
