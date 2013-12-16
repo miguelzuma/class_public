@@ -497,17 +497,16 @@ int input_init(
   
     // If a cosmological constant is specified
     if (flag1 == _TRUE_){
+      
       pba->Omega0_lambda = param1;
-      printf(" Lambda given \n ");
+    
       if (flag2 == _TRUE_){
 	pba->Omega0_scf = param2;
 	pba->Omega0_fld = 1. - pba->Omega0_k - param1 - param2 - Omega_tot;
-	printf(" scf given \n ");
       }
       else if (flag3 == _TRUE_){
 	pba->Omega0_fld = param3;
 	pba->Omega0_scf = 1. - pba->Omega0_k - param1 - param3 - Omega_tot;
-	printf(" fld given \n ");
       }
       else 
 	class_test((flag2 == _FALSE_) && (flag3 == _FALSE_),
@@ -523,12 +522,10 @@ int input_init(
 	    pba->Omega0_fld = param3;
 	
 	  pba->Omega0_lambda = 1. - pba->Omega0_k - param2 - param3 - Omega_tot;
-      
-      printf(" no Lambda given \n ");
     }
   }
-  // print the results of the dark sector
-  printf("Omega0_lambda = %f Omega0_fld = %f, Omega0_scf = %f \n",pba->Omega0_lambda, pba->Omega0_fld, pba->Omega0_scf);
+  // print the results of the dark sector, useful for debugging
+//  printf("Omega0_lambda = %f Omega0_fld = %f, Omega0_scf = %f \n",pba->Omega0_lambda, pba->Omega0_fld, pba->Omega0_scf);
   
   if (pba->Omega0_scf != 0.) {
     
