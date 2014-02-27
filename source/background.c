@@ -1809,7 +1809,6 @@ int background_derivs(
 
 }
 
-
 /**
  * Scalar field potential and its derivatives with respect to the field _scf
  * Right now exponential: \f$ V(\phi) = M_p^4\exp(-\lambda \phi) \f$
@@ -1821,88 +1820,24 @@ int background_derivs(
  * Numerical derivatives may further serve as a consistency check.
  */
 
-/** For Albrecht & Skordis model: 9908085
- * V = V_p_scf*V_e_scf
- * V_e =  M_p^4\exp(-\lambda \phi) (exponential)
- * V_p = (\phi - B)^\alpha + A (polynomial bump)
- */
-
-double V_e_scf(
+double V_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
   return  exp(-pba->scf_V_param1*phi);
 }
 
-double dV_e_scf(
+double dV_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
   return -pba->scf_V_param1*V_scf(pba,phi);
 }
 
-double ddV_e_scf(
+double ddV_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
   return pow(-pba->scf_V_param1,2)*V_scf(pba,phi);
 }
-
-
-/** parameters and functions for the polynomial coefficient
- * V_p = (\phi - B)^\alpha + A (polynomial bump)
- * double alpha_scf = 2;
- * double B_scf = 34.8;
- * double A_scf = 0.01; (values for their Figure 2)
- */
-
-double alpha_scf = 0; 
-double B_scf = 34.8;
-double A_scf = 0; 
-
-double V_p_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return  pow(phi - B_scf,alpha_scf) + A_scf;
-}
-
-double dV_p_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return  alpha_scf*pow(phi - B_scf,alpha_scf-1);
-}
-
-double ddV_p_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return alpha_scf*(alpha_scf - 1)*pow(phi - B_scf,alpha_scf-2);
-}
-
-/** now the overall potential
- */
-
-double V_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return  V_e_scf(pba,phi)*V_p_scf(pba,phi);
-}
-
-double dV_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return dV_e_scf(pba,phi)*V_p_scf(pba,phi) + V_e_scf(pba,phi)*dV_p_scf(pba,phi);
-}
-
-double ddV_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return ddV_e_scf(pba,phi)*V_p_scf(pba,phi) + 2*dV_e_scf(pba,phi)*dV_p_scf(pba,phi) + V_e_scf(pba,phi)*ddV_p_scf(pba,phi);
-}
-
 
