@@ -66,8 +66,10 @@ struct background
   double Omega0_scf; /**< \f$ \Omega_{0_\phi} \f$ : scalar field energy fraction */
   double phi_ini_scf; /**< \f$ \phi(t_0) \f$ : scalar field initial value */
   double phi_prime_ini_scf; /**< \f$ d\phi(t_0)/d\tau \f$ : scalar field initial derivative wrt conformal time */
-  double scf_V_param1; /**< \f$ V'/V \f$ : scalar field parameter1, currently exponential potential slope */
-  double scf_V_param2; /**< \f$ V_0 \f$ : scalar field parameter2, currently UNUSED */   
+  double scf_lambda; /**< \f$ \lambda \f$ : scalar field exponential potential slope */
+  double scf_alpha;  /**< \f$ \alpha \f$ : Albrecht-Skordis polynomial slope */   
+  double scf_B; /**< \f$ \alpha \f$ : Albrecht-Skordis field shift */   
+  double scf_A; /**< \f$ \alpha \f$ : Albrecht-Skordis offset */   
 
   int N_ncdm;                            /**< Number of distinguishabe ncdm species */
   double * M_ncdm;                       /**<vector of masses of non-cold relic: 

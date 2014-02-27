@@ -1591,7 +1591,7 @@ int background_solve(
     if (pba->has_scf == _TRUE_){    
       printf(" -> Omega_scf = %f, whished %f \n",pvecback[pba->index_bg_rho_scf]/pvecback[pba->index_bg_rho_crit], pba->Omega0_scf);     
       printf(" parameters: lambda = %f, Omega_Lambda = %f ", 
-	     pba->scf_V_param1, pvecback[pba->index_bg_rho_lambda]/pvecback[pba->index_bg_rho_crit]);
+	     pba->scf_lambda, pvecback[pba->index_bg_rho_lambda]/pvecback[pba->index_bg_rho_crit]);
       if (pba->phi_ini_scf !=1. || pba->phi_prime_ini_scf !=1.)
 	      printf(" phi_ini = %f, phi_prime_ini = %f (wrt attractor values)\n",
 		     pba->phi_ini_scf,pba->phi_prime_ini_scf);
@@ -1649,7 +1649,7 @@ int background_initial_conditions(
      MZ: added scalar field with phi_scf & phi_prime_scf such that there is no contribution */
     class_call(background_functions(pba,
 				    a,
-				    pba->scf_V_param1*100,//tiny potential
+				    pba->scf_lambda*100,//tiny potential
 				    0, //zero kinetic energy
 				    pba->long_info, //so I get rho_crit as well
 				    pvecback),
@@ -1708,9 +1708,9 @@ int background_initial_conditions(
    * -is rho_ur all there is early on?
    */
   if(pba->has_scf){
-    pvecback_integration[pba->index_bi_phi_scf] = -1/pba->scf_V_param1*
+    pvecback_integration[pba->index_bi_phi_scf] = -1/pba->scf_lambda*
     log((pvecback[pba->index_bg_rho_g]+pvecback[pba->index_bg_rho_ur])*
-    4./(3*pow(pba->scf_V_param1,2)-12))*pba->phi_ini_scf;
+    4./(3*pow(pba->scf_lambda,2)-12))*pba->phi_ini_scf;
     
 //     printf(" rho_crit,ur,g = %e, %e, %e ",pvecback[pba->index_bg_rho_crit],pvecback[pba->index_bg_rho_ur],pvecback[pba->index_bg_rho_g]);
     
@@ -1831,54 +1831,50 @@ double V_e_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
-  return  exp(-pba->scf_V_param1*phi);
+  return  exp(-pba->scf_lambda*phi);
 }
 
 double dV_e_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
-  return -pba->scf_V_param1*V_scf(pba,phi);
+  return -pba->scf_lambda*V_scf(pba,phi);
 }
 
 double ddV_e_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
-  return pow(-pba->scf_V_param1,2)*V_scf(pba,phi);
+  return pow(-pba->scf_lambda,2)*V_scf(pba,phi);
 }
 
 
 /** parameters and functions for the polynomial coefficient
  * V_p = (\phi - B)^\alpha + A (polynomial bump)
- * double alpha_scf = 2;
- * double B_scf = 34.8;
- * double A_scf = 0.01; (values for their Figure 2)
+ * double scf_alpha = 2;
+ * double scf_B = 34.8;
+ * double scf_A = 0.01; (values for their Figure 2)
  */
-
-double alpha_scf = 0; 
-double B_scf = 34.8;
-double A_scf = 0; 
 
 double V_p_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
-  return  pow(phi - B_scf,alpha_scf) + A_scf;
+  return  pow(phi - pba->scf_B,  pba->scf_alpha) +  pba->scf_A;
 }
 
 double dV_p_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
-  return  alpha_scf*pow(phi - B_scf,alpha_scf-1);
+  return   pba->scf_alpha*pow(phi -  pba->scf_B,  pba->scf_alpha - 1);
 }
 
 double ddV_p_scf(
 	      struct background *pba,
 	      double phi
 	    ) {
-  return alpha_scf*(alpha_scf - 1)*pow(phi - B_scf,alpha_scf-2);
+  return  pba->scf_alpha*(pba->scf_alpha - 1)*pow(phi -  pba->scf_B,  pba->scf_alpha - 2);
 }
 
 /** now the overall potential
