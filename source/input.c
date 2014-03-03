@@ -545,7 +545,7 @@ int input_init(
       pba->scf_lambda = param1;
     }
     
-    if (abs(pba->scf_lambda) <3.) printf(" lambda = %e <3 won't be tracking (exp quint)\n",pba->scf_lambda);
+    if (abs(pba->scf_lambda) <3.) printf(" lambda = %e <3 won't be tracking if exp quint (unless tuned)\n",pba->scf_lambda);
       
     // polynomial exponent
     class_call(parser_read_double(pfc,"scf_alpha",&param2,&flag2,errmsg),
