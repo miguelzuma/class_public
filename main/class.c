@@ -33,7 +33,18 @@ int main(int argc, char **argv) {
     printf("\n\nError running background_init \n=>%s\n",ba.error_message);
     return _FAILURE_;
   }
-
+  
+  //added in order to extract the background functions and avoid the thermo
+  // there seems to be a problem with thermo in the Albrecht Skordis model
+  if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
+    printf("\n\nError in output_init \n=>%s\n",op.error_message);
+    return _FAILURE_;
+  }    
+  
+  return _SUCCESS_; // stop at the background_free  
+  
+  
+  
   if (thermodynamics_init(&pr,&ba,&th) == _FAILURE_) {
     printf("\n\nError in thermodynamics_init \n=>%s\n",th.error_message);
     return _FAILURE_;
@@ -43,15 +54,7 @@ int main(int argc, char **argv) {
   if (perturb_init(&pr,&ba,&th,&pt) == _FAILURE_) {
     printf("\n\nError in perturb_init \n=>%s\n",pt.error_message);
     return _FAILURE_;
-  }
-  
-//   //added in order to extract the background functions
-//   if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
-//     printf("\n\nError in output_init \n=>%s\n",op.error_message);
-//     return _FAILURE_;
-//   }    
-// 
-//   return _SUCCESS_; // stop at the background_free  
+  }  
   
   if (primordial_init(&pr,&pt,&pm) == _FAILURE_) {
     printf("\n\nError in primordial_init \n=>%s\n",pm.error_message);
@@ -139,10 +142,14 @@ int tune_scalar_field_parameters(
     printf(" no scalar field, skipping tune algorithm \n");
     return _SUCCESS_; 
   }
+  
+  /** The parameter to be tuned can be defined as a preprocessor variable */
 
+#define _TUNE_PARAM_ pba->scf_B
+  
   int iter=0, maximum_iter = 100; //maximum number of iterations
-  double scf_lambda_min = -1;
-  double scf_lambda_max = 10*pba->scf_V_param1;
+  double scf_TUNE_PARAM_min = -10*_TUNE_PARAM_; //_TUNE_PARAM_
+  double scf_TUNE_PARAM_max = 10*_TUNE_PARAM_;
   double Omega0_scf_try = 0.;//absurd value
   double tolerance = 1e-4; //Need to pass a preccision argument
 
@@ -150,12 +157,12 @@ int tune_scalar_field_parameters(
   
   while (fabs(pba->Omega0_scf-Omega0_scf_try) > tolerance){
     
-    pba->scf_V_param1=0.5*(scf_lambda_max+scf_lambda_min);
+    _TUNE_PARAM_=0.5*(scf_TUNE_PARAM_max+scf_TUNE_PARAM_min);
     
- //   printf(" Tuning lambda = %e, Omega_0_try = %f \n",pba->scf_V_param1, Omega0_scf_try);
+    printf(" _TUNE_PARAM_ = %e, Omega_0_try = %f \n",_TUNE_PARAM_, Omega0_scf_try);
     
     if (background_init(ppr,pba) == _FAILURE_) {
-      printf("\n\nError running background_init with exp_quint, lambda = %e \n=>%s\n",pba->scf_V_param1,pba->error_message);
+      printf("\n\nError running background_init with exp_quint, lambda = %e \n=>%s\n",_TUNE_PARAM_,pba->error_message);
       /*changed from pba.error_message to pba->error_message*/
       return _FAILURE_;
     }
@@ -166,10 +173,10 @@ int tune_scalar_field_parameters(
     /* this line returns the real value of Omega0_scf infered from the real evolution of the fields */
     
     if (Omega0_scf_try > pba->Omega0_scf)
-      scf_lambda_min = pba->scf_V_param1;
+      scf_TUNE_PARAM_min = _TUNE_PARAM_;
     else
-      scf_lambda_max = pba->scf_V_param1;
-    /* note: the above four lines will find the correct value by bisection only if Omega0_scf_try is a monotonous function of sc_lambda. I hope that this is the case for the model we are after. It might not be the case in general. Then, one needs to think more. E.g. maybe one should pass values of scf_lambda_min and scf_lambda_max chosen not by chance, but knowning that they define the interval inside which the function Omega0_scf(scf_lambda) is monotonous. Moreover, depending on the fact that the function Omega0_scf(scf_lambda) is growing or decreasing, you may need to invert "min" and "max" inside the four lines above: I let you think about it. 
+      scf_TUNE_PARAM_max = _TUNE_PARAM_;
+    /* note: the above four lines will find the correct value by bisection only if Omega0_scf_try is a monotonous function of sc_lambda. I hope that this is the case for the model we are after. It might not be the case in general. Then, one needs to think more. E.g. maybe one should pass values of scf_TUNE_PARAM_min and scf_TUNE_PARAM_max chosen not by chance, but knowning that they define the interval inside which the function Omega0_scf(scf_lambda) is monotonous. Moreover, depending on the fact that the function Omega0_scf(scf_lambda) is growing or decreasing, you may need to invert "min" and "max" inside the four lines above: I let you think about it. 
     MZ: changed min/max
      */
     

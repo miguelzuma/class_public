@@ -534,25 +534,37 @@ int input_init(
     class_read_double("initial_phi_scf",pba->phi_ini_scf);
     class_read_double("initial_phi_prime_scf",pba->phi_prime_ini_scf);
     
-    class_call(parser_read_double(pfc,"parameter1_scf",&param1,&flag1,errmsg),
+    class_call(parser_read_double(pfc,"scf_lambda",&param1,&flag1,errmsg),
              errmsg,
              errmsg);
     
+    // Slope of the exponential potential
     if(flag1==_FALSE_) {
-      pba->scf_V_param1 = -sqrt(3./pba->Omega0_scf); //reproduces value today if only matter. Will be erased if tuning algorithm is called
+      pba->scf_lambda = -sqrt(3./pba->Omega0_scf); //reproduces value today if only matter. Will be erased if tuning algorithm is called
     }else{
-      pba->scf_V_param1 = param1;
+      pba->scf_lambda = param1;
     }
     
-    if (abs(pba->scf_V_param1) <3.) printf(" lambda = %e <3 won't be tracking (exp quint)\n",pba->scf_V_param1);
+    if (abs(pba->scf_lambda) <3.) printf(" lambda = %e <3 won't be tracking if exp quint (unless tuned)\n",pba->scf_lambda);
       
-    
-    class_call(parser_read_double(pfc,"parameter2_scf",&param2,&flag2,errmsg),
+    // polynomial exponent
+    class_call(parser_read_double(pfc,"scf_alpha",&param2,&flag2,errmsg),
              errmsg,
              errmsg);
-    class_test(flag2 == _TRUE_,
+    if (flag2 == _TRUE_) pba->scf_alpha = param2;
+    
+    // polynomial shift
+    class_call(parser_read_double(pfc,"scf_B",&param2,&flag2,errmsg),
              errmsg,
-             "So far we have only exponential quintessence. You can't introduce further potential parameters");
+             errmsg);
+    if (flag2 == _TRUE_) pba->scf_B = param2;
+    
+    // polynomial offset
+    class_call(parser_read_double(pfc,"scf_A",&param2,&flag2,errmsg),
+             errmsg,
+             errmsg);
+    if (flag2 == _TRUE_) pba->scf_A = param2;    
+    
   }  
 
   if (pba->Omega0_fld != 0.) {
@@ -1855,8 +1867,10 @@ int input_default_params(
   pba->ncdm_psd_files = NULL;
   
   pba->Omega0_scf = 0.; /* Scalar field defaults */
-  pba->scf_V_param1 = -10.;
-  pba->scf_V_param2 = 1.;
+  pba->scf_lambda = -10.; /*exponential slope parameter */
+  pba->scf_alpha = 0; /*Albrecht-Skordis polynomial bump defaults */
+  pba->scf_A = 0;
+  pba->scf_B = 0;
   //MZ: initial conditions are as multiplicative factors of the radiation attractor values  
   pba->phi_ini_scf = 1;
   pba->phi_prime_ini_scf = 1;    

@@ -5,11 +5,11 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 
+    
 base = './output'
-class1= np.genfromtxt(base+'/expquint_background.dat', comments='#',skip_header=3)
+class1= np.genfromtxt(base+'/ASquint_background.dat', comments='#',skip_header=3)
 
-
-#print class1
+print class1
 
 #class2= read_data_lines(base+'class/scf1_pk.dat')
 
@@ -32,16 +32,15 @@ plt.ylabel("$\\rho$",
            fontsize=fontsizeq)
 plt.yticks(fontsize=fontsize)
 plt.xticks([0,2,4,6,8,10],fontsize=fontsize)
+fig.suptitle("Albrecht-Skordis quintessence (background)",fontsize=fontsizeq)
 
-fig.suptitle("exponential quint ($\\lambda \\to \\Omega_\\phi = 0.7$)",fontsize=fontsizeq)
 
-
+plt.plot(class1[::,0],class1[::,8],color='k',
+         linewidth=2,linestyle='-',label="$\\rho_\\gamma$")
 plt.plot(class1[::,0],class1[::,13],color='g',
         linewidth=2,linestyle='-',label="$\\rho_\\phi$")
-plt.plot(class1[::,0],class1[::,10],color='k',
-         linewidth=2,linestyle='-',label="$\\rho_{CDM}$")
-plt.plot(class1[::,0],class1[::,8],color='r',
-         linewidth=2,linestyle='--',label="$\\rho_\\gamma$")
+plt.plot(class1[::,0],class1[::,10],color='r',
+         linewidth=2,linestyle='--',label="$\\rho_{CDM}$")
 
 #legend
 plt.legend(loc="upper left",numpoints=1,
@@ -59,7 +58,6 @@ for line in ax.get_xticklines()+ax.get_yticklines():
     line.set_markeredgewidth(2)
     line.set_markersize(8)
 
-plt.savefig(base+"exp_quint.pdf",bbox_inches='tight')
-
+plt.savefig(base+"AS_quint0.pdf",bbox_inches='tight')
 
 plt.show()
