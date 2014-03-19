@@ -1841,3 +1841,5 @@ double ddV_scf(
 	    ) {
   return pow(-pba->scf_V_param1,2)*V_scf(pba,phi);
 }
+
+//exponential class from ITP
