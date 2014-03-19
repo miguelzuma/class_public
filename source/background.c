@@ -1901,4 +1901,4 @@ double ddV_scf(
   return ddV_e_scf(pba,phi)*V_p_scf(pba,phi) + 2*dV_e_scf(pba,phi)*dV_p_scf(pba,phi) + V_e_scf(pba,phi)*ddV_p_scf(pba,phi);
 }
 
-
+// check, gives segmentation fault at thermodynamics or perturbations

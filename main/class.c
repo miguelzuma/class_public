@@ -36,20 +36,15 @@ int main(int argc, char **argv) {
   
   //added in order to extract the background functions and avoid the thermo
   // there seems to be a problem with thermo in the Albrecht Skordis model
-  if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
-    printf("\n\nError in output_init \n=>%s\n",op.error_message);
-    return _FAILURE_;
-  }    
-  
-//  return _SUCCESS_; // stop at the background_free  
-  
-  
+//  if (output_init(&ba,&pt,&sp,&nl,&le,&op) == _FAILURE_) {
+//    printf("\n\nError in output_init \n=>%s\n",op.error_message);
+//    return _FAILURE_;
+//  }    
   
   if (thermodynamics_init(&pr,&ba,&th) == _FAILURE_) {
     printf("\n\nError in thermodynamics_init \n=>%s\n",th.error_message);
     return _FAILURE_;
   }
-  
 
   if (perturb_init(&pr,&ba,&th,&pt) == _FAILURE_) {
     printf("\n\nError in perturb_init \n=>%s\n",pt.error_message);
