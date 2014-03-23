@@ -1826,3 +1826,77 @@ int background_derivs(
  * V_p = (\phi - B)^\alpha + A (polynomial bump)
  */
 
+
+double V_e_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return  exp(-pba->scf_lambda*phi);
+}
+
+double dV_e_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return -pba->scf_lambda*V_scf(pba,phi);
+}
+
+double ddV_e_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return pow(-pba->scf_lambda,2)*V_scf(pba,phi);
+}
+
+
+/** parameters and functions for the polynomial coefficient
+ * V_p = (\phi - B)^\alpha + A (polynomial bump)
+ * double scf_alpha = 2;
+ * double scf_B = 34.8;
+ * double scf_A = 0.01; (values for their Figure 2)
+ */
+
+double V_p_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return  pow(phi - pba->scf_B,  pba->scf_alpha) +  pba->scf_A;
+}
+
+double dV_p_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return   pba->scf_alpha*pow(phi -  pba->scf_B,  pba->scf_alpha - 1);
+}
+
+double ddV_p_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return  pba->scf_alpha*(pba->scf_alpha - 1)*pow(phi -  pba->scf_B,  pba->scf_alpha - 2);
+}
+
+/** now the overall potential V = V_p*V_e
+ */
+
+double V_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return  V_e_scf(pba,phi)*V_p_scf(pba,phi);
+}
+
+double dV_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return dV_e_scf(pba,phi)*V_p_scf(pba,phi) + V_e_scf(pba,phi)*dV_p_scf(pba,phi);
+}
+
+double ddV_scf(
+	      struct background *pba,
+	      double phi
+	    ) {
+  return ddV_e_scf(pba,phi)*V_p_scf(pba,phi) + 2*dV_e_scf(pba,phi)*dV_p_scf(pba,phi) + V_e_scf(pba,phi)*ddV_p_scf(pba,phi);
+}
