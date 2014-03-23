@@ -152,7 +152,7 @@ int tune_scalar_field_parameters(
   
   while (fabs(pba->Omega0_scf-Omega0_scf_try) > tolerance){
     
-    _TUNE_PARAM_=0.5*(scf_TUNE_PARAM_max+scf_TUNE_PARAM_min);
+    _TUNE_PARAM_=0.5*(scf_TUNE_PARAM_max + scf_TUNE_PARAM_min);
     
     printf(" _TUNE_PARAM_ = %e, Omega_0_try = %f \n",_TUNE_PARAM_, Omega0_scf_try);
     

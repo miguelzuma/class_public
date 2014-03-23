@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 
 
 base = './output'
-class1= np.genfromtxt(base+'/ASquint_background.dat', comments='#',skip_header=3)
+class1= np.genfromtxt(base+'/expquint_background.dat', comments='#',skip_header=3)
+
 
 #print class1
 
@@ -31,7 +32,8 @@ plt.ylabel("$\\rho$",
            fontsize=fontsizeq)
 plt.yticks(fontsize=fontsize)
 plt.xticks([0,2,4,6,8,10],fontsize=fontsize)
-fig.suptitle("Albrecht-Skordis quint ($\\lambda = 8, \\alpha = 2, A = 0.01, B \\to \\Omega_\\phi = 0.7$)",fontsize=fontsizeq)
+
+fig.suptitle("exponential quint ($\\lambda \\to \\Omega_\\phi = 0.7$)",fontsize=fontsizeq)
 
 
 plt.plot(class1[::,0],class1[::,13],color='g',
@@ -57,6 +59,7 @@ for line in ax.get_xticklines()+ax.get_yticklines():
     line.set_markeredgewidth(2)
     line.set_markersize(8)
 
-plt.savefig(base+"AS_quint.pdf",bbox_inches='tight')
+plt.savefig(base+"exp_quint.pdf",bbox_inches='tight')
+
 
 plt.show()
