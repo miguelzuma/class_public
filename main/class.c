@@ -143,7 +143,7 @@ int tune_scalar_field_parameters(
 #define _TUNE_PARAM_ pba->scf_B
   
   int iter=0, maximum_iter = 100; //maximum number of iterations
-  double scf_TUNE_PARAM_min = -10*_TUNE_PARAM_; //_TUNE_PARAM_
+  double scf_TUNE_PARAM_min = -11*_TUNE_PARAM_; //_TUNE_PARAM_
   double scf_TUNE_PARAM_max = 10*_TUNE_PARAM_;
   double Omega0_scf_try = 0.;//absurd value
   double tolerance = 1e-4; //Need to pass a preccision argument
