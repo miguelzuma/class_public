@@ -1826,26 +1826,3 @@ int background_derivs(
  * V_p = (\phi - B)^\alpha + A (polynomial bump)
  */
 
-double V_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return  exp(-pba->scf_V_param1*phi);
-}
-
-double dV_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return -pba->scf_V_param1*V_scf(pba,phi);
-}
-
-double ddV_scf(
-	      struct background *pba,
-	      double phi
-	    ) {
-  return pow(-pba->scf_V_param1,2)*V_scf(pba,phi);
-}
-
-
-
