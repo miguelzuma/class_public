@@ -69,13 +69,15 @@ endif
 
 TOOLS = growTable.o dei_rkck.o sparse.o evolver_rkck.o  evolver_ndf15.o arrays.o parser.o quadrature.o hyperspherical.o common.o
 
-SOURCE = input.o background.o thermodynamics.o perturbations.o transfer.o primordial.o spectra.o trg.o nonlinear.o lensing.o
+SOURCE = input.o background.o quintessence.o thermodynamics.o perturbations.o transfer.o primordial.o spectra.o trg.o nonlinear.o lensing.o
 
 INPUT = input.o
 
 PRECISION = precision.o
 
 BACKGROUND = background.o
+
+QUINTESSENCE = quintessence.o
 
 THERMO = thermodynamics.o
 
