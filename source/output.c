@@ -1726,7 +1726,7 @@ int output_open_background_file(
   if (pop->write_header == _TRUE_) {
     fprintf(*backfile,"# Table of selected background quantitites\n"); 
     fprintf(*backfile,"# All densities are mutiplied by (8piG/3) (below, shortcut notation (.) for this factor) \n"); 
-    fprintf(*backfile,"                      1+z");/*MZ: modified to 1+z for convenience in background plots*/
+    fprintf(*backfile,"                      z");
     fprintf(*backfile,"        proper time [Gyr]");
     fprintf(*backfile," conformal time * c [Mpc]");
     fprintf(*backfile,"            H / c [1/Mpc]");
@@ -1780,7 +1780,7 @@ int output_one_line_of_background(
   
   int n;
 
-fprintf(backfile,"%25.12e",pba->a_today/pvecback[pba->index_bg_a]);/*Modified to 1+z for convenience -1.*/
+fprintf(backfile,"%25.12e",pba->a_today/pvecback[pba->index_bg_a]-1.);
   fprintf(backfile,"%25.12e",pvecback[pba->index_bg_time]/_Gyr_over_Mpc_);
   fprintf(backfile,"%25.12e",pba->conformal_age-pvecback[pba->index_bg_conf_distance]);
   fprintf(backfile,"%25.12e",pvecback[pba->index_bg_H]);

@@ -334,8 +334,8 @@ int background_functions(
     pvecback[pba->index_bg_dV_scf] = dV_scf(pba,phi); // dV_scf(pba,phi); //potential' as function of phi
     pvecback[pba->index_bg_ddV_scf] = ddV_scf(pba,phi); // ddV_scf(pba,phi); //potential'' as function of phi
     
-    pvecback[pba->index_bg_rho_scf] = (phi_prime*phi_prime/(2*a*a) + V_scf(pba,phi)); // energy of the scalar field. The field units are set automatically by setting the initial conditions
-    pvecback[pba->index_bg_p_scf] =(phi_prime*phi_prime/(2*a*a) - V_scf(pba,phi)); // pressure of the scalar field
+    pvecback[pba->index_bg_rho_scf] = (phi_prime*phi_prime/(2*a*a) + V_scf(pba,phi))/3.; // energy of the scalar field. The field units are set automatically by setting the initial conditions
+    pvecback[pba->index_bg_p_scf] =(phi_prime*phi_prime/(2*a*a) - V_scf(pba,phi))/3.; // pressure of the scalar field
 
     rho_tot += pvecback[pba->index_bg_rho_scf];
     p_tot += pvecback[pba->index_bg_p_scf];
@@ -1590,13 +1590,14 @@ int background_solve(
     
     if (pba->has_scf == _TRUE_){    
       printf(" -> Omega_scf = %f, whished %f \n",pvecback[pba->index_bg_rho_scf]/pvecback[pba->index_bg_rho_crit], pba->Omega0_scf);     
+    if(pba->has_lambda == _TRUE_)
       printf(" parameters: lambda = %f, Omega_Lambda = %f ", 
 	     pba->scf_lambda, pvecback[pba->index_bg_rho_lambda]/pvecback[pba->index_bg_rho_crit]);
       if (pba->phi_ini_scf !=1. || pba->phi_prime_ini_scf !=1.)
 	      printf(" phi_ini = %f, phi_prime_ini = %f (wrt attractor values)\n",
 		     pba->phi_ini_scf,pba->phi_prime_ini_scf);
 	      else
-		printf(" attractor initial conditions\n");
+		printf(" attractor IC\n");
     }
   }
 

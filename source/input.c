@@ -515,17 +515,24 @@ int input_init(
     }
     else {
       // NO cosmological constant specified, fill up with Lambda
-	if (flag1 == _FALSE_) {
-	  if (flag2 == _TRUE_)
-	    pba->Omega0_scf = param2;
-	  if (flag3 == _TRUE_)
-	    pba->Omega0_fld = param3;
-	
-	  pba->Omega0_lambda = 1. - pba->Omega0_k - param2 - param3 - Omega_tot;
+      if (flag2 == _TRUE_) {
+	pba->Omega0_scf = param2;
+	Omega_tot += pba->Omega0_scf;
+	pba->Omega0_lambda = 1. - pba->Omega0_k - Omega_tot;
+      }
+      if (flag3 == _TRUE_) {
+	pba->Omega0_fld = param3;
+	Omega_tot += pba->Omega0_fld;
+	pba->Omega0_lambda = 1. - pba->Omega0_k - Omega_tot;
+      }
+      if (flag2 == _FALSE_ && flag3 == _FALSE_)
+	pba->Omega0_lambda = 1. - pba->Omega0_k - Omega_tot;
     }
-  }
   // print the results of the dark sector, useful for debugging
-//  printf("Omega0_lambda = %f Omega0_fld = %f, Omega0_scf = %f \n",pba->Omega0_lambda, pba->Omega0_fld, pba->Omega0_scf);
+//     printf("Omega0_lambda = %f Omega0_fld = %f, Omega0_scf = %f, Omega_tot = %f, %f \n",pba->Omega0_lambda, pba->Omega0_fld, pba->Omega0_scf, pba->Omega0_cdm, pba->Omega0_b,
+//     pba->Omega0_lambda+pba->Omega0_fld+pba->Omega0_scf+pba->Omega0_cdm+pba->Omega0_b,Omega_tot);
+//     printf("Omega_tot = %f, param2 = %f, param3 = %f \n",Omega_tot, param2, param3);
+
   
   if (pba->Omega0_scf != 0.) {
     
