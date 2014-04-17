@@ -444,6 +444,13 @@ extern "C" {
 		struct background *pba,
 		double phi
 		);    
+  
+  /** Coupling between scalar field and matter **/
+  double Q_scf(
+		struct background *pba,
+		double phi,
+		double phi_prime
+		);  
 
 #ifdef __cplusplus
 }
@@ -472,7 +479,6 @@ extern "C" {
 /* remark: sigma_B = 2 pi^5 k_B^4 / (15h^3c^2) = 5.670400e-8 
                    = Stefan-Boltzmann constant in W/m^2/K^4 = Kg/K^4/s^3 */
 
-#define _SCF_VOID_ = 123456789 /**< if phi_scf, phi_prime_scf are given to background_functions() with this precise value, use the interpolated values at the given a */
 
 //@}
 

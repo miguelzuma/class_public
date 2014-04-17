@@ -2548,6 +2548,7 @@ int spectra_sigma(
   
   for (i=0;i<psp->ln_k_size;i++) {
     k=exp(psp->ln_k[i]);
+    if (i == psp->ln_k_size-1) k*= 0.9999999; //fix for CLASS    
     x=k*R;  
     W=3./x/x/x*(sin(x)-x*cos(x));
     class_call(spectra_pk_at_k_and_z(pba,ppm,psp,k,z,&pk,pk_ic),

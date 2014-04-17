@@ -158,7 +158,7 @@ int tune_scalar_field_parameters(
     
     if (background_init(ppr,pba) == _FAILURE_) {
       printf("\n\nError running background_init with exp_quint, lambda = %e \n=>%s\n",_TUNE_PARAM_,pba->error_message);
-      /*changed from pba.error_message to pba->error_message*/
+      /*TODO: update the error message*/
       return _FAILURE_;
     }
     
@@ -182,7 +182,7 @@ int tune_scalar_field_parameters(
     /* note: it is important to call background_free now, otherwise we could not call background_init again */
     
     if (iter > maximum_iter) {
-      printf("\n\nError in tune_scalar_field_parameters, too many iterations \n=>%s\n",pba->error_message);
+      printf("\n\nError in tune_scalar_field_parameters, no tuning after %u iterations \n=>%s\n",iter, pba->error_message);
       return _FAILURE_;
     }
     iter ++;

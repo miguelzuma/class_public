@@ -10,28 +10,23 @@
 // #include "dei_rkck.h"
 // #include "parser.h"
 
-// enum spatial_curvature {flat,open,closed};
-
 /**
  * HERE BE COMMENTS
  */
 
 struct quintessence
 {
-  /** @name - input parameters initialized by user in input module
-   *  (all other quantitites are computed in this module, given these parameters
-   *   and the content of the 'precision' structure)
+  /** @name - quintessence parameters
    *
-   * The background cosmological parameters listed here form a parameter
-   * basis which is directly usable by the background module. Nothing
-   * prevents from defining the input cosmological parameters
-   * differently, and to pre-process them into this format, using the input
-   * module (this might require iterative calls of background_init()
-   * e.g. for dark energy or decaying dark matter). */
+   * The quintessence structure should contain all the quintessence related functions.
+   * This should facilitate the incorporation of further models.
+   * Each model would then be contained in a separate file
+   */
   
   //@{
 
-  double param_test; /**< \f$ H_0 \f$ : Hubble parameter (in fact, [H_0/c]) in \f$ Mpc^{-1} \f$ */
+  double lambda_scf;
+  double alpha_scf;
   
   
   //@}

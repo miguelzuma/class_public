@@ -5813,8 +5813,6 @@ int perturb_derivs(double tau,
       if (ppt->gauge == synchronous) {
         
         dy[pv->index_pt_eta] = pvecmetric[ppw->index_mt_eta_prime];
-	
-	//MZ: consider evolving h, seems necessary for the pressure contribution of the scf in th synchronous gauge
 
       }
       
