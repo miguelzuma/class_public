@@ -1713,7 +1713,13 @@ int background_initial_conditions(
     log((pvecback[pba->index_bg_rho_g]+pvecback[pba->index_bg_rho_ur])*
     4./(3*pow(pba->scf_lambda,2)-12))*pba->phi_ini_scf;
     
-//     printf(" rho_crit,ur,g = %e, %e, %e ",pvecback[pba->index_bg_rho_crit],pvecback[pba->index_bg_rho_ur],pvecback[pba->index_bg_rho_g]);
+  //if there is no attractor solution, assign a large value 
+  if (3.*pow(pba->scf_lambda,2)-12. < 0){
+    if (pba->background_verbose > 0){
+      printf(" No attractor IC for lambda = %f ! \n ",pba->scf_lambda);
+    }
+    pvecback_integration[pba->index_bi_phi_scf] = 1/pba->scf_lambda*1e10;
+  }    
     
     pvecback_integration[pba->index_bi_phi_prime_scf] = 2*pvecback_integration[pba->index_bi_a]*sqrt(V_scf(pba,pvecback_integration[pba->index_bi_phi_scf]))*pba->phi_prime_ini_scf;
     
