@@ -14,6 +14,15 @@
  * HERE BE COMMENTS
  */
 
+/** structure to contain each of the quintessence parameters
+ */
+struct param
+{
+  double value;
+//  string name;
+};
+  
+
 struct quintessence
 {
   /** @name - quintessence parameters

@@ -1718,7 +1718,7 @@ int background_initial_conditions(
     if (pba->background_verbose > 0){
       printf(" No attractor IC for lambda = %f ! \n ",pba->scf_lambda);
     }
-    pvecback_integration[pba->index_bi_phi_scf] = 1/pba->scf_lambda*1e10;
+    pvecback_integration[pba->index_bi_phi_scf] = 1/pba->scf_lambda*1e1;//seems to work for 10
   }    
     
     pvecback_integration[pba->index_bi_phi_prime_scf] = 2*pvecback_integration[pba->index_bi_a]*sqrt(V_scf(pba,pvecback_integration[pba->index_bi_phi_scf]))*pba->phi_prime_ini_scf;
