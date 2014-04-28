@@ -465,7 +465,7 @@ int background_init(
   int filenum=0;
 
   /** - in verbose mode, provide some information (unless scf not tuned) */
-  if (pba->background_verbose > 0 && (pba->has_scf == _TRUE_ && pba->scf_is_tuned == _TRUE_)) {
+  if (pba->background_verbose > 0 && pba->has_scf == _TRUE_) {
     printf("Running CLASS version %s\n",_VERSION_);
     printf("Computing background\n");
     
@@ -1584,21 +1584,24 @@ int background_solve(
     /(7./8.*pow(4./11.,4./3.)*pba->background_table[pba->index_bg_rho_g]);
 
   /** - done */
-  if (pba->background_verbose > 0 && (pba->has_scf == _TRUE_ && pba->scf_is_tuned == _TRUE_)) {
+  if (pba->background_verbose > 0) {
     printf(" -> age = %f Gyr\n",pba->age);
     printf(" -> conformal age = %f Mpc\n",pba->conformal_age);    
     
     if (pba->has_scf == _TRUE_){    
-      printf(" -> Omega_scf = %f, whished %f \n",pvecback[pba->index_bg_rho_scf]/pvecback[pba->index_bg_rho_crit], pba->Omega0_scf);     
-    if(pba->has_lambda == _TRUE_)
-      printf(" parameters: lambda = %f, Omega_Lambda = %f ", 
-	     pba->scf_lambda, pvecback[pba->index_bg_rho_lambda]/pvecback[pba->index_bg_rho_crit]);
-      if (pba->phi_ini_scf !=1. || pba->phi_prime_ini_scf !=1.)
-	      printf(" phi_ini = %f, phi_prime_ini = %f (wrt attractor values)\n",
-		     pba->phi_ini_scf,pba->phi_prime_ini_scf);
-	      else
-		printf(" attractor IC\n");
+      printf(" -> Omega_scf = %g, whished %g",pvecback[pba->index_bg_rho_scf]/pvecback[pba->index_bg_rho_crit], pba->Omega0_scf);     
+      if(pba->has_lambda == _TRUE_)
+	printf("  Omega_Lambda = %g",pba->scf_lambda, pvecback[pba->index_bg_rho_lambda]/pvecback[pba->index_bg_rho_crit]);
+      printf("\n");
+      printf("parameters: lambda = %.3g, alpha = %.3g, B = %.3g, A = %.3g \n",pba->scf_lambda, pba->scf_alpha, pba->scf_B, pba->scf_A);
     }
+      
+    printf("initial conditions:");  
+    if (pba->attractor_ic_scf == _FALSE_)
+      printf("phi = %.3g, phi_prime = %.3g (in CLASS units)\n",pba->phi_ini_scf,pba->phi_prime_ini_scf);
+    else
+      printf("attractor (assuming exponential potential)\n");
+
   }
 
   free(pvecback);
@@ -1708,28 +1711,30 @@ int background_initial_conditions(
    * -Check equations and signs. Sign of phi_prime?
    * -is rho_ur all there is early on?
    */
-  if(pba->has_scf){
-    pvecback_integration[pba->index_bi_phi_scf] = -1/pba->scf_lambda*
-    log((pvecback[pba->index_bg_rho_g]+pvecback[pba->index_bg_rho_ur])*
-    4./(3*pow(pba->scf_lambda,2)-12))*pba->phi_ini_scf;
+  if(pba->has_scf == _TRUE_){
     
-  //if there is no attractor solution, assign a large value 
-  if (3.*pow(pba->scf_lambda,2)-12. < 0){
-    if (pba->background_verbose > 0){
-      printf(" No attractor IC for lambda = %f ! \n ",pba->scf_lambda);
+    if(pba->attractor_ic_scf == _TRUE_){
+      pvecback_integration[pba->index_bi_phi_scf] = -1/pba->scf_lambda*log((pvecback[pba->index_bg_rho_g]+pvecback[pba->index_bg_rho_ur])*4./(3*pow(pba->scf_lambda,2)-12))*pba->phi_ini_scf;
+      
+      //if there is no attractor solution for scf_lambda, assign a large value. Otherwise would give a nan 
+      if (3.*pow(pba->scf_lambda,2)-12. < 0){
+	pvecback_integration[pba->index_bi_phi_scf] = 1/pba->scf_lambda*1e1;//seems to work for 10
+	if (pba->background_verbose > 0)
+	  printf(" No attractor IC for lambda = %.3e ! \n ",pba->scf_lambda);
     }
-    pvecback_integration[pba->index_bi_phi_scf] = 1/pba->scf_lambda*1e1;//seems to work for 10
-  }    
     
     pvecback_integration[pba->index_bi_phi_prime_scf] = 2*pvecback_integration[pba->index_bi_a]*sqrt(V_scf(pba,pvecback_integration[pba->index_bi_phi_scf]))*pba->phi_prime_ini_scf;
+ 
+  }
+  //If no attractor initial conditions are assigned, gets the provided ones
+  else{
+    pvecback_integration[pba->index_bi_phi_scf] = pba->phi_ini_scf;
+    pvecback_integration[pba->index_bi_phi_prime_scf] = pba->phi_prime_ini_scf;
+  }   
     
-    //NOTE: it's not recongnizing infinite values of the parameters here!!
-    class_test(!isfinite(pvecback_integration[pba->index_bi_phi_scf]) || !isfinite(pvecback_integration[pba->index_bi_phi_scf]),
+  class_test(!isfinite(pvecback_integration[pba->index_bi_phi_scf]) || !isfinite(pvecback_integration[pba->index_bi_phi_scf]),
 	     pba->error_message,
 	     "initial phi = %e phi_prime = %e -> check initial conditions",pvecback_integration[pba->index_bi_phi_scf],pvecback_integration[pba->index_bi_phi_scf]);    
-    
-    if((pba->phi_ini_scf!=1.)||(pba->phi_prime_ini_scf!=1.)) printf("Non attractor initial conditions: phi = %e, phi_prime = %e \n", 
-	   pvecback_integration[pba->index_bi_phi_scf], pvecback_integration[pba->index_bi_phi_prime_scf]);
 
   }   
 
@@ -1818,19 +1823,14 @@ int background_derivs(
 
 /**
  * Scalar field potential and its derivatives with respect to the field _scf
- * Right now exponential: \f$ V(\phi) = M_p^4\exp(-\lambda \phi) \f$
- * NOTE: M_p^4 is multiplied in background_functions() => M_p^4/(3*M_p^2) in CLASS units
- * 
+ * For Albrecht & Skordis model: 9908085
+ * \f$ V = V_p_scf*V_e_scf \f$
+ * \f$ V_e =  \exp(-\lambda \phi) (exponential) \f$
+ * \f$ V_p = (\phi - B)^\alpha + A (polynomial bump) \f$
  * TODO: -Add some functionality to include different models/potentials (tuning would be difficult, though)
  * - Generalize to Kessence/Horndeski/PPF and/or couplings
  * - A default module to numerically compute the derivatives when no analytic functions are given should be added. 
  * Numerical derivatives may further serve as a consistency check.
- */
-
-/** For Albrecht & Skordis model: 9908085
- * V = V_p_scf*V_e_scf
- * V_e =  M_p^4\exp(-\lambda \phi) (exponential)
- * V_p = (\phi - B)^\alpha + A (polynomial bump)
  */
 
 
@@ -1857,7 +1857,7 @@ double ddV_e_scf(
 
 
 /** parameters and functions for the polynomial coefficient
- * V_p = (\phi - B)^\alpha + A (polynomial bump)
+ * \f$ V_p = (\phi - B)^\alpha + A (polynomial bump) \f$
  * double scf_alpha = 2;
  * double scf_B = 34.8;
  * double scf_A = 0.01; (values for their Figure 2)
@@ -1884,7 +1884,7 @@ double ddV_p_scf(
   return  pba->scf_alpha*(pba->scf_alpha - 1)*pow(phi -  pba->scf_B,  pba->scf_alpha - 2);
 }
 
-/** now the overall potential V = V_p*V_e
+/** now the overall potential \f$ V = V_p*V_e \f$
  */
 
 double V_scf(

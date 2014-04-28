@@ -528,7 +528,7 @@ int input_init(
       if (flag2 == _FALSE_ && flag3 == _FALSE_)
 	pba->Omega0_lambda = 1. - pba->Omega0_k - Omega_tot;
     }
-  // print the results of the dark sector, useful for debugging
+// print the results of the dark sector, useful for debugging
 //     printf("Omega0_lambda = %f Omega0_fld = %f, Omega0_scf = %f, Omega_tot = %f, %f \n",pba->Omega0_lambda, pba->Omega0_fld, pba->Omega0_scf, pba->Omega0_cdm, pba->Omega0_b,
 //     pba->Omega0_lambda+pba->Omega0_fld+pba->Omega0_scf+pba->Omega0_cdm+pba->Omega0_b,Omega_tot);
 //     printf("Omega_tot = %f, param2 = %f, param3 = %f \n",Omega_tot, param2, param3);
@@ -538,39 +538,51 @@ int input_init(
     
     pba->has_scf = _TRUE_; //need here for tuning to work
     
-    class_read_double("initial_phi_scf",pba->phi_ini_scf);
-    class_read_double("initial_phi_prime_scf",pba->phi_prime_ini_scf);
-    
-    class_call(parser_read_double(pfc,"scf_lambda",&param1,&flag1,errmsg),
-             errmsg,
-             errmsg);
-    
-    // Slope of the exponential potential
-    if(flag1==_FALSE_) {
-      pba->scf_lambda = -sqrt(3./pba->Omega0_scf); //reproduces value today if only matter. Will be erased if tuning algorithm is called
-    }else{
-      pba->scf_lambda = param1;
+    class_call(parser_read_string(pfc,
+                                  "tuning_scf",
+                                  &string1,
+                                  &flag1,
+                                  errmsg),
+                errmsg,
+                errmsg);
+
+    if (flag1 == _TRUE_){ 
+      if((strstr(string1,"y") != NULL) || (strstr(string1,"Y") != NULL)){ 
+        pba->tuning_scf = _TRUE_;
+      }
+      else{
+	pba->tuning_scf = _FALSE_;
+      }
     }
     
-    if (abs(pba->scf_lambda) <3.) printf(" lambda = %e <3 won't be tracking if exp quint (unless tuned)\n",pba->scf_lambda);
-      
-    // polynomial exponent
-    class_call(parser_read_double(pfc,"scf_alpha",&param2,&flag2,errmsg),
-             errmsg,
-             errmsg);
-    if (flag2 == _TRUE_) pba->scf_alpha = param2;
+    // exponent field coefficient
+    class_read_double("scf_lambda",pba->scf_lambda);
     
-    // polynomial shift
-    class_call(parser_read_double(pfc,"scf_B",&param2,&flag2,errmsg),
-             errmsg,
-             errmsg);
-    if (flag2 == _TRUE_) pba->scf_B = param2;
+    if ((abs(pba->scf_lambda) <3.)&&(pba->background_verbose>1)) 
+      printf("lambda = %e <3 won't be tracking (for exp quint) unless overwritten by tuning function\n",pba->scf_lambda);
+          
+    class_read_double("scf_alpha",pba->scf_alpha); // polynomial exponent       
+    class_read_double("scf_B",pba->scf_B); // polynomial shift    
+    class_read_double("scf_B",pba->scf_B); // polynomial offset
     
-    // polynomial offset
-    class_call(parser_read_double(pfc,"scf_A",&param2,&flag2,errmsg),
-             errmsg,
-             errmsg);
-    if (flag2 == _TRUE_) pba->scf_A = param2;    
+    class_call(parser_read_string(pfc,
+                                  "attractor_ic_scf",
+                                  &string1,
+                                  &flag1,
+                                  errmsg),
+                errmsg,
+                errmsg);
+
+    if (flag1 == _TRUE_){ 
+      if((strstr(string1,"y") != NULL) || (strstr(string1,"Y") != NULL)){ 
+        pba->attractor_ic_scf = _TRUE_;
+      }
+      else{
+	pba->attractor_ic_scf = _FALSE_;
+	class_read_double("initial_phi_scf",pba->phi_ini_scf);
+	class_read_double("initial_phi_prime_scf",pba->phi_prime_ini_scf);
+      }
+    }    
     
   }  
 
@@ -1874,6 +1886,8 @@ int input_default_params(
   pba->ncdm_psd_files = NULL;
   
   pba->Omega0_scf = 0.; /* Scalar field defaults */
+  pba->tuning_scf = _TRUE_;
+  pba->attractor_ic_scf = _TRUE_;
   pba->scf_lambda = -10.; /*exponential slope parameter */
   pba->scf_alpha = 0; /*Albrecht-Skordis polynomial bump defaults */
   pba->scf_A = 0;

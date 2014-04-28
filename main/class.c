@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
   }
 
   //Tune the scalar field parameters
-  if (tune_scalar_field_parameters(&pr,&ba) == _FAILURE_) {
+  if (tune_parameters_scf(&pr,&ba) == _FAILURE_) {
     printf("\n\nError running background_init \n=>%s\n",ba.error_message);
     return _FAILURE_;
   }
@@ -129,7 +129,7 @@ int main(int argc, char **argv) {
 
 
 
-int tune_scalar_field_parameters(
+int tune_parameters_scf(
 		                 struct precision * ppr,
 		                 struct background * pba
 		                 )  {
@@ -143,53 +143,82 @@ int tune_scalar_field_parameters(
 #define _TUNE_PARAM_ pba->scf_lambda
   
   int iter=0, maximum_iter = 100; //maximum number of iterations
-  double scf_TUNE_PARAM_min = 1/11*_TUNE_PARAM_; //_TUNE_PARAM_
+  double scf_TUNE_PARAM_min = 1/11*_TUNE_PARAM_; // these bounds tend to work well for the default scf_lambda
   double scf_TUNE_PARAM_max = 10*_TUNE_PARAM_;
   double Omega0_scf_try = 0.;//absurd value
   double tolerance = 1e-4; //Need to pass a preccision argument
-
-  pba->scf_is_tuned = _FALSE_; /*scalar field not tuned. Useful to avoid unnecesary output NOTE: perhaps trade for a temporary background verbose value */
   
-  while (fabs(pba->Omega0_scf-Omega0_scf_try) > tolerance){
+  int wish_background_verbose = pba->background_verbose;
+  pba->background_verbose = 0; /*remove unnecessary output while tuning*/  
+  
+  
+  if(pba->tuning_scf == _TRUE_) { 
+
+    while (fabs(pba->Omega0_scf-Omega0_scf_try) > tolerance){
+      
+      _TUNE_PARAM_=0.5*(scf_TUNE_PARAM_max + scf_TUNE_PARAM_min);
+      
+      //NOTE: it would be nice if the string could be updated with the preprocessor _TUNE_PARAM_
+      if(wish_background_verbose>0)
+	printf(" _TUNE_PARAM_ = %.3e, Omega_0_try = %f \n",_TUNE_PARAM_, Omega0_scf_try);
     
-    _TUNE_PARAM_=0.5*(scf_TUNE_PARAM_max + scf_TUNE_PARAM_min);
+      if (background_init(ppr,pba) == _FAILURE_) {
+	printf("\n\nError running background_init with _TUNE_PARAM_ %g \n=>%s\n",_TUNE_PARAM_,pba->error_message);
+	return _FAILURE_;
+      }
     
-    printf(" _TUNE_PARAM_ = %e, Omega_0_try = %f \n",_TUNE_PARAM_, Omega0_scf_try);
+      Omega0_scf_try = 
+      pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_scf]/
+      pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_crit];
+      /*this line returns the real value of Omega0_scf infered from the real evolution of the fields */
+    
+      if (Omega0_scf_try > pba->Omega0_scf)
+	scf_TUNE_PARAM_min = _TUNE_PARAM_;
+      else
+	scf_TUNE_PARAM_max = _TUNE_PARAM_;
+      /* note: the above four lines will find the correct value by bisection only if Omega0_scf_try is a monotonous function of sc_lambda. I hope that this is the case for the model we are after. It might not be the case in general. Then, one needs to think more. E.g. maybe one should pass values of scf_TUNE_PARAM_min and scf_TUNE_PARAM_max chosen not by chance, but knowning that they define the interval inside which the function Omega0_scf(scf_lambda) is monotonous. Moreover, depending on the fact that the function Omega0_scf(scf_lambda) is growing or decreasing, you may need to invert "min" and "max" inside the four lines above. */
+    
+      if (background_free(pba) == _FAILURE_) {
+	printf("\n\nError in background_free \n=>%s\n",pba->error_message);
+	return _FAILURE_;
+      }
+      /* note: it is important to call background_free now, otherwise we could not call background_init again */
+    
+      if (iter > maximum_iter) {
+	printf("\n\nError in tune_parameters_scf, no tuning after %u iterations \n=>%s\n",iter, pba->error_message);
+	return _FAILURE_;
+      }
+      iter ++;
+    
+    } /* end of bisection loop */
+  
+  }
+  
+  // in case that no tuning is wanted, run a background and overwrite the values of Omega0 for each component
+  else {
     
     if (background_init(ppr,pba) == _FAILURE_) {
-      printf("\n\nError running background_init with exp_quint, lambda = %e \n=>%s\n",_TUNE_PARAM_,pba->error_message);
-      /*TODO: update the error message*/
+      //NOTE: it would be nice if the string could be updated with the preprocessor _TUNE_PARAM_
+      printf("\n\nError running background_init with _TUNE_PARAM_ %g \n=>%s\n",_TUNE_PARAM_,pba->error_message);
       return _FAILURE_;
     }
-    
-    Omega0_scf_try = 
-    pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_scf]/
-    pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_crit];
-    /* this line returns the real value of Omega0_scf infered from the real evolution of the fields */
-    
-    if (Omega0_scf_try > pba->Omega0_scf)
-      scf_TUNE_PARAM_min = _TUNE_PARAM_;
-    else
-      scf_TUNE_PARAM_max = _TUNE_PARAM_;
-    /* note: the above four lines will find the correct value by bisection only if Omega0_scf_try is a monotonous function of sc_lambda. I hope that this is the case for the model we are after. It might not be the case in general. Then, one needs to think more. E.g. maybe one should pass values of scf_TUNE_PARAM_min and scf_TUNE_PARAM_max chosen not by chance, but knowning that they define the interval inside which the function Omega0_scf(scf_lambda) is monotonous. Moreover, depending on the fact that the function Omega0_scf(scf_lambda) is growing or decreasing, you may need to invert "min" and "max" inside the four lines above: I let you think about it. 
-    MZ: changed min/max
-     */
-    
-    if (background_free(pba) == _FAILURE_) {
-      printf("\n\nError in background_free \n=>%s\n",pba->error_message);
-      return _FAILURE_;
-    }
-    /* note: it is important to call background_free now, otherwise we could not call background_init again */
-    
-    if (iter > maximum_iter) {
-      printf("\n\nError in tune_scalar_field_parameters, no tuning after %u iterations \n=>%s\n",iter, pba->error_message);
-      return _FAILURE_;
-    }
-    iter ++;
-    
-  } /* end of bisection loop */
+   double Omega0_notune = pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_scf]/
+   pba->background_table[(pba->bt_size-1)*pba->bg_size+pba->index_bg_rho_crit];
+
+   if(wish_background_verbose > 1)
+     printf("Quintessence not tuned: Omega0_scf = %f, initial input %f \n",Omega0_notune, pba->Omega0_scf);
+   
+   /* Then the values introduced by the user are not the real ones, e.g. rho_m(a_0) = Omega_m(input)*H_0^2 (in CLASS units)
+    * This might be useful to run MCMC's without tuning parameters: 
+    * everything is computed and then the right values of Omega0_cdm, etc... 
+    * are stored as derived parameters (might introduce a bias though)
+    * TODO: consider updating the values of all the omegas after an non-tuned model is run.
+    */
+
+  }
   
-    pba->scf_is_tuned = _TRUE_;
+  // put the background verbose back
+  pba->background_verbose = wish_background_verbose;
   
   return _SUCCESS_;
 

@@ -64,6 +64,8 @@ struct background
   double Omega0_k; /**< \f$ \Omega_{0_k} \f$ : curvature contribution */
   
   double Omega0_scf; /**< \f$ \Omega_{0_\phi} \f$ : scalar field energy fraction */
+  short tuning_scf; /**< whether the scalar field has to be tuned */
+  short attractor_ic_scf; /** < whether the scalar field has attractor initial conditions */
   double phi_ini_scf; /**< \f$ \phi(t_0) \f$ : scalar field initial value */
   double phi_prime_ini_scf; /**< \f$ d\phi(t_0)/d\tau \f$ : scalar field initial derivative wrt conformal time */
   double scf_lambda; /**< \f$ \lambda \f$ : scalar field exponential potential slope */
@@ -240,8 +242,6 @@ struct background
   short has_curvature; /**< presence of global spatial curvature? */
   short has_scf;       /**< presence of scalar field? */  
   
-  short scf_is_tuned; /**< is the scalar field tuned to give Omega0_scf? */
-
   //@}
 
   /** 
