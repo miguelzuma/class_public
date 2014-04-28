@@ -1653,7 +1653,7 @@ int background_initial_conditions(
      MZ: added scalar field with phi_scf & phi_prime_scf such that there is no contribution */
     class_call(background_functions(pba,
 				    a,
-				    pba->scf_lambda*100,//tiny potential
+				    pba->scf_lambda*ppr->safe_phi_scf,//tiny potential
 				    0, //zero kinetic energy
 				    pba->long_info, //so I get rho_crit as well
 				    pvecback),
@@ -1716,9 +1716,9 @@ int background_initial_conditions(
     if(pba->attractor_ic_scf == _TRUE_){
       pvecback_integration[pba->index_bi_phi_scf] = -1/pba->scf_lambda*log((pvecback[pba->index_bg_rho_g]+pvecback[pba->index_bg_rho_ur])*4./(3*pow(pba->scf_lambda,2)-12))*pba->phi_ini_scf;
       
-      //if there is no attractor solution for scf_lambda, assign a large value. Otherwise would give a nan 
+      //if there is no attractor solution for scf_lambda, assign some value. Otherwise would give a nan 
       if (3.*pow(pba->scf_lambda,2)-12. < 0){
-	pvecback_integration[pba->index_bi_phi_scf] = 1/pba->scf_lambda*1e1;//seems to work for 10
+	pvecback_integration[pba->index_bi_phi_scf] = 1./pba->scf_lambda;//seems to the work
 	if (pba->background_verbose > 0)
 	  printf(" No attractor IC for lambda = %.3e ! \n ",pba->scf_lambda);
     }

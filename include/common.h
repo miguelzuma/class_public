@@ -303,6 +303,11 @@ struct precision
    * initial time
    */
   double tol_ncdm_initial_w;
+  
+  /**
+   * parameter controling the initial scalar field in background functions
+   */
+  double safe_phi_scf;  
 
   //@}
 
