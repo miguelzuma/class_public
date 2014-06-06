@@ -563,7 +563,7 @@ int input_init(
           
     class_read_double("scf_alpha",pba->scf_alpha); // polynomial exponent       
     class_read_double("scf_B",pba->scf_B); // polynomial shift    
-    class_read_double("scf_B",pba->scf_B); // polynomial offset
+    class_read_double("scf_A",pba->scf_A); // polynomial offset
     
     class_call(parser_read_string(pfc,
                                   "attractor_ic_scf",
@@ -1894,8 +1894,8 @@ int input_default_params(
   pba->scf_A = 0;
   pba->scf_B = 0;
   //MZ: initial conditions are as multiplicative factors of the radiation attractor values  
-  pba->phi_ini_scf = 1;
-  pba->phi_prime_ini_scf = 1;    
+  pba->phi_ini_scf = 0;
+  pba->phi_prime_ini_scf = 1e-100;    
 
   pba->Omega0_k = 0.;
   pba->K = 0.;
