@@ -197,6 +197,10 @@ int background_tau_of_z(
 
   /* necessary for calling array_interpolate(), but never used */
   int last_index; 
+  
+  // patch to solve the problems from the integration (fixed in older versions)
+  if ((z<0) && (fabs(z) < 1e-12))
+    z = 0;
 
   /** - check that \f$ z \f$ is in the pre-computed range */
   class_test(z < pba->z_table[pba->bt_size-1],
@@ -1714,7 +1718,7 @@ int background_initial_conditions(
   if(pba->has_scf == _TRUE_){
     
     if(pba->attractor_ic_scf == _TRUE_){
-      pvecback_integration[pba->index_bi_phi_scf] = -1/pba->scf_lambda*log((pvecback[pba->index_bg_rho_g]+pvecback[pba->index_bg_rho_ur])*4./(3*pow(pba->scf_lambda,2)-12))*pba->phi_ini_scf;
+      pvecback_integration[pba->index_bi_phi_scf] = -1/pba->scf_lambda*log((pvecback[pba->index_bg_rho_g]+pvecback[pba->index_bg_rho_ur])*4./(3*pow(pba->scf_lambda,2)-12));
       
       //if there is no attractor solution for scf_lambda, assign some value. Otherwise would give a nan 
       if (3.*pow(pba->scf_lambda,2)-12. < 0){
@@ -1723,7 +1727,7 @@ int background_initial_conditions(
 	  printf(" No attractor IC for lambda = %.3e ! \n ",pba->scf_lambda);
     }
     
-    pvecback_integration[pba->index_bi_phi_prime_scf] = 2*pvecback_integration[pba->index_bi_a]*sqrt(V_scf(pba,pvecback_integration[pba->index_bi_phi_scf]))*pba->phi_prime_ini_scf;
+    pvecback_integration[pba->index_bi_phi_prime_scf] = 2*pvecback_integration[pba->index_bi_a]*sqrt(V_scf(pba,pvecback_integration[pba->index_bi_phi_scf]));
  
   }
   //If no attractor initial conditions are assigned, gets the provided ones

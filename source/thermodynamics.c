@@ -412,6 +412,9 @@ int thermodynamics_init(
   /** - fill missing columns (quantities not computed previously but related) */
 
   /** -> baryon drag interaction rate time minus one, -[R * kappa'], stored temporarily in column ddkappa */
+
+  last_index_back = pba->bg_size-1;
+
   for (index_tau=0; index_tau < pth->tt_size; index_tau++) {
 
 //     class_call(background_functions(pba,
@@ -1887,6 +1890,9 @@ int thermodynamics_reionization_sample(
 
   /** (e) loop over redshift values in order to find values of z, x_e, kappa' (Tb and cb2 found later by integration). The sampling in z space is found here. */
 
+  /** - initial step */
+  dz = dz_max;
+
   while (z > 0.) {
 
     /** - try default step */
@@ -2178,6 +2184,8 @@ int thermodynamics_recombination_with_hyrec(
   double L2s1s_current;
   void * buffer;
   int buf_size;
+  double tau;
+  int last_index_back;
 
   /** - Fill hyrec parameter structure */
   
