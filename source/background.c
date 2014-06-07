@@ -198,7 +198,7 @@ int background_tau_of_z(
   /* necessary for calling array_interpolate(), but never used */
   int last_index; 
   
-  // patch to solve the problems from the integration (fixed in older versions)
+  // patch to solve the problems from the integration (fixed in other versions)
   if ((z<0) && (fabs(z) < 1e-12))
     z = 0;
 

@@ -4335,17 +4335,19 @@ int perturb_total_stress_energy(
     ppw->delta_p = ppw->delta_p + pba->cs2_fld * ppw->pvecback[pba->index_bg_rho_fld]*y[ppw->pv->index_pt_delta_fld]; 
   } 
   
-  /* scalar field contribution */
+  /* scalar field contribution 
+   * NOTE: for consistency with the background and CLASS units there is a factor 1/3 wrt the usual expressions
+   */
   if (pba->has_scf == _TRUE_) {
  
-    ppw->delta_rho +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
-    + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf]; 
+    ppw->delta_rho +=  (1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
+    + ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf])/3.; 
    
-    ppw->rho_plus_p_theta +=  k*k/a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf]; 
+    ppw->rho_plus_p_theta +=  (k*k/a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_scf])/3.; 
     //checked
     
-    ppw->delta_p +=  1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
-    - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf];
+    ppw->delta_p +=  (1./a2*ppw->pvecback[pba->index_bg_phi_prime_scf]*y[ppw->pv->index_pt_phi_prime_scf] 
+    - ppw->pvecback[pba->index_bg_dV_scf]*y[ppw->pv->index_pt_phi_scf])/3.;
     
   }   
 
